@@ -1,0 +1,46 @@
+== Section 3: hidden coordinate, exact identities and sum E_i <= 2 I
+PASS k=1 I=1.000000 sumE/I=2.000000 E_x/Inf_x=2.000000
+PASS k=3 I=1.500000 sumE/I=1.174371 E_x/Inf_x=3.523112
+PASS k=5 I=1.875000 sumE/I=0.424267 E_x/Inf_x=4.242673
+PASS k=7 I=2.187500 sumE/I=0.142536 E_x/Inf_x=4.988771
+PASS k=9 I=2.460938 sumE/I=0.045900 E_x/Inf_x=5.783424
+PASS k=11 I=2.707031 sumE/I=0.014326 E_x/Inf_x=6.618467
+PASS k=13 I=2.932617 sumE/I=0.004361 E_x/Inf_x=7.482886
+== Section 4: substitutions, leaf formula, E_leaf/Inf_leaf < 4, sum E_i <= 5 I
+PASS k=3 blocks=(3, 3, 3) N=10 max leaf ratio=1.089949 sumE/I=1.062214
+PASS k=3 blocks=(5, 3, 1) N=10 max leaf ratio=1.174371 sumE/I=1.026702
+PASS k=5 blocks=(3, 3, 3, 3, 1) N=14 max leaf ratio=0.385698 sumE/I=0.394724
+PASS k=5 blocks=(1, 5, 3, 1, 3) N=14 max leaf ratio=0.385698 sumE/I=0.396258
+PASS k=1 blocks=(5,) N=6 max leaf ratio=1.638661 sumE/I=1.764344
+PASS k=1 blocks=(3,) N=4 max leaf ratio=1.804820 sumE/I=1.882892
+PASS B_k decreasing, B_3<4 B_3=3.847487
+PASS k=1 leaf bound < 3 max=2.474983
+PASS (k+1)h2(2^-k)<=2I, k odd<=99
+== Section 5: coordinate rules on the hidden coordinate
+PASS k=5 x has least influence, W2 all equal E_x/Inf_x=4.242673
+PASS k=9 x has least influence, W2 all equal E_x/Inf_x=5.783424
+PASS k=13 x has least influence, W2 all equal E_x/Inf_x=7.482886
+PASS k=17 x has least influence, W2 all equal E_x/Inf_x=9.269852
+PASS k=3 MAJ3 blocks: x in every shortest minterm 3 shortest minterms
+PASS k=5 MAJ3 blocks: x in every shortest minterm 9 shortest minterms
+PASS tau(MAJ_3)<=1/sqrt(r+1) 0.500000
+PASS tau(MAJ_5)<=1/sqrt(r+1) 0.375000
+PASS tau(MAJ_7)<=1/sqrt(r+1) 0.312500
+PASS tau(MAJ_11)<=1/sqrt(r+1) 0.246094
+PASS tau(MAJ_17)<=1/sqrt(r+1) 0.196381
+PASS tau(MAJ_27)<=1/sqrt(r+1) 0.154981
+PASS tau(MAJ_41)<=1/sqrt(r+1) 0.125371
+== Complementary pivotal points: W2_x = 0, every other W2 > 0, E_x/Inf_x grows
+PASS k=6 E_x/Inf_x=3.370697 min_i E_i/Inf_i=1.520791
+PASS k=8 E_x/Inf_x=5.240170 min_i E_i/Inf_i=1.613238
+PASS k=10 E_x/Inf_x=7.037576 min_i E_i/Inf_i=1.629851
+PASS k=12 E_x/Inf_x=8.822319 min_i E_i/Inf_i=1.625089
+PASS k=14 E_x/Inf_x=10.621997 min_i E_i/Inf_i=1.616307
+PASS k=16 E_x/Inf_x=12.441975 min_i E_i/Inf_i=1.607996
+PASS k=18 E_x/Inf_x=14.280651 min_i E_i/Inf_i=1.600971
+== The law of Section 6: E_i / delta exactly, against log2(n)/288
+PASS n=100 E_i/delta=4.5914 bound=0.0231
+PASS n=1000 E_i/delta=5.9536 bound=0.0346
+PASS n=10000 E_i/delta=7.3382 bound=0.0461
+PASS n=100000 E_i/delta=8.7262 bound=0.0577
+ALL PASS
