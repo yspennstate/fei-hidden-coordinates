@@ -421,11 +421,8 @@ fresh variables for $j\le m$ and with $T'_t$ of a block of fresh variables for $
 
 \begin{proposition}\label{prop:forced}
 $A(F_{k,t})\cap B(F_{k,t})=\{x\}$, and for each $k$,
-\[
-\frac{E_x(F_{k,t})}{\Inf_x(F_{k,t})}\to\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}\qquad(t\to\infty).
-\]
-Hence the rule that chooses the variable of smallest $E_i/\Inf_i$ in $A\cap B$ has unbounded ratio on monotone
-functions.
+$E_x(F_{k,t})/\Inf_x(F_{k,t})\to E_x(\tilde f_k)/\Inf_x(\tilde f_k)$ as $t\to\infty$. Hence the rule that chooses the
+variable of smallest $E_i/\Inf_i$ in $A\cap B$ has unbounded ratio on monotone functions.
 \end{proposition}
 
 \begin{proof}
@@ -469,7 +466,9 @@ $4.70$ and $5.30$ for $k=3,5,\dots,17$, and $13.83$, $29.31$, $45.33$ and $52.34
 of about $0.39$ per unit of $k$; for $\tilde f_k$ the values at these four $k$ are $18.62$, $37.39$, $57.09$ and
 $66.98$. The sequence is not monotone (it falls from $52.59$ at $k=133$ to $50.32$ at $k=135$). Under a bias the
 coefficients of the majority near its threshold are Krawtchouk-type sums that change sign, and the proof of
-Proposition~\ref{prop:both} does not carry over; we do not know a proof that the ratio is unbounded for a fixed $t$.
+Proposition~\ref{prop:both} does not carry over. For $t=1$ the ratio is $(1+o(1))(k-1)\log_2\frac43$, which is
+$(1+o(1))\log_2(1/\Inf_x)$ and so asymptotic to its largest possible value~\cite{Shm9}; the proof writes these sums
+as integrals over the unit circle. For fixed $t\ge2$ we do not know a proof that the ratio is unbounded.
 At $k=7$, $t=1$ the smallest ratio over all coordinates is $2.15$, and at $k=17$, $t=20$ the forced ratio is
 $9.59$. On monotone functions of at most six variables the rule does no worse than $G_{\mathrm{mon}}(n)$
 (Section~\ref{sec:census}).
@@ -634,6 +633,8 @@ Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
 \url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
 \bibitem{Shm3} Y.~Shmalo, Good coordinates in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fei-good-coordinates}, 2026.
+\bibitem{Shm9} Y.~Shmalo, A forced coordinate with nearly maximal erasure entropy,
+\url{https://github.com/yspennstate/fei-forced-coordinate}, 2026.
 \bibitem{Top} F.~Tops{\o}e, Bounds for entropy and divergence for distributions over a two-element set, J. Inequal.
 Pure Appl. Math. 2 (2001), Article 25.
 \bibitem{WWW}A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
