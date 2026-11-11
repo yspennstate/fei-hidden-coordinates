@@ -73,6 +73,11 @@ n = 18); output `code/or_of_blocks_out.txt`. `code/or_of_blocks_formula.py` comp
 spectrum of one block (the formula in the census section), checks it against truth tables, and searches m copies of
 (x1 OR x2)...(x(2j-1) OR x(2j)) for j <= 8, m <= 40 (best: m = 8, j = 5, n = 80); output
 `code/or_of_blocks_formula_out.txt`.
+`code/read_once_towers.py` computes alternating AND/OR read-once towers level by level (each level needs five
+numbers from the level below), checks the recursion against truth tables of five towers with n <= 16 and
+reproduces the two OR-of-blocks values above; output `code/read_once_towers_out.txt`. `code/towers_mp.py` is the
+same recursion in 40-digit arithmetic, and `code/climb.py` searches fan-ins up to 40 for depths 2 to 10 (best at
+depth 10: 4.2220, n = 67200); output `code/climb_out.txt` (about 40 minutes).
 
 ## Related papers
 

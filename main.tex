@@ -588,9 +588,31 @@ $\frac12(3/4)^{j-1}\bigl(1-(3/4)^j\bigr)^{m-1}$. The ratio is largest at $m=4$ f
 $3.783969373526$), at $m=6$ for $j=4$ ($n=48$, $3.924260765374$) and at $m=8$ for $j=5$ ($n=80$,
 $3.949934743097$); this last value is the largest for $j\le8$ and $m\le40$, and no OR of copies of two of these blocks,
 at most $30$ of each, does better. Hence $G_{\mathrm{mon}}(n)\ge3.7839$ for $n\ge24$, $G_{\mathrm{mon}}(n)\ge3.9242$
-for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$. Iterated compositions of
-monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
-functions.
+for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$.
+
+The same computation goes through every level of a read-once tower. If $c$ is the indicator of an AND of indicators
+$c_1,\dots,c_k$ on disjoint sets of variables, then $\hat c(T)=\prod_b\hat c_b(T_b)$ for every $T$, the empty set
+included, and $1-c$ has the same coefficients as $c$ except at $\emptyset$. So for a tower whose levels alternate AND and
+OR gates, with fan-ins $k_1,\dots,k_d$ from the bottom up, the five numbers $\Pr[c=1]$, $\hat c(\emptyset)^2$,
+$\hat c(\{i\})^2$, $\sum_S\hat c(S\cup\{i\})^2$ and $\sum_{\emptyset\ne S\not\ni i}\Phi\bigl(\hat c(S)^2,\hat
+c(S\cup\{i\})^2\bigr)$ at one level follow from those at the level below, and $E_i/\Inf_i$ follows from the top level as
+above. Coordinate ascent over fan-ins at most $40$, with an OR at the top, gives
+\begin{center}
+\begin{tabular}{rrlr}
+$d$ & ratio & fan-ins & $n$\\\hline
+4 & 4.082607350869 & 2, 4, 4, 9 & 288\\
+5 & 4.147038128862 & 2, 4, 3, 4, 9 & 864\\
+6 & 4.175806194504 & 2, 4, 3, 3, 3, 6 & 1296\\
+7 & 4.198870450086 & 2, 3, 2, 2, 2, 4, 9 & 1728\\
+8 & 4.212002610938 & 2, 3, 2, 2, 2, 4, 6, 9 & 10368\\
+9 & 4.218175761392 & 2, 3, 2, 2, 2, 2, 2, 5, 10 & 9600\\
+10 & 4.221995523184 & 2, 3, 2, 2, 2, 2, 2, 5, 7, 10 & 67200\\
+\end{tabular}
+\end{center}
+so $G_{\mathrm{mon}}(n)\ge4.0826$ for $n\ge288$ and $G_{\mathrm{mon}}(n)\ge4.1989$ for $n\ge1728$. The gain from one
+more level roughly halves from $d=7$ on, which suggests that towers of AND and OR gates alone stay below about $4.23$.
+Iterated compositions of larger monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the
+supremum over all monotone functions.
 
 Table~\ref{tab:rules} gives, for $n\le6$, the largest $E_i/\Inf_i$ at the coordinate chosen by a rule, with ties
 broken against the rule. The coordinate of largest influence never does worse than $G_{\mathrm{mon}}(n)$ here, and at
@@ -635,7 +657,10 @@ their truth tables, \texttt{check\_table.py} evaluates a function given as a hex
 \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$, and
 \texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $k\le11$, and \texttt{or\_of\_blocks.py} the ORs of
 blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
-above, after checking it against truth tables of six functions with up to $18$ variables. The script
+above, after checking it against truth tables of six functions with up to $18$ variables, and
+\texttt{read\_once\_towers.py} checks the recursion for towers against truth tables of five towers with up to $16$
+variables; \texttt{towers\_mp.py} carries it out in $40$-digit arithmetic, and \texttt{climb.py} does the search. The
+script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
