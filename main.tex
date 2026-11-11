@@ -46,7 +46,8 @@ be a random subset with $\Pr[U=S]=\mu(S)=\hat f(S)^2$. The Fourier entropy is $H
 $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
 functions~\cite{OWZ}, for read-once formulas~\cite{OT13,CKLS} and for read-$k$ decision trees with $k$
-fixed~\cite{WWW}; Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and
+fixed~\cite{WWW}; its min-entropy version is known for read-$k$ DNFs with $k$ fixed~\cite{Shalev,ACKSW};
+Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and
 Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$.
 
 The erasure entropy of $f$ at $i$ is
@@ -410,6 +411,11 @@ inequality $\bigl||T|-\frac{k-1}2\bigr|>\frac{k-5}4$ with probability at most $4
 $(k+3)/4\le|T|\le(3k-7)/4$, which is the required range.
 \end{proof}
 
+Both factors of the bound in Proposition~\ref{prop:both}, and of those in Propositions~\ref{prop:diverge}
+and~\ref{prop:pair}, are positive only from $k=45$, $k=45$ and $k=66$ respectively. For smaller $k$ the displayed
+product says nothing: at $k=5$ the right side of Proposition~\ref{prop:diverge} is $16.4$, a product of two negative
+factors.
+
 At $k=3,5,\dots,13$ the ratio at $x$ is $1.80$, $2.56$, $3.17$, $3.90$, $4.70$ and $5.55$, while the smallest ratio
 over $A(\tilde f_k)\cap B(\tilde f_k)$ is the smallest over all coordinates, $1.00$ at $k=3$ and $0.0060$ at $k=13$.
 So $\tilde f_k$ does not defeat the rule. A substitution removes the other variables from $A\cap B$.
@@ -563,8 +569,11 @@ The program \texttt{rule\_minmax.py} computes $A(f)$, $B(f)$ and every ratio for
 variables. The largest value over $f$ of $\min_{i\in A\cap B}E_i/\Inf_i$ is $2$, $2.672488983973$, $2.672488983973$,
 $2.695887520153$ and $2.944495303872$ for $n=2,\dots,6$, which is $G_{\mathrm{mon}}(n)$ in each case. The rule does not
 always find the best coordinate: the minimum over all coordinates is not attained in $A\cap B$ for $8$ of the $168$
-functions with $n=4$, $190$ of the $7{,}581$ with $n=5$ and $335{,}144$ of the $7{,}828{,}354$ with $n=6$, and the
-quotient of the two minima reaches $1.108$, $1.458$ and $2.363$. Taking the worst variable of $A\cap B$ instead gives
+functions with $n=4$, $190$ of the $7{,}581$ with $n=5$ and $335{,}144$ of the $7{,}828{,}354$ with $n=6$, and among
+functions whose smallest ratio is positive the quotient of the two minima reaches $1.108$, $1.458$ and $2.363$. At
+$n=6$ there are also $360$ functions in which some relevant variable has ratio $0$ while every variable of $A\cap B$
+has a positive ratio, so that the quotient is infinite; for one of them the six ratios are
+$0,0,0.686,0.686,0.451,0.451$ and $A\cap B$ consists of the last two variables. Taking the worst variable of $A\cap B$ instead gives
 $3.344977967946$ at $n=5$ and $3.650196658624$ at $n=6$; the worst variable of $A$, of $B$ or of $A\cup B$ gives
 $4.950362212005$ at $n=6$.
 
@@ -621,6 +630,8 @@ The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
 \begin{thebibliography}{99}
+\bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
+entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), no.~4, 1--40, doi:10.1145/3470860; arXiv:1809.09819.
 \bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
 Comput. Sci. 654 (2016), 92--112.
 \bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
@@ -637,6 +648,7 @@ arXiv:1711.00762, 2017.
 Lecture Notes in Comput. Sci. 7965, 780--791, doi:10.1007/978-3-642-39206-1\_66.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
 Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
+\bibitem{Shalev} G.~Shalev, On the Fourier entropy influence conjecture for extremal classes, arXiv:1806.03646, 2018.
 \bibitem{Shm1} Y.~Shmalo, The one-coordinate step in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
 \bibitem{Shm3} Y.~Shmalo, Good coordinates in the Fourier entropy-influence conjecture,
