@@ -611,6 +611,11 @@ $d$ & ratio & fan-ins & $n$\\\hline
 \end{center}
 so $G_{\mathrm{mon}}(n)\ge4.0826$ for $n\ge288$ and $G_{\mathrm{mon}}(n)\ge4.1989$ for $n\ge1728$. The gain from one
 more level roughly halves from $d=7$ on, which suggests that towers of AND and OR gates alone stay below about $4.23$.
+This concerns the minimum over the leaves, which in these towers is the same at every leaf. A single leaf of a read-once
+AND/OR formula has ratio below $\pi/\ln2=4.5324$, and the ratio comes arbitrarily close to $\pi/\ln 2$ along one path
+of a deep formula~\cite{Shm3}. A small threshold block in place of the variables at the bottom of a tower lowers the
+ratio: with $\MAJ_3$, $\MAJ_5$ or ``at least two of four'' as the block, the best towers of depth $6$ reach $2.981$,
+$2.533$ and $3.697$, against $4.176$ with variables.
 Iterated compositions of larger monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the
 supremum over all monotone functions.
 

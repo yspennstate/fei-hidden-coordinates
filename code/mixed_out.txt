@@ -1,0 +1,40 @@
+truth-table checks
+  MAJ3 () OR 0.0 0.000000000000 ok
+  MAJ3 (2,) OR 1.8048202372184 1.804820237218 ok
+  MAJ3 (2,) AND 1.8048202372184 1.804820237218 ok
+  MAJ3 (3,) OR 2.1826744874573 2.182674487457 ok
+  MAJ3 (2, 2) OR 1.5581145926071 1.558114592607 ok
+  MAJ3 (3, 2) AND 2.1550609057447 2.155060905745 ok
+  T(4,2) (2, 2) OR 2.9916491401608 2.991649140161 ok
+  MAJ5 (3,) AND 1.9277997289315 1.927799728932 ok
+  T(5,4) (2,) OR 2.0619083221849 2.061908322185 ok
+MAJ3    depth 2: 2.693256100809 fans (2, 8) top OR n 48
+MAJ3    depth 3: 2.867158435042 fans (2, 5, 8) top OR n 240
+MAJ3    depth 4: 2.934461123069 fans (2, 4, 4, 9) top OR n 864
+MAJ3    depth 5: 2.966806455865 fans (2, 4, 3, 4, 9) top OR n 2592
+MAJ3    depth 6: 2.981205457163 fans (2, 4, 3, 3, 3, 6) top OR n 3888
+MAJ5    depth 2: 2.316686367902 fans (2, 8) top OR n 80
+MAJ5    depth 3: 2.447379852062 fans (2, 5, 8) top OR n 400
+MAJ5    depth 4: 2.497967137675 fans (2, 4, 4, 9) top AND n 1440
+MAJ5    depth 5: 2.522240483197 fans (2, 4, 3, 4, 9) top OR n 4320
+MAJ5    depth 6: 2.533041374506 fans (2, 4, 3, 3, 3, 6) top OR n 6480
+T(4,2)  depth 2: 3.493237009333 fans (4, 9) top OR n 144
+T(4,2)  depth 3: 3.602464999637 fans (3, 4, 10) top AND n 480
+T(4,2)  depth 4: 3.660581402260 fans (3, 3, 4, 9) top OR n 1296
+T(4,2)  depth 5: 3.683461548989 fans (3, 3, 3, 4, 10) top AND n 4320
+T(4,2)  depth 6: 3.696795598047 fans (3, 3, 3, 3, 4, 8) top OR n 10368
+T(4,3)  depth 2: 3.493237009333 fans (4, 9) top AND n 144
+T(4,3)  depth 3: 3.602464999637 fans (3, 4, 10) top OR n 480
+T(4,3)  depth 4: 3.660581402260 fans (3, 3, 4, 9) top AND n 1296
+T(4,3)  depth 5: 3.683461548989 fans (3, 3, 3, 4, 10) top OR n 4320
+T(4,3)  depth 6: 3.696795598047 fans (3, 3, 3, 3, 4, 8) top AND n 10368
+T(5,2)  depth 2: 3.125919506432 fans (7, 8) top OR n 280
+T(5,2)  depth 3: 3.188248505363 fans (6, 4, 7) top AND n 840
+T(5,2)  depth 4: 3.218346192399 fans (5, 3, 4, 7) top OR n 2100
+T(5,2)  depth 5: 3.230422970790 fans (5, 3, 4, 5, 11) top AND n 16500
+T(5,2)  depth 6: 3.235560442248 fans (4, 2, 2, 2, 5, 11) top OR n 8800
+T(5,4)  depth 2: 3.125919506432 fans (7, 8) top AND n 280
+T(5,4)  depth 3: 3.188248505363 fans (6, 4, 7) top OR n 840
+T(5,4)  depth 4: 3.218346192399 fans (5, 3, 4, 7) top AND n 2100
+T(5,4)  depth 5: 3.230422970790 fans (5, 3, 4, 5, 11) top OR n 16500
+T(5,4)  depth 6: 3.235560442248 fans (4, 2, 2, 2, 5, 11) top AND n 8800

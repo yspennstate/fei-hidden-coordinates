@@ -78,6 +78,8 @@ numbers from the level below), checks the recursion against truth tables of five
 reproduces the two OR-of-blocks values above; output `code/read_once_towers_out.txt`. `code/towers_mp.py` is the
 same recursion in 40-digit arithmetic, and `code/climb.py` searches fan-ins up to 40 for depths 2 to 10 (best at
 depth 10: 4.2220, n = 67200); output `code/climb_out.txt` (about 40 minutes).
+`code/mixed_towers.py` puts a threshold block (MAJ3, MAJ5, at least t of k) at the bottom of the same towers, checks the
+recursion against truth tables for n <= 18 and climbs the fan-ins for depths 1 to 6; output `code/mixed_out.txt`.
 
 ## Related papers
 
