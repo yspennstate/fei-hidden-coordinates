@@ -1,0 +1,12 @@
+n= 2 shapes      1 best 2.000000000000 by x1 v x2
+n= 3 shapes      2 best 2.672488983973 by x1 v x2 v x3  (next value 0.890829661324)
+n= 4 shapes      5 best 2.634003390886 by x1 v x2 v x3 v x4  (next value 2.431166951882)
+n= 5 shapes     12 best 2.695887520153 by x1 v x2 v x3 v x4x5  (next value 2.580444114274)
+n= 6 shapes     33 best 2.693618763109 by x1 v x2 v x3 v x4x5x6  (next value 2.677042718162)
+n= 7 shapes     90 best 2.714565395324 by x1(x2 v x3) v (x4 v x5)(x6 v x7)  (next value 2.697237222508)
+n= 8 shapes    261 best 3.304701322451 by (x1 v x2)(x3 v x4) v (x5 v x6)(x7 v x8)  (next value 3.108449690057)
+n= 9 shapes    766 best 3.128203071390 by (x1 v x2)(x3 v x4) v (x5 v x6)(x7 v x8x9)  (next value 3.092190627278)
+n=10 shapes   2312 best 3.401069972510 by x1x2 v (x3 v x4)(x5 v x6) v (x7 v x8)(x9 v x10)  (next value 3.389192093442)
+n=11 shapes   7068 best 3.361823334433 by x1x2x3 v (x4 v x5)(x6 v x7) v (x8 v x9)(x10 v x11)  (next value 3.347305728189)
+n=12 shapes  21965 best 3.541677755510 by x1x2 v x3x4 v x5x6 v x7x8 v x9x10 v x11x12  (next value 3.424639693979)
+n=13 shapes  68954 best 3.424164650797 by (x1 v x2)(x3 v x4) v (x5 v x6)(x7 v x8) v (x9 v x10)(x11 v x12x13)  (next value 3.418291977230)

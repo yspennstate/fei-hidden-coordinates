@@ -553,7 +553,15 @@ $3.389192093442$ at every variable. The read-once function
 (x_1\vee x_2)(x_3\vee x_4)\vee(x_5\vee x_6)(x_7\vee x_8)\vee x_9x_{10}
 \]
 does better: its influences are $49/512$ at $x_1,\dots,x_8$ and $63/512$ at $x_9,x_{10}$, with ratios
-$3.401069972510$ and $3.589953807822$, so $G_{\mathrm{mon}}(10)\ge3.4010$. Iterated compositions of
+$3.401069972510$ and $3.589953807822$, so $G_{\mathrm{mon}}(10)\ge3.4010$. Both functions are read-once, a class
+for which the conjecture holds~\cite{OT13,CKLS}. Up to a permutation of the variables and duality, which leaves every
+ratio unchanged, a read-once monotone function is a series-reduced planted tree with an OR gate at the root, and there
+are $261$, $2{,}312$ and $68{,}954$ such trees with $8$, $10$ and $13$ leaves~\cite{OEIS669}. Evaluating all of them for
+$n\le13$ shows that the two functions above are the best read-once functions for $n=8$ and $n=10$. For $n=12$ the best
+is $x_1x_2\vee x_3x_4\vee\dots\vee x_{11}x_{12}$, the dual of the tribes function with six blocks, with every influence
+$243/2048$ and ratio $3.541677755510$ at every variable. Since a function of $n$ variables is also a function of $n+1$
+variables, $G_{\mathrm{mon}}$ is nondecreasing, and $G_{\mathrm{mon}}(n)\ge3.5416$ for $n\ge12$; for $n=9$, $11$ and
+$13$ the best read-once values, $3.1282$, $3.3618$ and $3.4242$, lie below the bound for $n-1$. Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
 functions.
 
@@ -596,7 +604,8 @@ variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each ru
 Proposition~\ref{prop:pair} including monotonicity; it also evaluates the law of Proposition~\ref{prop:law} exactly.
 The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$), and
 \texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
-their truth tables, and \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table. The script
+their truth tables, \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table, and
+\texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
@@ -632,7 +641,7 @@ Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{pr
 their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$ and found the eight-variable function of Section~\ref{sec:census}
 by a local search, and another Claude agent found the ten-variable function by simulated annealing. Claude Opus 5.5
 (Anthropic) found Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of the rule of
-Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and a
+Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and the census of read-once functions and a
 second census program for $n\le6$, prepared the manuscript and audited it. These checks are not peer review. The author
 directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
 
@@ -662,6 +671,8 @@ arXiv:1711.00762, 2017.
 \bibitem{MI26a} Mosaic Intelligence, A certified lower bound $C_{71}\ge 6.4901128435233943$ for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.20794146.
 \bibitem{MI26b} Mosaic Intelligence, A certified $n=17$ lower bound for the Fourier entropy-influence constant, Zenodo, 2026, doi:10.5281/zenodo.21113935.
 \bibitem{Num26} Numaro, Improved lower bound $C_{71}>6.521845710923046575$ for the Fourier entropy-influence constant ($n=18$ explicit construction), certificate archive, Zenodo, 2026, doi:10.5281/zenodo.21497769.
+\bibitem{OEIS669} OEIS Foundation Inc., The On-Line Encyclopedia of Integer Sequences, sequence A000669, number of
+series-reduced planted trees with $n$ leaves, \url{https://oeis.org/A000669}.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013,
 Lecture Notes in Comput. Sci. 7965, 780--791, doi:10.1007/978-3-642-39206-1\_66.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of

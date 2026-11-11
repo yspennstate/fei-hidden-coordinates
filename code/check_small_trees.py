@@ -53,6 +53,7 @@ cases = {
     "n=10 tribes 2x5 (OR of two AND5)": (10, lambda x: all(x[:5]) | all(x[5:])),
     "n=10 (x1 v x2)(x3 v x4) v (x5 v x6)(x7 v x8) v x9x10":
         (10, lambda x: ((x[0] | x[1]) & (x[2] | x[3])) | ((x[4] | x[5]) & (x[6] | x[7])) | (x[8] & x[9])),
+    "n=12 OR of six AND2 (dual of tribes 6x2)": (12, lambda x: any(x[2 * j] & x[2 * j + 1] for j in range(6))),
 }
 for name, (n, fm) in cases.items() if __name__ == "__main__" else []:
     H, I, rat = stats(n, fm)
