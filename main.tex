@@ -547,9 +547,13 @@ ratios $3.0316$ and $2.9547$; its smallest ratio is at a coordinate of largest i
 lower bounds. The read-once function
 $(x_1x_2\vee x_3x_4)\wedge(x_5x_6\vee x_7x_8)$ has every influence $21/128$ and $E_i/\Inf_i=3.304701322451$ at every
 variable, so $G_{\mathrm{mon}}(8)\ge3.3047$, while $G_{\mathrm{mon}}(7)=2.9547$; the tribes
-function~\cite{BL85} $\bigwedge_{j=1}^{5}(x_{2j-1}\vee x_{2j})$, with every influence $81/512$, gives
-$G_{\mathrm{mon}}(10)\ge3.3891$.
-Both are compositions of transitive gates. Iterated compositions of
+function~\cite{BL85} $\bigwedge_{j=1}^{5}(x_{2j-1}\vee x_{2j})$, with every influence $81/512$, has ratio
+$3.389192093442$ at every variable. The read-once function
+\[
+(x_1\vee x_2)(x_3\vee x_4)\vee(x_5\vee x_6)(x_7\vee x_8)\vee x_9x_{10}
+\]
+does better: its influences are $49/512$ at $x_1,\dots,x_8$ and $63/512$ at $x_9,x_{10}$, with ratios
+$3.401069972510$ and $3.589953807822$, so $G_{\mathrm{mon}}(10)\ge3.4010$. Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
 functions.
 
@@ -591,8 +595,8 @@ checks Lemma~\ref{lem:hidden}, Proposition~\ref{prop:leaf} against a direct eval
 variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each rule of Theorem~\ref{thm:rules}, and
 Proposition~\ref{prop:pair} including monotonicity; it also evaluates the law of Proposition~\ref{prop:law} exactly.
 The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$), and
-\texttt{check\_small\_trees.py} computes the two functions on $8$ and $10$ variables of Section~\ref{sec:census} from
-their truth tables. The script
+\texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
+their truth tables, and \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
@@ -626,7 +630,7 @@ Claude Fable agent (Anthropic) and Codex agents running OpenAI's GPT-6.1, connec
 problem, studied the conjecture for monotone functions; a Codex agent found the constructions of
 Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced}, with
 their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$ and found the eight-variable function of Section~\ref{sec:census}
-by a local search. Claude Opus 5.5
+by a local search, and another Claude agent found the ten-variable function by simulated annealing. Claude Opus 5.5
 (Anthropic) found Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of the rule of
 Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and a
 second census program for $n\le6$, prepared the manuscript and audited it. These checks are not peer review. The author

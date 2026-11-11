@@ -51,9 +51,11 @@ cases = {
     "n=8  tribes 4x2 (AND of four OR2)": (8, lambda x: all(x[2 * j] | x[2 * j + 1] for j in range(4))),
     "n=10 tribes 5x2 (AND of five OR2)": (10, lambda x: all(x[2 * j] | x[2 * j + 1] for j in range(5))),
     "n=10 tribes 2x5 (OR of two AND5)": (10, lambda x: all(x[:5]) | all(x[5:])),
+    "n=10 (x1 v x2)(x3 v x4) v (x5 v x6)(x7 v x8) v x9x10":
+        (10, lambda x: ((x[0] | x[1]) & (x[2] | x[3])) | ((x[4] | x[5]) & (x[6] | x[7])) | (x[8] & x[9])),
 }
-for name, (n, fm) in cases.items():
+for name, (n, fm) in cases.items() if __name__ == "__main__" else []:
     H, I, rat = stats(n, fm)
-    r = sorted(set(round(a, 12) for a, _ in rat))
-    infs = sorted(set(round(b, 10) for _, b in rat))
+    r = sorted(set(round(float(a), 12) for a, _ in rat))
+    infs = sorted(set(round(float(b), 10) for _, b in rat))
     print(f"{name}: min E_i/Inf_i {min(a for a, _ in rat):.12f}  ratios {r}  influences {infs}  H {H:.9f}  I {I:.8f}")

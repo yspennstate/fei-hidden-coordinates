@@ -60,8 +60,10 @@ Outputs: `code/check_xand_out.txt`, `code/check_gk_out.txt`, `code/forced_rule_o
 `code/forced_exact.py` computes the same ratio exactly (rational arithmetic) from the two-index form of the biased
 coefficients; its output for odd k <= 141, with t = 1 and the unbiased variant, is `code/forced_exact_out.txt`.
 `code/check_small_trees.py` (Python 3, NumPy) computes min E_i/Inf_i, H and I from the truth tables of the read-once
-function (x1x2 OR x3x4) AND (x5x6 OR x7x8) and of tribes functions on 8 and 10 variables (the lower bounds for n = 8
-and n = 10 in the census section); output `code/check_small_trees_out.txt`.
+functions (x1x2 OR x3x4) AND (x5x6 OR x7x8) and (x1 OR x2)(x3 OR x4) OR (x5 OR x6)(x7 OR x8) OR x9x10 and of tribes
+functions on 8 and 10 variables (the lower bounds for n = 8 and n = 10 in the census section); output
+`code/check_small_trees_out.txt`. `code/check_table.py n HEX` evaluates the same quantities, monotonicity and the
+minimal true points of a function given as a hexadecimal truth table.
 
 ## Related papers
 
