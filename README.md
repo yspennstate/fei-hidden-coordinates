@@ -6,7 +6,7 @@ This repository contains a paper on the Fourier entropy-influence (FEI) conjectu
 with the programs behind every numerical value in it.
 
 Paper: [main.pdf](main.pdf) (source [main.tex](main.tex)).
-Zenodo: [doi:10.5281/zenodo.24141881](https://doi.org/10.5281/zenodo.24141881).
+Zenodo: [doi:10.5281/zenodo.24142310](https://doi.org/10.5281/zenodo.24142310).
 
 ## Summary
 
