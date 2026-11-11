@@ -69,6 +69,7 @@ coefficients; its output for odd k <= 141, with t = 1 and the unbiased variant, 
 6. [Erasure entropies of sparse linear DNFs](https://github.com/yspennstate/fei-sparse-linear-dnf)
 7. [The Fourier entropy of linear monotone DNFs on few variables](https://github.com/yspennstate/fei-linear-dnf-census)
 8. [A forced coordinate with nearly maximal erasure entropy](https://github.com/yspennstate/fei-forced-coordinate)
+9. [The erasure entropy of a forced coordinate under every bias](https://github.com/yspennstate/fei-forced-coordinate-bias)
 
 ## License
 
