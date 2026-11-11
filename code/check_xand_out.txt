@@ -1,0 +1,4 @@
+max |exact - formula| over 300 random g: 1.3322676295501878e-15
+max over p of the formula: 2.697376955 at p = 0.199434; limit p->0: 2.000000; p = 1/2: 2.000000
+max over p of formula / (4(1-p)) for p < 1: 1.000000
+max over q of h2(q) - 2 sqrt(q(1-q)): 0.000e+00

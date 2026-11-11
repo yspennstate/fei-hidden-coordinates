@@ -106,6 +106,12 @@ probability law on subsets of $[n]$ satisfies both and has $E_i/\Pr[i\in U]\ge\l
 gives the exact maxima of the three ratios $\min_iE_i/\Inf_i$, $H/I$ and $\sum_iE_i/I$ over all monotone functions on
 at most seven variables, and the worst cases of the simple rules on at most six.
 
+None of these constructions places the hidden coordinate both in a shortest minterm and in a shortest maxterm. For the
+rule that chooses, among such variables, one of smallest ratio, we show that it is bounded by $2.6974$ when a shortest
+minterm or maxterm is a single variable (Proposition~\ref{prop:xand}), that a variable of this kind can have
+unbounded ratio, so that the minimisation is needed (Proposition~\ref{prop:both}), and that on at most six variables its
+worst case equals $G_{\mathrm{mon}}(n)$.
+
 \section{Preliminaries}\label{sec:prelim}
 
 All logarithms are to base $2$, $\eta=\log_2e$, and $h_2$ is the binary entropy. For $p,q\ge0$ put
@@ -326,12 +332,83 @@ conditioned on $|T|$ even, $|T|\in[k/4,3k/4]$ with probability at least $1-8/k$.
 
 At $k=18$ the ratio at $x$ is $14.28$, while the smallest ratio over all coordinates is $1.60$.
 
-\begin{remark}
-In each of these functions the hidden coordinate does not lie both in a shortest minterm and in a shortest maxterm.
-In $f_k$ and its substitutions it lies in no shortest maxterm, and in $f'_k$ in no shortest minterm. So none of them
-bears on the rule that chooses, among the variables lying in both, one minimising $E_i/\Inf_i$; we do not know
-whether that rule has bounded ratio.
-\end{remark}
+\subsection*{Shortest minterms and shortest maxterms}
+
+In each of these functions the hidden coordinate does not lie both in a shortest minterm and in a shortest maxterm:
+in $f_k$ and its substitutions it lies in no shortest maxterm, and in $f'_k$ in no shortest minterm. For monotone $f$
+let $A(f)$ be the set of variables lying in some shortest minterm and $B(f)$ the set lying in some shortest maxterm.
+Every minterm meets every maxterm, so $A(f)\cap B(f)$ is not empty. Consider the rule that chooses a variable of
+$A(f)\cap B(f)$ minimising $E_i/\Inf_i$. It is bounded when a shortest minterm or a shortest maxterm is a single
+variable, and the minimisation within $A\cap B$ cannot be dropped.
+
+\begin{proposition}\label{prop:xand}
+Let $f=x\wedge g$, where $g$ is a monotone function of the other variables that is not identically false, and let
+$p=\Pr[g\text{ true}]$. Then $\Inf_x(f)=p$ and
+\[
+\frac{E_x(f)}{\Inf_x(f)}=2(1-p)+\frac{\Phi\bigl((1-p)^2,p^2\bigr)}{p}\ \le\ 4(1-p).
+\]
+The middle expression tends to $2$ as $p\to0$, equals $2$ at $p=1/2$, and its maximum over $p\in(0,1]$ is
+$2.697377$, attained near $p=0.1994$.
+\end{proposition}
+
+\begin{proof}
+Write $x$ and $g$ in $\pm1$ values with $-1$ for true. Then $f=\frac{1+g}2+x\,\frac{1-g}2$, so for $T$ not containing
+$x$, $\hat f(T)=\frac12(\mathbf 1[T=\emptyset]+\hat g(T))$ and $\hat f(T\cup\{x\})=\frac12(\mathbf
+1[T=\emptyset]-\hat g(T))$. As $\hat g(\emptyset)=1-2p$, we get $\mu(\emptyset)=(1-p)^2$, $\mu(\{x\})=p^2$, and
+$\mu(T)=\mu(T\cup\{x\})=\hat g(T)^2/4$ for $T\ne\emptyset$. Since $\Phi(c,c)=2c$, \eqref{eq:Ei} gives
+\[
+E_x=\Phi\bigl((1-p)^2,p^2\bigr)+\tfrac12\bigl(1-(1-2p)^2\bigr),\qquad \Inf_x=p^2+\tfrac14\bigl(1-(1-2p)^2\bigr)=p,
+\]
+and the second term of $E_x$ is $2p(1-p)$. For the bound, $\Phi(a,b)=(a+b)h_2(b/(a+b))\le2\sqrt{ab}$ by the
+inequality $h_2(t)\le2\sqrt{t(1-t)}$, which follows from $h_2(t)\le(4t(1-t))^{1/\ln4}$~\cite{Top}; here
+$2\sqrt{ab}=2p(1-p)$.
+\end{proof}
+
+If a shortest maxterm of a monotone $f$ is a single variable $x$, then $f=x\wedge g$ with $g$ the restriction $x=1$,
+and every shortest maxterm is a single variable of this kind. So every variable of $B(f)$, and hence of $A(f)\cap B(f)$,
+has $E_i/\Inf_i<2.6974$. The dual $f^\dagger(z)=\neg f(\bar z)$ exchanges minterms and maxterms and has the same
+squared Fourier coefficients, so the same holds when a shortest minterm is a single variable. In these cases any
+variable of $A\cap B$ will do.
+
+In general it will not. For odd $k\ge3$ let $m=(k-1)/2$, let $y^0$ have ones exactly at $y_1,\dots,y_m$, put
+$y^1=y^0+e_{m+1}$, let $M$ be $\MAJ_k$ with its value at $y^1$ changed to false, and
+\[
+\tilde f_k(y,x)=M(y)\vee\bigl(x\wedge[y\ge y^0]\bigr).
+\]
+The point $y^1$ lies in the lowest true layer of $\MAJ_k$, so $M$ and $\tilde f_k$ are monotone.
+
+\begin{proposition}\label{prop:both}
+The variable $x$ lies in a shortest minterm and in a shortest maxterm of $\tilde f_k$, $\Inf_x(\tilde f_k)=2^{1-k}$,
+and for odd $k$ large enough
+\[
+\frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}\ \ge\ \Bigl(\frac12-\frac{4(k-1)}{(k-5)^2}\Bigr)\Bigl(\frac{k-1}4-2\log k\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+A true point has weight at least $m+1$: with $x$ false it needs $M(y)$, so $|y|\ge m+1$, and with $x$ true it needs
+$y\ge y^0$ or $M(y)$. Hence $\{x,y_1,\dots,y_m\}$ is a shortest minterm. Every point of weight $m+2$ is true: with $x$
+false, $|y|=m+2$ and $M(y)$ holds; with $x$ true, $|y|=m+1$ and either $y=y^1\ge y^0$ or $M(y)$ holds. The point
+with $x$ false and $y=y^1$ is false and has weight $m+1$, so the variables at which it is $0$, among them $x$, form a
+shortest maxterm.
+
+In $\pm1$ values with $+1$ for true, $\tilde f_k=\MAJ_k+(1+x)\mathbf 1[y=y^0]-(1-x)\mathbf 1[y=y^1]$. The derivative in
+$x$ is $D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1]$ and the average over $x$ is $\bar g=\MAJ_k+\mathbf 1[y=y^0]-\mathbf
+1[y=y^1]$. With $\delta=2^{-k}$, $\hat D(T)=\delta(\chi_T(y^0)+\chi_T(y^1))$ vanishes if $y_{m+1}\in T$ and has
+modulus $2\delta$ otherwise. So $\Inf_x=2^{k-1}(2\delta)^2=2^{1-k}$, and $E_x/\Inf_x$ is the average of
+$(2\delta)^{-2}\Phi(\hat{\bar g}(T)^2,4\delta^2)$ over the $2^{k-1}$ sets $T\subseteq[k]\setminus\{m+1\}$. For these
+$T$, $\chi_T(y^0)=\chi_T(y^1)$, the two indicators cancel, and $|\hat{\bar g}(T)|=b_r$ for $|T|=r$ odd, with $b_r$ as
+in the proof of Proposition~\ref{prop:diverge}. If $(k-1)/4\le r-1\le3(k-1)/4$, that proof gives $b_r/(2\delta)\ge
+2^{(k-1)/8}/k\ge1$ for large $k$, hence $(2\delta)^{-2}\Phi(b_r^2,4\delta^2)\ge\log(b_r^2/(4\delta^2))\ge(k-1)/4-2\log k$.
+Now $|T|$ is binomial with parameters $k-1$ and $\frac12$; it is odd with probability $\frac12$, and by Chebyshev's
+inequality $\bigl||T|-\frac{k-1}2\bigr|>\frac{k-5}4$ with probability at most $4(k-1)/(k-5)^2$. Otherwise
+$(k+3)/4\le|T|\le(3k-7)/4$, which is the required range.
+\end{proof}
+
+At $k=3,5,\dots,13$ the ratio at $x$ is $1.80$, $2.56$, $3.17$, $3.90$, $4.70$ and $5.55$, while the smallest ratio
+over $A(\tilde f_k)\cap B(\tilde f_k)$ is the smallest over all coordinates, $1.00$ at $k=3$ and $0.0060$ at $k=13$.
+On all monotone functions of at most six variables the rule does no worse than $G_{\mathrm{mon}}(n)$
+(Section~\ref{sec:census}). We do not know whether it has bounded ratio.
 
 \section{The singleton identities do not suffice}\label{sec:obstruction}
 
@@ -414,6 +491,15 @@ $n$ & largest $\Inf_i$ & smallest $\Inf_i$ & largest $W^{(2)}_i/\Inf_i$ & smalle
 \label{tab:rules}
 \end{table}
 
+The program \texttt{rule\_minmax.py} computes $A(f)$, $B(f)$ and every ratio for all monotone functions on $n\le6$
+variables. The largest value over $f$ of $\min_{i\in A\cap B}E_i/\Inf_i$ is $2$, $2.672488983973$, $2.672488983973$,
+$2.695887520153$ and $2.944495303872$ for $n=2,\dots,6$, which is $G_{\mathrm{mon}}(n)$ in each case. The rule does not
+always find the best coordinate: the minimum over all coordinates is not attained in $A\cap B$ for $8$ of the $168$
+functions with $n=4$, $190$ of the $7{,}581$ with $n=5$ and $335{,}144$ of the $7{,}828{,}354$ with $n=6$, and the
+quotient of the two minima reaches $1.108$, $1.458$ and $2.363$. Taking the worst variable of $A\cap B$ instead gives
+$3.344977967946$ at $n=5$ and $3.650196658624$ at $n=6$; the worst variable of $A$, of $B$ or of $A\cup B$ gives
+$4.950362212005$ at $n=6$.
+
 \section{Numerical checks}\label{sec:num}
 
 The script \texttt{check\_hidden.py} in the code repository computes exact Walsh--Hadamard transforms of $f_k$ for odd
@@ -421,7 +507,11 @@ $k\le17$, of six substituted functions with blocks of sizes $1$, $3$ and $5$, an
 checks Lemma~\ref{lem:hidden}, Proposition~\ref{prop:leaf} against a direct evaluation of the erasure entropy at every
 variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each rule of Theorem~\ref{thm:rules}, and
 Proposition~\ref{prop:pair} including monotonicity; it also evaluates the law of Proposition~\ref{prop:law} exactly.
-The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$).
+The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$). The script
+\texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
+$300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
+bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
+$k\le13$ and checks monotonicity.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -447,8 +537,10 @@ The paper comes out of Math Brain, an ongoing project on the use of AI systems f
 results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. In November 2026 a
 Claude Fable agent (Anthropic) and Codex agents running OpenAI's GPT-6.1, connected to the Brain and working on the same
 problem, studied the conjecture for monotone functions; a Codex agent found the constructions of
-Sections~\ref{sec:hidden}--\ref{sec:obstruction} and their proofs and computed the census for $n\le6$, and a Claude
-agent computed the census for $n=7$. Claude Opus 5.5 (Anthropic) rederived each proof, wrote the numerical checks and a
+Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand} and~\ref{prop:both}, with
+their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$. Claude Opus 5.5
+(Anthropic) found Propositions~\ref{prop:xand} and~\ref{prop:both} and the census of the rule of
+Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and a
 second census program for $n\le6$, prepared the manuscript and audited it. These checks are not peer review. The author
 directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
 
@@ -476,7 +568,9 @@ Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
 \url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}, 2026.
 \bibitem{Shm3} Y.~Shmalo, Good coordinates in the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/fei-good-coordinates}, 2026.
-\bibitem{WWW} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
+\bibitem{Top} F.~Tops{\o}e, Bounds for entropy and divergence for distributions over a two-element set, J. Inequal.
+Pure Appl. Math. 2 (2001), Article 25.
+\bibitem{WWW}A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
 arXiv:1312.3003.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
 \url{https://github.com/yspennstate/math-brain-public}.

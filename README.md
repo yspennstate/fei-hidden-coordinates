@@ -25,6 +25,11 @@ f having a coordinate with E_i(f) = O(Inf_i(f)).
 * An exchangeable law on subsets satisfying the two singleton identities of monotone functions has E_i / Pr[i in U] at
   least log2(n)/288, so those identities alone do not bound the erasure entropy.
 * Exact maxima of min_i E_i/Inf_i, H/I and sum_i E_i / I over all monotone functions on at most seven variables.
+* For the rule that picks, among the variables lying both in a shortest minterm and in a shortest maxterm, one of
+  smallest ratio: if a shortest minterm or maxterm is a single variable x, so that f = x AND g up to duality, then
+  E_x/Inf_x depends only on p = Pr[g], is at most 4(1-p) and at most 2.6974. A variant of f_k puts the hidden
+  coordinate in both a shortest minterm and a shortest maxterm with unbounded ratio, so the minimisation is needed.
+  On all monotone functions of at most six variables the rule's worst case equals the best coordinate's.
 
 ## Code
 
@@ -40,6 +45,14 @@ coordinate rules and ties broken against the rule. Outputs: `code/census_n5.json
 against the Dedekind number. Outputs: `code/mono_census_n6.txt` and `code/mono_census_n7.txt` (the n = 7 run evaluated
 6,031,580,181 representatives in six parts). Build with `cc -O2 -o mono_census mono_census.c -lm`; usage is in the
 header.
+
+`code/rule_minmax.py` (Python 3, NumPy; imports `census_mono.py`) computes, for every monotone function on
+n <= 6 variables, the variables in shortest minterms and in shortest maxterms and the best and worst ratios over each
+set. Outputs: `code/rule_minmax_n5.json` (n <= 5) and `code/rule_minmax_n6.json` (n = 6).
+
+`code/check_xand.py` checks the formula for x AND g against exact transforms and evaluates it and its bound over p;
+`code/check_gk.py` computes the minterm and maxterm sets and every ratio of f_k and of its variant for odd k <= 13.
+Outputs: `code/check_xand_out.txt`, `code/check_gk_out.txt`.
 
 ## Related papers
 
