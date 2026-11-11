@@ -56,6 +56,8 @@ set. Outputs: `code/rule_minmax_n5.json` (n <= 5) and `code/rule_minmax_n6.json`
 `code/forced_rule.py` builds the substituted functions, checks that the hidden coordinate is the only variable in
 both sets and that its ratio matches the biased expansion of the variant, and tabulates that ratio.
 Outputs: `code/check_xand_out.txt`, `code/check_gk_out.txt`, `code/forced_rule_out.txt`.
+`code/forced_exact.py` computes the same ratio exactly (rational arithmetic) from the two-index form of the biased
+coefficients; its output for odd k <= 141, with t = 1 and the unbiased variant, is `code/forced_exact_out.txt`.
 
 ## Related papers
 

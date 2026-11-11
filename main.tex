@@ -458,8 +458,16 @@ from Proposition~\ref{prop:both}.
 \end{proof}
 
 Already $t=1$, where $T_1$ and $T'_1$ are the OR and the AND of two variables, gives a growing ratio at the forced
-coordinate: $1.05$, $1.88$, $2.57$, $3.12$, $3.59$, $4.12$, $4.70$ and $5.30$ for $k=3,5,\dots,17$, on $2k+1$
-variables. At $k=7$, $t=1$ the smallest ratio over all coordinates is $2.15$, and at $k=17$, $t=20$ the forced ratio is
+coordinate, on $2k+1$ variables. By the proof above it is the ratio of $\tilde f_k$ under the product measure with
+bias $\frac34$ on $y_1,\dots,y_m$ and $\frac14$ on $y_{m+1},\dots,y_k$. There $D$ and the average over $x$ have
+coefficients that depend only on $|S\cap\{y_1,\dots,y_m\}|$ and $|S\cap\{y_{m+2},\dots,y_k\}|$, so the ratio is a
+double sum over these two numbers and can be computed exactly. It is $1.05$, $1.88$, $2.57$, $3.12$, $3.59$, $4.12$,
+$4.70$ and $5.30$ for $k=3,5,\dots,17$, and $13.83$, $29.31$, $45.33$ and $52.34$ at $k=41,81,121,141$, an increase
+of about $0.39$ per unit of $k$; for $\tilde f_k$ the values at these four $k$ are $18.62$, $37.39$, $57.09$ and
+$66.98$. The sequence is not monotone (it falls from $52.59$ at $k=133$ to $50.32$ at $k=135$). Under a bias the
+coefficients of the majority near its threshold are Krawtchouk-type sums that change sign, and the proof of
+Proposition~\ref{prop:both} does not carry over; we do not know a proof that the ratio is unbounded for a fixed $t$.
+At $k=7$, $t=1$ the smallest ratio over all coordinates is $2.15$, and at $k=17$, $t=20$ the forced ratio is
 $9.59$. On monotone functions of at most six variables the rule does no worse than $G_{\mathrm{mon}}(n)$
 (Section~\ref{sec:census}).
 
