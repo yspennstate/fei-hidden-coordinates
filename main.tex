@@ -614,7 +614,7 @@ more level roughly halves from $d=7$ on, which suggests that towers of AND and O
 This concerns the minimum over the leaves, which in these towers is the same at every leaf. A single leaf of a read-once
 AND/OR formula has ratio below $\pi/\ln2=4.5324$, and the ratio comes arbitrarily close to $\pi/\ln 2$ along one path
 of a deep formula~\cite{Shm3}. A small threshold block in place of the variables at the bottom of a tower lowers the
-ratio: with $\MAJ_3$, $\MAJ_5$ or ``at least two of four'' as the block, the best towers of depth $6$ reach $2.981$,
+ratio: with $\MAJ_3$, $\MAJ_5$ or ``at least two of four'' as the block, the best towers of depth $6$ that the same search finds reach $2.981$,
 $2.533$ and $3.697$, against $4.176$ with variables.
 Iterated compositions of larger monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the
 supremum over all monotone functions.
@@ -664,7 +664,9 @@ their truth tables, \texttt{check\_table.py} evaluates a function given as a hex
 blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
 above, after checking it against truth tables of six functions with up to $18$ variables, and
 \texttt{read\_once\_towers.py} checks the recursion for towers against truth tables of five towers with up to $16$
-variables; \texttt{towers\_mp.py} carries it out in $40$-digit arithmetic, and \texttt{climb.py} does the search. The
+variables; \texttt{towers\_mp.py} carries it out in $40$-digit arithmetic, and \texttt{climb.py} does the search;
+\texttt{mixed\_towers.py} does the same for towers with a threshold block at the bottom, after checking nine of
+them against truth tables with up to $18$ variables. The
 script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
