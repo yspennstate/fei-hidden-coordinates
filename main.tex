@@ -51,9 +51,9 @@ Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6
 
 The erasure entropy of $f$ at $i$ is
 \[
-E_i(f)=H\bigl(\mathbf 1[i\in U]\bigm| U\setminus\{i\}\bigr).
+E_i(f)=H\bigl(\mathbf 1[i\in U]\bigm| U\setminus\{i\}\bigr),
 \]
-It is the part of the entropy drop from $f$ to its two restrictions at $x_i$ that is not controlled by a constant times
+the conditional entropy of one coordinate given the others in the sense of Verd\'u and Weissman~\cite{VW08}. It is the part of the entropy drop from $f$ to its two restrictions at $x_i$ that is not controlled by a constant times
 $\Inf_i$~\cite[Remarks~3.1--3.2]{Han},~\cite[(32)]{GMP}, and the FEI conjecture holds if and only if
 \[
 G=\sup_f\ \min_{i:\,\Inf_i(f)>0}\frac{E_i(f)}{\Inf_i(f)}
@@ -447,7 +447,8 @@ blocks of $S_0$, every shortest maxterm consists of $x$ and variables of the blo
 
 For the ratio let $\mu_j$ be the probability that $\varphi_j$ is true, $\sigma_j^2=\mu_j(1-\mu_j)$, and expand
 $\tilde f_k$, in $\pm1$ values, in the orthonormal basis $\prod_{j\in S}(y_j-\mu_j)/\sigma_j$ (times $x$ when $x\in
-S$) of the product measure with $\Pr[y_j=1]=\mu_j$ and $x$ uniform; call the coefficients $c_\mu(S)$. Each
+S$) of the product measure with $\Pr[y_j=1]=\mu_j$ and $x$ uniform (the biased setting of~\cite{KMS12}); call the
+coefficients $c_\mu(S)$. Each
 $\psi_j=(\varphi_j-\mu_j)/\sigma_j$ has mean $0$ and variance $1$ under the uniform measure on its block, so
 $\sum_{R_j\ne\emptyset}\hat\psi_j(R_j)^2=1$, and the coefficient of $F_{k,t}$ at the union of $S\cap\{x\}$ and sets
 $R_j\ne\emptyset$, $j\in S\setminus\{x\}$, is $c_\mu(S)\prod_j\hat\psi_j(R_j)$. So the spectral sample of
@@ -629,6 +630,8 @@ entropy-influence conjecture, arXiv:2606.00246, 2026.
 arXiv:2312.08271.
 \bibitem{Hod} R.~Hod, Improved lower bounds for the Fourier entropy/influence conjecture via lexicographic functions,
 arXiv:1711.00762, 2017.
+\bibitem{KMS12} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
+(2012), 3364--3372, arXiv:1105.2651.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
 Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
@@ -640,6 +643,8 @@ Boolean functions, ICALP 2011, Lecture Notes in Comput. Sci. 6755, 330--341.
 \url{https://github.com/yspennstate/fei-forced-coordinate}, 2026.
 \bibitem{Top} F.~Tops{\o}e, Bounds for entropy and divergence for distributions over a two-element set, J. Inequal.
 Pure Appl. Math. 2 (2001), Article 25.
+\bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
+5030--5058.
 \bibitem{WWW}A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols and the entropy-influence conjecture, ITCS 2014,
 arXiv:1312.3003.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
