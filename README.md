@@ -69,7 +69,10 @@ the best min E_i/Inf_i for each n; output `code/read_once_census_out.txt` (about
 `code/or_of_and2.py 11` computes the ratio of x1x2 OR x3x4 OR ... OR x(2k-1)x(2k) for k <= 11 (largest at k = 8);
 output `code/or_of_and2_out.txt`. `code/or_of_blocks.py 20` evaluates every OR of disjoint blocks x1x2, x1x2x3,
 (x1 OR x2)(x3 OR x4) and (x1 OR x2)(x3 OR x4)(x5 OR x6) on at most 20 variables (best: three blocks of the last kind,
-n = 18); output `code/or_of_blocks_out.txt`.
+n = 18); output `code/or_of_blocks_out.txt`. `code/or_of_blocks_formula.py` computes ORs of disjoint blocks from the
+spectrum of one block (the formula in the census section), checks it against truth tables, and searches m copies of
+(x1 OR x2)...(x(2j-1) OR x(2j)) for j <= 8, m <= 40 (best: m = 8, j = 5, n = 80); output
+`code/or_of_blocks_formula_out.txt`.
 
 ## Related papers
 

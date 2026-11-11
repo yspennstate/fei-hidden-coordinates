@@ -572,7 +572,23 @@ variables, the best is
 \]
 with every influence $12321/131072$ and ratio $3.713716018539$ at every variable, so $G_{\mathrm{mon}}(n)\ge3.7137$
 for $n\ge18$. With two blocks of two pairs the same construction is the dual of the eight-variable function above.
-Iterated compositions of
+
+Larger ORs of blocks need no truth table. Let $f=\bigvee_b g_b$ with the $g_b$ on disjoint sets of variables, and let
+$a_b$ be the indicator that $g_b$ is false. Then $f=-1+2\prod_ba_b$, so $\hat f(T)=2\prod_b\hat a_b(T_b)$ for
+$T\ne\emptyset$, where $T_b$ is the part of $T$ in block $b$. Since $\Phi$ is homogeneous of degree one and
+$\sum_S\hat a_b(S)^2=\Pr[a_b=1]$, for a variable $i$ of block $1$, with $A=\hat a_1^2$, $q=\prod_{b>1}\Pr[a_b=1]$ and
+$r=\prod_{b>1}\hat a_b(\emptyset)^2$,
+\begin{align*}
+\Inf_i&=4q\sum_SA(S\cup\{i\}),\\
+E_i&=4q\sum_{S\not\ni i}\Phi\bigl(A(S),A(S\cup\{i\})\bigr)-4r\,\Phi\bigl(A(\emptyset),A(\{i\})\bigr)
++\Phi\bigl(\hat f(\emptyset)^2,4rA(\{i\})\bigr).
+\end{align*}
+For $m$ copies of $\bigwedge_{t=1}^{j}(x_{2t-1}\vee x_{2t})$ every influence is
+$\frac12(3/4)^{j-1}\bigl(1-(3/4)^j\bigr)^{m-1}$. The ratio is largest at $m=4$ for $j=3$ ($n=24$, ratio
+$3.783969373526$), at $m=6$ for $j=4$ ($n=48$, $3.924260765374$) and at $m=8$ for $j=5$ ($n=80$,
+$3.949934743097$); this last value is the largest for $j\le8$ and $m\le40$, and no OR of copies of two of these blocks,
+at most $30$ of each, does better. Hence $G_{\mathrm{mon}}(n)\ge3.7839$ for $n\ge24$, $G_{\mathrm{mon}}(n)\ge3.9242$
+for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$. Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
 functions.
 
@@ -618,7 +634,8 @@ The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_cen
 their truth tables, \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table, and
 \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$, and
 \texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $k\le11$, and \texttt{or\_of\_blocks.py} the ORs of
-blocks with at most $20$ variables. The script
+blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
+above, after checking it against truth tables of six functions with up to $18$ variables. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
