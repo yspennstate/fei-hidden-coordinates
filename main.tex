@@ -564,7 +564,15 @@ variables, $G_{\mathrm{mon}}$ is nondecreasing, and $G_{\mathrm{mon}}(n)\ge3.541
 $13$ the best read-once values, $3.1282$, $3.3618$ and $3.4242$, lie below the bound for $n-1$. Along the family
 $\bigvee_{j=1}^{k}x_{2j-1}x_{2j}$, with every influence $\frac12(3/4)^{k-1}$, the ratio is $2.3160$, $3.0428$, $3.3892$,
 $3.5417$, $3.5984$, $3.6068$, $3.5916$ and $3.5657$ for $k=3,\dots,10$; it is largest at $k=8$, where it equals
-$3.606847002096$, so $G_{\mathrm{mon}}(n)\ge3.6068$ for $n\ge16$. Iterated compositions of
+$3.606847002096$, so $G_{\mathrm{mon}}(n)\ge3.6068$ for $n\ge16$. Among ORs of disjoint blocks of the forms
+$x_1x_2$, $x_1x_2x_3$, $(x_1\vee x_2)(x_3\vee x_4)$ and $(x_1\vee x_2)(x_3\vee x_4)(x_5\vee x_6)$ with at most $20$
+variables, the best is
+\[
+\bigvee_{b=0}^{2}\ \bigwedge_{j=1}^{3}\,(x_{6b+2j-1}\vee x_{6b+2j}),
+\]
+with every influence $12321/131072$ and ratio $3.713716018539$ at every variable, so $G_{\mathrm{mon}}(n)\ge3.7137$
+for $n\ge18$. With two blocks of two pairs the same construction is the dual of the eight-variable function above.
+Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
 functions.
 
@@ -609,7 +617,8 @@ The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_cen
 \texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
 their truth tables, \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table, and
 \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$, and
-\texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $k\le11$. The script
+\texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $k\le11$, and \texttt{or\_of\_blocks.py} the ORs of
+blocks with at most $20$ variables. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd

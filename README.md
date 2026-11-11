@@ -67,7 +67,9 @@ minimal true points of a function given as a hexadecimal truth table. `code/read
 read-once monotone function on n <= 13 variables (one tree shape per class up to relabelling and duality) and prints
 the best min E_i/Inf_i for each n; output `code/read_once_census_out.txt` (about five minutes).
 `code/or_of_and2.py 11` computes the ratio of x1x2 OR x3x4 OR ... OR x(2k-1)x(2k) for k <= 11 (largest at k = 8);
-output `code/or_of_and2_out.txt`.
+output `code/or_of_and2_out.txt`. `code/or_of_blocks.py 20` evaluates every OR of disjoint blocks x1x2, x1x2x3,
+(x1 OR x2)(x3 OR x4) and (x1 OR x2)(x3 OR x4)(x5 OR x6) on at most 20 variables (best: three blocks of the last kind,
+n = 18); output `code/or_of_blocks_out.txt`.
 
 ## Related papers
 
