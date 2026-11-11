@@ -66,6 +66,8 @@ functions on 8, 10 and 12 variables (the lower bounds in the census section); ou
 minimal true points of a function given as a hexadecimal truth table. `code/read_once_census.py 13` evaluates every
 read-once monotone function on n <= 13 variables (one tree shape per class up to relabelling and duality) and prints
 the best min E_i/Inf_i for each n; output `code/read_once_census_out.txt` (about five minutes).
+`code/or_of_and2.py 11` computes the ratio of x1x2 OR x3x4 OR ... OR x(2k-1)x(2k) for k <= 11 (largest at k = 8);
+output `code/or_of_and2_out.txt`.
 
 ## Related papers
 
