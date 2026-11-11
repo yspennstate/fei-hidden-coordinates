@@ -543,7 +543,13 @@ $n$ & monotone functions & $G_{\mathrm{mon}}(n)$ & $\max H/I$ & $\max\sum_iE_i/I
 For $n=6$ the maximum of $\min_iE_i/\Inf_i$ is attained by $\MAJ_3$ of three $\mathrm{AND}_2$ on disjoint pairs and by
 its dual, with every influence $3/16$; the maximum of $H/I$ for $n\le7$ by $\mathrm{AND}_n$ and $\mathrm{OR}_n$.
 For $n=7$ the maximiser of $\min_iE_i/\Inf_i$ has influences $0.09375$ at three variables and $0.15625$ at four, with
-ratios $3.0316$ and $2.9547$; its smallest ratio is at a coordinate of largest influence. Iterated compositions of
+ratios $3.0316$ and $2.9547$; its smallest ratio is at a coordinate of largest influence. For $n\ge8$ we have only
+lower bounds. The read-once function
+$(x_1x_2\vee x_3x_4)\wedge(x_5x_6\vee x_7x_8)$ has every influence $21/128$ and $E_i/\Inf_i=3.304701322451$ at every
+variable, so $G_{\mathrm{mon}}(8)\ge3.3047$, while $G_{\mathrm{mon}}(7)=2.9547$; the tribes
+function~\cite{BL85} $\bigwedge_{j=1}^{5}(x_{2j-1}\vee x_{2j})$, with every influence $81/512$, gives
+$G_{\mathrm{mon}}(10)\ge3.3891$.
+Both are compositions of transitive gates. Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
 functions.
 
@@ -584,7 +590,9 @@ $k\le17$, of six substituted functions with blocks of sizes $1$, $3$ and $5$, an
 checks Lemma~\ref{lem:hidden}, Proposition~\ref{prop:leaf} against a direct evaluation of the erasure entropy at every
 variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each rule of Theorem~\ref{thm:rules}, and
 Proposition~\ref{prop:pair} including monotonicity; it also evaluates the law of Proposition~\ref{prop:law} exactly.
-The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$). The script
+The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$), and
+\texttt{check\_small\_trees.py} computes the two functions on $8$ and $10$ variables of Section~\ref{sec:census} from
+their truth tables. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
@@ -617,7 +625,8 @@ results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite
 Claude Fable agent (Anthropic) and Codex agents running OpenAI's GPT-6.1, connected to the Brain and working on the same
 problem, studied the conjecture for monotone functions; a Codex agent found the constructions of
 Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced}, with
-their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$. Claude Opus 5.5
+their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$ and found the eight-variable function of Section~\ref{sec:census}
+by a local search. Claude Opus 5.5
 (Anthropic) found Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of the rule of
 Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and a
 second census program for $n\le6$, prepared the manuscript and audited it. These checks are not peer review. The author
@@ -632,6 +641,8 @@ The paper is part of the Math Brain project, whose public repository is
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
 entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), no.~4, 1--40, doi:10.1145/3470860; arXiv:1809.09819.
+\bibitem{BL85} M.~Ben-Or, N.~Linial, Collective coin flipping, robust voting schemes and minima of Banzhaf values, in:
+26th Annual Symposium on Foundations of Computer Science (FOCS), IEEE Computer Society, 1985, 408--416.
 \bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy, Theoret.
 Comput. Sci. 654 (2016), 92--112.
 \bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.

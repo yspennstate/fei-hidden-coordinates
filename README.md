@@ -59,6 +59,9 @@ both sets and that its ratio matches the biased expansion of the variant, and ta
 Outputs: `code/check_xand_out.txt`, `code/check_gk_out.txt`, `code/forced_rule_out.txt`.
 `code/forced_exact.py` computes the same ratio exactly (rational arithmetic) from the two-index form of the biased
 coefficients; its output for odd k <= 141, with t = 1 and the unbiased variant, is `code/forced_exact_out.txt`.
+`code/check_small_trees.py` (Python 3, NumPy) computes min E_i/Inf_i, H and I from the truth tables of the read-once
+function (x1x2 OR x3x4) AND (x5x6 OR x7x8) and of tribes functions on 8 and 10 variables (the lower bounds for n = 8
+and n = 10 in the census section); output `code/check_small_trees_out.txt`.
 
 ## Related papers
 

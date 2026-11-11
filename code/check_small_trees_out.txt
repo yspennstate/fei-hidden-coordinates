@@ -1,0 +1,5 @@
+n=8  (x1x2 v x3x4)(x5x6 v x7x8): min E_i/Inf_i 3.304701322451  ratios [3.304701322451]  influences [0.1640625]  H 4.741429279  I 1.31250000
+n=8  same, search labelling (x0x7 v x1x4)(x2x6 v x3x5): min E_i/Inf_i 3.304701322451  ratios [3.304701322451]  influences [0.1640625]  H 4.741429279  I 1.31250000
+n=8  tribes 4x2 (AND of four OR2): min E_i/Inf_i 3.042836845650  ratios [3.04283684565]  influences [0.2109375]  H 5.543984601  I 1.68750000
+n=10 tribes 5x2 (AND of five OR2): min E_i/Inf_i 3.389192093442  ratios [3.389192093442]  influences [0.158203125]  H 5.830604224  I 1.58203125
+n=10 tribes 2x5 (OR of two AND5): min E_i/Inf_i 2.451713047766  ratios [2.451713047766]  influences [0.060546875]  H 2.196464716  I 0.60546875
