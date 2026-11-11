@@ -596,26 +596,29 @@ included, and $1-c$ has the same coefficients as $c$ except at $\emptyset$. So f
 OR gates, with fan-ins $k_1,\dots,k_d$ from the bottom up, the five numbers $\Pr[c=1]$, $\hat c(\emptyset)^2$,
 $\hat c(\{i\})^2$, $\sum_S\hat c(S\cup\{i\})^2$ and $\sum_{\emptyset\ne S\not\ni i}\Phi\bigl(\hat c(S)^2,\hat
 c(S\cup\{i\})^2\bigr)$ at one level follow from those at the level below, and $E_i/\Inf_i$ follows from the top level as
-above. Coordinate ascent over fan-ins at most $40$, with an OR at the top, gives
+above. Coordinate ascent over fan-ins at most $40$, with an OR at the top, changing one fan-in at a time or two
+of them by at most $3$ each and started from several towers, gives
 \begin{center}
 \begin{tabular}{rrlr}
 $d$ & ratio & fan-ins & $n$\\\hline
 4 & 4.082607350869 & 2, 4, 4, 9 & 288\\
 5 & 4.147038128862 & 2, 4, 3, 4, 9 & 864\\
-6 & 4.175806194504 & 2, 4, 3, 3, 3, 6 & 1296\\
-7 & 4.198870450086 & 2, 3, 2, 2, 2, 4, 9 & 1728\\
-8 & 4.212002610938 & 2, 3, 2, 2, 2, 4, 6, 9 & 10368\\
-9 & 4.218175761392 & 2, 3, 2, 2, 2, 2, 2, 5, 10 & 9600\\
-10 & 4.221995523184 & 2, 3, 2, 2, 2, 2, 2, 5, 7, 10 & 67200\\
+6 & 4.184002783528 & 2, 3, 2, 3, 4, 8 & 1152\\
+7 & 4.203971114698 & 2, 3, 2, 3, 3, 3, 7 & 2268\\
+8 & 4.216322435744 & 2, 3, 2, 2, 2, 3, 4, 10 & 5760\\
+9 & 4.225998688945 & 2, 3, 2, 2, 2, 3, 3, 4, 8 & 13824\\
+10 & 4.229650288531 & 2, 3, 2, 2, 2, 3, 3, 3, 3, 7 & 27216\\
 \end{tabular}
 \end{center}
-so $G_{\mathrm{mon}}(n)\ge4.0826$ for $n\ge288$ and $G_{\mathrm{mon}}(n)\ge4.1989$ for $n\ge1728$. The gain from one
-more level roughly halves from $d=7$ on, which suggests that towers of AND and OR gates alone stay below about $4.23$.
+so $G_{\mathrm{mon}}(n)\ge4.0826$ for $n\ge288$, $G_{\mathrm{mon}}(n)\ge4.2039$ for $n\ge2268$ and
+$G_{\mathrm{mon}}(n)\ge4.2296$ for $n\ge27216$. The gain from one more level falls from $0.020$ at $d=7$ to $0.004$ at
+$d=10$, which suggests that towers of AND and OR gates alone level off not far above $4.23$.
 This concerns the minimum over the leaves, which in these towers is the same at every leaf. A single leaf of a read-once
 AND/OR formula has ratio below $\pi/\ln2=4.5324$, and the ratio comes arbitrarily close to $\pi/\ln 2$ along one path
 of a deep formula~\cite{Shm3}. A small threshold block in place of the variables at the bottom of a tower lowers the
-ratio: with $\MAJ_3$, $\MAJ_5$ or ``at least two of four'' as the block, the best towers of depth $6$ that the same search finds reach $2.981$,
-$2.533$ and $3.697$, against $4.176$ with variables.
+ratio: with $\MAJ_3$, $\MAJ_5$ or ``at least two of four'' as the block, the best towers of depth $6$ that the same search finds reach $2.986$
+($\MAJ_3$, fan-ins $2,3,2,3,4,8$, $n=3456$), $2.537$ ($\MAJ_5$, the same fan-ins, $n=5760$) and $3.697$ (fan-ins
+$3,3,3,3,4,8$, $n=10368$), all with an OR at the top, against $4.184$ with variables.
 Iterated compositions of larger monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the
 supremum over all monotone functions.
 
@@ -664,9 +667,9 @@ their truth tables, \texttt{check\_table.py} evaluates a function given as a hex
 blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
 above, after checking it against truth tables of six functions with up to $18$ variables, and
 \texttt{read\_once\_towers.py} checks the recursion for towers against truth tables of five towers with up to $16$
-variables; \texttt{towers\_mp.py} carries it out in $40$-digit arithmetic, and \texttt{climb.py} does the search;
+variables; \texttt{towers\_mp.py} carries it out in $40$-digit arithmetic, and \texttt{climb2.py} does the search;
 \texttt{mixed\_towers.py} does the same for towers with a threshold block at the bottom, after checking nine of
-them against truth tables with up to $18$ variables. The
+them against truth tables with up to $18$ variables, and \texttt{mixed\_climb2.py} searches them. The
 script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
 $300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the

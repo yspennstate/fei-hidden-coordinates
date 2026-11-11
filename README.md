@@ -76,10 +76,13 @@ spectrum of one block (the formula in the census section), checks it against tru
 `code/read_once_towers.py` computes alternating AND/OR read-once towers level by level (each level needs five
 numbers from the level below), checks the recursion against truth tables of five towers with n <= 16 and
 reproduces the two OR-of-blocks values above; output `code/read_once_towers_out.txt`. `code/towers_mp.py` is the
-same recursion in 40-digit arithmetic, and `code/climb.py` searches fan-ins up to 40 for depths 2 to 10 (best at
-depth 10: 4.2220, n = 67200); output `code/climb_out.txt` (about 40 minutes).
+same recursion in 40-digit arithmetic, and `code/climb2.py` searches fan-ins up to 40 for depths 4 to 10, one fan-in at
+a time and then pairs of levels moved by up to 3 each (best at depth 10: 4.2297, n = 27216); output
+`code/climb2_out.txt` (about 20 minutes).
 `code/mixed_towers.py` puts a threshold block (MAJ3, MAJ5, at least t of k) at the bottom of the same towers, checks the
 recursion against truth tables for n <= 18 and climbs the fan-ins for depths 1 to 6; output `code/mixed_out.txt`.
+`code/mixed_climb2.py` runs the search of `climb2.py` on depth-6 towers over MAJ3, MAJ5 and at least two of four,
+with an OR or an AND at the top; output `code/mixed_climb2_out.txt`.
 
 ## Related papers
 
