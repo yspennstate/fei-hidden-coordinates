@@ -13,7 +13,9 @@ Usage: python forced_exact.py [kmax] [t ...]     (t = 0 means P = 1/2)
 """
 import sys
 from fractions import Fraction
-from math import comb, log2
+from math import comb, log, log1p, log2
+
+LN2 = log(2)
 
 
 def bias(t):
@@ -43,6 +45,16 @@ def flog(fr):
     return log2(fr.numerator) - log2(fr.denominator)
 
 
+def log2_1p(x):
+    """log2(1 + x) for a Fraction x >= 0. For small x the difference of two large logs in flog loses every digit
+    (at k = 121 the ratio a^2/d^2 is about 1e17 and the weight of the a-term is as large), so use log1p."""
+    try:
+        xf = float(x)
+    except OverflowError:
+        return flog(1 + x)
+    return log1p(xf) / LN2
+
+
 def ratio(k, P):
     m = (k - 1) // 2
     u, w = P.numerator, P.denominator
@@ -61,11 +73,10 @@ def ratio(k, P):
             a = (1 if i == j == 0 else 0) - 2 * (maj - (1 - P) * d) - d
             a2, d2 = a * a, d * d
             sc = (P * (1 - P)) ** (i + j) * comb(m, i) * comb(m, j) / Inf   # weight relative to Inf_x
-            tot = a2 + d2
             term = 0.0
             if a2:
-                term += float(a2 * sc) * flog(tot / a2)
-            term += float(d2 * sc) * flog(tot / d2)
+                term += float(a2 * sc) * log2_1p(d2 / a2)
+            term += float(d2 * sc) * log2_1p(a2 / d2)
             E += term
     return E, float(Inf)
 
