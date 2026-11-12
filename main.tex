@@ -525,16 +525,18 @@ largest and smallest influence agree with those of \texttt{census\_mono.py} to $
 \texttt{mono\_census.c} breaks ties in favour of a rule and \texttt{census\_mono.py} against it. It gives the row $n=7$.
 Table~\ref{tab:census} gives the results.
 
-\begin{table}[h]
+\begin{table}[tbp]
 \centering
 \begin{tabular}{rrlll}
-$n$ & monotone functions & $G_{\mathrm{mon}}(n)$ & $\max H/I$ & $\max\sum_iE_i/I$\\\hline
+\toprule
+$n$ & monotone functions & $G_{\mathrm{mon}}(n)$ & $\max H/I$ & $\max\sum_iE_i/I$\\\midrule
 2 & 6 & 2 & 2 & 2\\
 3 & 20 & 2.672488983973 & 2.955889582252 & 2.672488983973\\
 4 & 168 & 2.672488983973 & 3.402475551199 & 2.704153205629\\
 5 & 7{,}581 & 2.695887520153 & 3.623740399702 & 2.883566415773\\
 6 & 7{,}828{,}354 & 2.944495303872 & 3.739764017898 & 3.030964070213\\
 7 & 2{,}414{,}682{,}040{,}998 & 2.954683814183 & 3.804357069772 & 3.164564560463\\
+\bottomrule
 \end{tabular}
 \caption{Maxima over all monotone functions on $n$ variables.}\label{tab:census}
 \end{table}
@@ -595,14 +597,16 @@ broken against the rule. The coordinate of largest influence never does worse th
 $n=7$ it does not either, with ties broken in its favour. The coordinate of smallest positive influence reaches
 $6.2425$ at $n=7$ even with ties broken in its favour.
 
-\begin{table}[h]
+\begin{table}[tbp]
 \centering
 \begin{tabular}{rllll}
-$n$ & largest $\Inf_i$ & smallest $\Inf_i$ & largest $W^{(2)}_i/\Inf_i$ & smallest $W^{(2)}_i/\Inf_i$\\\hline
+\toprule
+$n$ & largest $\Inf_i$ & smallest $\Inf_i$ & largest $W^{(2)}_i/\Inf_i$ & smallest $W^{(2)}_i/\Inf_i$\\\midrule
 3 & 2.672488983973 & 2.672488983973 & 2.672488983973 & 2.672488983973\\
 4 & 2.672488983973 & 3.523111966872 & 3.523111966872 & 3.523111966872\\
 5 & 2.695887520153 & 4.335249356685 & 4.335249356685 & 4.335249356685\\
 6 & 2.944495303872 & 5.019930166880 & 4.833940887931 & 5.019930166880\\
+\bottomrule
 \end{tabular}
 \caption{Worst ratio at the coordinate selected by each rule, over all monotone functions on $n$ variables.}
 \label{tab:rules}
