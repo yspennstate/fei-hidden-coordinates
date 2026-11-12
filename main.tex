@@ -47,13 +47,11 @@ For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ with $\chi_S(x
 be a random subset with $\Pr[U=S]=\mu(S)=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U)$ and the total influence is
 $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
-functions~\cite{OWZ}, for read-once formulas~\cite{OT13,CKLS}, for linear threshold functions~\cite{Shm2}, for
-plateaued functions~\cite{Pot26}, for a class of cryptographic Boolean functions of logarithmic density
-one~\cite{GS14} and for read-$k$ decision trees with $k$ fixed~\cite{WWW}; its min-entropy version is known for read-$k$ DNFs with $k$
-fixed~\cite{Shalev,ACKSW}; Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove that the min-entropy is
-$O(I(f)\log I(f))$ for functions of constant variance, with a matching concentration of the spectrum;
-Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, Li and
-Han~\cite{LH25} lower the multiple to the sharp value $1/\ln 2$, and Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$, and explicit balanced monotone functions on $14$ to $18$ variables raise this to $6.5218$~\cite{MI26a,MI26b,Num26}.
+functions~\cite{OWZ}, for read-once formulas~\cite{OT13,CKLS} and for linear threshold functions~\cite{Shm2}. It is
+also known for plateaued functions~\cite{Pot26}, for a class of cryptographic Boolean functions of logarithmic density
+one~\cite{GS14} and for read-$k$ decision trees with $k$ fixed~\cite{WWW}. Its min-entropy version is known for read-$k$ DNFs with $k$
+fixed~\cite{Shalev,ACKSW}, and Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove that the min-entropy is
+$O(I(f)\log I(f))$ for functions of constant variance, with a matching concentration of the spectrum. Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and Li and Han~\cite{LH25} lower the multiple to the sharp value $1/\ln 2$. Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$, and explicit balanced monotone functions on $14$ to $18$ variables raise this to $6.5218$~\cite{MI26a,MI26b,Num26}.
 
 The erasure entropy of $f$ at $i$ is
 \[
