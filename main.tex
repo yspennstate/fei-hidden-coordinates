@@ -49,7 +49,7 @@ $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
 functions~\cite{OWZ}, for read-once formulas~\cite{OT13,CKLS} and for linear threshold functions~\cite{Shm2}. It is
 also known for plateaued functions~\cite{Pot26}, for a class of cryptographic Boolean functions of logarithmic density
-one~\cite{GS14} and for read-$k$ decision trees with $k$ fixed~\cite{WWW}. Its min-entropy version is known for read-$k$ DNFs with $k$
+one~\cite{GS14} and for read-$k$ decision trees with $k$ fixed~\cite{WWW}. Its min-entropy version is known for read-$k$ DNFs (formulas in disjunctive normal form) with $k$
 fixed~\cite{Shalev,ACKSW}, and Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove that the min-entropy is
 $O(I(f)\log I(f))$ for functions of constant variance, with a matching concentration of the spectrum. Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and Li and Han~\cite{LH25} lower the multiple to the sharp value $1/\ln 2$. Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$, and explicit balanced monotone functions on $14$ to $18$ variables raise this to $6.5218$~\cite{MI26a,MI26b,Num26}.
 
@@ -72,7 +72,7 @@ Section~\ref{sec:hidden} studies the functions
 \[
 f_k(y,x)=\MAJ_k(y)\vee\bigl(x\wedge[y\ge y^0]\bigr),\qquad k\ \text{odd},
 \]
-where $y^0\in\{0,1\}^k$ has $(k-1)/2$ ones and $[y\ge y^0]$ is the AND of the coordinates of $y$ at which $y^0$ is $1$.
+where $y^0\in\{0,1\}^k$ has $(k-1)/2$ ones and $[y\ge y^0]$ is the AND (conjunction) of the coordinates of $y$ at which $y^0$ is $1$.
 The variable $x$ changes the value only at the single point $y=y^0$, so $\Inf_x(f_k)=2^{-k}$, and the ratio
 $E_x/\Inf_x$ tends to infinity (Proposition~\ref{prop:diverge}). Nevertheless the erasure entropies of all coordinates
 together are small:
@@ -467,7 +467,7 @@ to their values at $\pi=\frac12$, which are $E_x(\tilde f_k)$ and $\Inf_x(\tilde
 from Proposition~\ref{prop:both}.
 \end{proof}
 
-Already $t=1$, where $\mathrm{Th}_1$ and $\mathrm{Th}'_1$ are the OR and the AND of two variables, gives a growing ratio at the forced
+Already $t=1$, where $\mathrm{Th}_1$ and $\mathrm{Th}'_1$ are the OR (disjunction) and the AND of two variables, gives a growing ratio at the forced
 coordinate, on $2k+1$ variables. By the proof above it is the ratio of $\tilde f_k$ under the product measure with
 bias $\frac34$ on $y_1,\dots,y_m$ and $\frac14$ on $y_{m+1},\dots,y_k$. There $D$ and the average over $x$ have
 coefficients that depend only on $|S\cap\{y_1,\dots,y_m\}|$ and $|S\cap\{y_{m+2},\dots,y_k\}|$, so the ratio is a
@@ -660,17 +660,14 @@ The author holds equity in Heights Labs and in Convex Nexus Capital and has a ma
 These entities are included in the funding declaration above.
 
 \section*{Declaration of generative AI and AI-assisted technologies}
-The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics, and its
-results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. In November 2026 a
-Claude Fable agent (Anthropic) and Codex agents running OpenAI's GPT-6.1, connected to the Brain and working on the same
-problem, studied the conjecture for monotone functions; a Codex agent found the constructions of
-Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced}, with
-their proofs, and computed the census for $n\le6$, and a Claude agent computed the census for $n=7$ and found the eight-variable function of Section~\ref{sec:census}
-by a local search, and another Claude agent found the ten-variable function by simulated annealing. Claude Opus 5.5
-(Anthropic) found Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of the rule of
-Section~\ref{sec:rules} built on shortest minterms and maxterms, rederived each proof, wrote the numerical checks and the census of read-once functions and a
-second census program for $n\le6$, prepared the manuscript and audited it. These checks are not peer review. The author
-directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+The paper comes out of Math Brain, a project on the use of AI systems in research
+mathematics~\cite{BrainFramework,MathBrainRepo}. Codex agents running OpenAI's GPT-6.1 found the constructions of
+Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand}, \ref{prop:both}
+and~\ref{prop:forced}, with their proofs, and computed the census for $n\le6$. Claude agents (Anthropic: Fable and
+Opus~5.5) computed the census for $n=7$, found the eight- and ten-variable functions of Section~\ref{sec:census},
+Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of Section~\ref{sec:rules}, checked
+the proofs and computations, and prepared the manuscript. The author directed the work and is responsible for the
+content of the paper and for decisions concerning its dissemination.
 
 \section*{Code and data availability}
 Code and outputs: \url{https://github.com/yspennstate/fei-hidden-coordinates}.
