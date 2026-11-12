@@ -1,6 +1,7 @@
 \documentclass[11pt]{amsart}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1.1in]{geometry}
+\usepackage{array,longtable,booktabs}
 \usepackage{hyperref}
 \emergencystretch=2em
 
@@ -25,8 +26,7 @@
 \begin{abstract}
 For a Boolean function $f$ and a coordinate $i$, the erasure entropy $E_i(f)$ is the conditional entropy of the event
 $i\in U$ given $U\setminus\{i\}$, where $U$ is drawn from the spectral distribution $\hat f^2$. The Fourier
-entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)\le c\,\Inf_i(f)$
-for an absolute $c$. We study a family of monotone functions with a hidden coordinate: a variable that enters only
+entropy-influence conjecture is equivalent to every non-constant $f$ having a coordinate with $E_i(f)\le G\,\Inf_i(f)$ for an absolute $G$. We study a family of monotone functions with a hidden coordinate: a variable that enters only
 through one point below a majority threshold. Its ratio $E_i/\Inf_i$ tends to infinity, yet the sum of the erasure
 entropies over all coordinates is at most twice the total influence, and at most five times the total influence after
 every other variable is replaced by a self-dual monotone function on fresh variables. These functions show that no
@@ -42,7 +42,7 @@ functions of at most seven variables.
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ with $\chi_S(x)=(-1)^{\sum_{j\in S}x_j}$, and let $U$
 be a random subset with $\Pr[U=S]=\mu(S)=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U)$ and the total influence is
@@ -138,7 +138,7 @@ $\sum_t\Phi(p_t,q_t)\le\Phi(\sum_tp_t,\sum_tq_t)$. It is nondecreasing in each a
 $\Phi(p,q)\ge q\log(p/q)$ when $p\ge q$, since both of its terms are nonnegative and $(p+q)/q\ge p/q$. We use
 $h_2(t)\le t\log(e/t)$, which follows from $-(1-t)\ln(1-t)\le t$.
 
-For monotone $f$ (with $f=1-2F$ for a monotone $F$, or $2F-1$; squared coefficients do not depend on the choice),
+For monotone $f$ (true may be written $-1$ or $+1$; squared coefficients do not depend on the choice),
 $|\hat f(\{i\})|=\Inf_i(f)$. A Boolean function is self-dual if $f(\bar x)=-f(x)$, where $\bar x$ is the complement of
 $x$; then $\hat f(S)=0$ for every $S$ of even size, and in particular $\hat f(\emptyset)=0$.
 
@@ -172,8 +172,7 @@ so that $a$ is the influence of every variable of $\MAJ_k$. For $k=1$ the vector
 \begin{proof}
 If $y\ge y^0$ and $y\ne y^0$ then $|y|\ge(k+1)/2$, so the clause $x\wedge[y\ge y^0]$ changes the value only at
 $y=y^0$, where $\MAJ_k=-1$ and $f_k=x$; this is (1). The derivative in $x$ is $\mathbf 1[y=y^0]$, so
-$\Inf_x=\Pr[y=y^0]=\delta$. Setting $f_k(1,y^0)=1$ creates a pivotal edge in direction $j$ when $y^0_j=1$, since
-$\MAJ_k(y^0-e_j)=-1$, and removes one when $y^0_j=0$, since $\MAJ_k(y^0+e_j)=1$; each edge carries influence $\delta$.
+$\Inf_x=\Pr[y=y^0]=\delta$. Setting $f_k(1,y^0)=1$ creates a pivotal edge in direction $j$ when $y^0_j=1$, since $\MAJ_k=-1$ at the neighbour of $y^0$ in direction $j$, and removes one when $y^0_j=0$, since $\MAJ_k=1$ at that neighbour; each edge carries influence $\delta$.
 There are $(k-1)/2$ coordinates of the first kind and $(k+1)/2$ of the second, so $I(f_k)=\delta+ka-\delta=ka$. As
 $a$ is the largest atom of the binomial law on $\{0,\dots,k-1\}$, $a\ge1/k$. For (3): $\MAJ_k$ is self-dual, so its
 spectrum lies on odd sets not containing $x$. The coefficients of $(1+x)\mathbf 1[y=y^0]$ all have modulus $\delta$,
@@ -203,8 +202,8 @@ $\delta^{-2}\Phi(\hat g(T)^2,\delta^2)$ over uniform $T$. For $|T|=r$ odd, $\wid
 b_r=a\binom{(k-1)/2}{(r-1)/2}\Big/\binom{k-1}{r-1}.
 \]
 Indeed, for $j\in T$ it equals the coefficient at $T\setminus\{j\}$ of the derivative in $y_j$, the indicator of the
-middle layer of the other $2m=k-1$ coordinates, and
-$\sum_S\E[\chi_S\mid|z|=m]\,t^{|S|}=(1-t)^m(1+t)^m=(1-t^2)^m$ gives $\E[\chi_S\mid |z|=m]=(-1)^s\binom ms/\binom{2m}{2s}$
+middle layer of the other $2m=k-1$ coordinates, evaluated at a uniform point $v$ of $\{0,1\}^{2m}$, and
+$\sum_S\E[\chi_S\mid|v|=m]\,\xi^{|S|}=(1-\xi)^m(1+\xi)^m=(1-\xi^2)^m$ gives $\E[\chi_S\mid |v|=m]=(-1)^s\binom ms/\binom{2m}{2s}$
 for $|S|=2s$. If $(k-1)/4\le r-1\le3(k-1)/4$ then $\binom{m}{(r-1)/2}\ge2^{(k-1)/8}$, and with $a\ge1/k$ and
 $\binom{k-1}{r-1}\le2^{k-1}$ we get $b_r/\delta\ge2^{(k-1)/8+1}/k\ge2$ for large $k$. Then $|\hat g(T)|\ge b_r-\delta\ge
 b_r/2$ and $\delta^{-2}\Phi(\hat g(T)^2,\delta^2)\ge\log(\hat g(T)^2/\delta^2)\ge(k-1)/4-2\log k$. The set of such $T$
@@ -216,13 +215,13 @@ The ratio is $3.52$, $5.78$ and $9.27$ at $k=3,9,17$.
 \section{Substitution}\label{sec:subst}
 
 Let $\varphi_1,\dots,\varphi_k$ be non-constant self-dual monotone functions on disjoint blocks of fresh variables, and
-$F(z,x)=f_k(\varphi_1(z^1),\dots,\varphi_k(z^k),x)$. Write $\mu$ for the spectral distribution of $f_k$ and $\delta_j$
+$F(z,x)=f_k(\varphi_1(z^1),\dots,\varphi_k(z^k),x)$. Write $\mu$ for the spectral distribution of $f_k$ and $\iota_j$
 for $\Inf_{y_j}(f_k)$. For a variable $\ell$ of block $j$ let $\tau=\Inf_\ell(\varphi_j)=|\hat\varphi_j(\{\ell\})|$.
 
 \begin{proposition}\label{prop:leaf}
 With $p_T=\mu(T)$ and $q_T=\mu(T\cup\{y_j\})$ for $T$ a subset of the coordinates of $f_k$ other than $y_j$,
 \[
-\Inf_\ell(F)=\tau\delta_j,\qquad E_\ell(F)=\sum_T\Phi(p_T,\tau^2q_T).
+\Inf_\ell(F)=\tau\iota_j,\qquad E_\ell(F)=\sum_T\Phi(p_T,\tau^2q_T).
 \]
 Moreover $E_x(F)=E_x(f_k)$, $\Inf_x(F)=\delta$, and the weight of $F$ on sets of even size is $\delta$.
 \end{proposition}
@@ -242,34 +241,33 @@ $|S|\equiv|T|\pmod 2$ and the even weight is that of $f_k$.
 \end{proof}
 
 \begin{corollary}\label{cor:leaf}
-$E_\ell(F)\le\min\bigl(h_2(\delta),h_2(\tau^2\delta_j)\bigr)$.
+$E_\ell(F)\le\min\bigl(h_2(\delta),h_2(\tau^2\iota_j)\bigr)$.
 \end{corollary}
 
 \begin{proof}
 The first bound is Lemma~\ref{lem:parity} with Proposition~\ref{prop:leaf}. For the second, superadditivity gives
-$E_\ell(F)\le\Phi(\sum_Tp_T,\tau^2\sum_Tq_T)=\Phi(1-\delta_j,\tau^2\delta_j)\le\Phi(1-\tau^2\delta_j,\tau^2\delta_j)$, using
+$E_\ell(F)\le\Phi(\sum_Tp_T,\tau^2\sum_Tq_T)=\Phi(1-\iota_j,\tau^2\iota_j)\le\Phi(1-\tau^2\iota_j,\tau^2\iota_j)$, using
 that $\Phi$ is nondecreasing in its first argument.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:sum} for $F$]
-Let $k\ge3$. Then $\delta\le1/(2k)$, so $\delta_j\ge a-\delta\ge1/(2k)$. Put $r=\sqrt{\delta/\delta_j}$. If $\tau\ge r$,
+Let $k\ge3$. Then $\delta\le1/(2k)$, so $\iota_j\ge a-\delta\ge1/(2k)$. Put $\tau_0=\sqrt{\delta/\iota_j}$. If $\tau\ge\tau_0$,
 Corollary~\ref{cor:leaf} and $h_2(t)\le t\log(e/t)$ give
 \[
-\frac{E_\ell}{\Inf_\ell}\le\frac{h_2(\delta)}{r\delta_j}\le r\log\frac e\delta.
+\frac{E_\ell}{\Inf_\ell}\le\frac{h_2(\delta)}{\tau_0\iota_j}\le \tau_0\log\frac e\delta.
 \]
-If $\tau\le r$, they give $E_\ell/\Inf_\ell\le\tau\log(e/(\tau^2\delta_j))$, whose derivative in $\tau$ is
-$\log(1/(\tau^2\delta_j))-\eta>0$, because $\tau^2\delta_j\le\delta\le1/8<1/e$; so it is at most its value $r\log(e/\delta)$
-at $\tau=r$. Hence
+If $\tau\le\tau_0$, they give $E_\ell/\Inf_\ell\le\tau\log(e/(\tau^2\iota_j))$, whose derivative in $\tau$ is
+$\log(1/(\tau^2\iota_j))-\eta>0$, because $\tau^2\iota_j\le\delta\le1/8<1/e$; so it is at most its value $\tau_0\log(e/\delta)$ at $\tau=\tau_0$. Hence
 \[
-\frac{E_\ell(F)}{\Inf_\ell(F)}\le\sqrt{\delta/\delta_j}\,\log(e/\delta)\le B_k:=\sqrt{2k2^{-k}}\,(k+\eta).
+\frac{E_\ell(F)}{\Inf_\ell(F)}\le\sqrt{\delta/\iota_j}\,\log(e/\delta)\le \gamma_k:=\sqrt{2k2^{-k}}\,(k+\eta).
 \]
-Here $B_3<\frac94\sqrt3<4$, and $B_{k+2}/B_k=\frac12\sqrt{1+2/k}\,(1+2/(k+\eta))\le\frac12\sqrt{5/3}\cdot\frac32<1$. For
-$k=1$, $\delta=\delta_1=1/2$ and $E_\ell/\Inf_\ell\le h_2(\tau^2/2)/(\tau/2)\le\tau\log(2e/\tau^2)\le2\sqrt{2/e}\,\eta<3$.
+Here $\gamma_3<\frac94\sqrt3<4$, and $\gamma_{k+2}/\gamma_k=\frac12\sqrt{1+2/k}\,(1+2/(k+\eta))\le\frac12\sqrt{5/3}\cdot\frac32<1$. For
+$k=1$, $\delta=\iota_1=1/2$ and $E_\ell/\Inf_\ell\le h_2(\tau^2/2)/(\tau/2)\le\tau\log(2e/\tau^2)\le2\sqrt{2/e}\,\eta<3$.
 
-For the sum, $I(F)=\delta+\sum_j\delta_jI(\varphi_j)$, and $I(\varphi_j)\ge\Var(\varphi_j)=1$, so
-$I(F)\ge\delta+\sum_j\delta_j=I(f_k)\ge1$. Therefore
+For the sum, $I(F)=\delta+\sum_j\iota_jI(\varphi_j)$, and $I(\varphi_j)\ge\Var(\varphi_j)=1$, so
+$I(F)\ge\delta+\sum_j\iota_j=I(f_k)\ge1$. Therefore
 \[
-\sum_iE_i(F)=E_x(F)+\sum_\ell E_\ell(F)\le h_2(\delta)+4\sum_j\delta_jI(\varphi_j)\le I(F)+4I(F).\qedhere
+\sum_iE_i(F)=E_x(F)+\sum_\ell E_\ell(F)\le h_2(\delta)+4\sum_j\iota_jI(\varphi_j)\le I(F)+4I(F).\qedhere
 \]
 \end{proof}
 
@@ -289,9 +287,9 @@ Proposition~\ref{prop:diverge} applies.
 at a set of size two is a coefficient of $(1+x)\mathbf 1[y=y^0]$, of modulus $\delta$. Thus $W^{(2)}_i=k\delta^2$ for
 every coordinate, and maximising $W^{(2)}_i/\Inf_i$ is minimising $\Inf_i$.
 
-\emph{Largest influence.} Substitute $\varphi_j=\MAJ_{2s+1}$ for every $j$. Then
-$\tau=\binom{2s}{s}4^{-s}\le(s+1)^{-1/2}$ (the ratio from $s$ to $s+1$ is $\frac{2s+1}{2s+2}$, and
-$(\frac{2s+1}{2s+2})^2\le\frac{s+1}{s+2}$). For $s+1>4^k$ every variable of a block has influence $\tau\delta_j<\delta$, so
+\emph{Largest influence.} Substitute $\varphi_j=\MAJ_{2w+1}$ for every $j$. Then
+$\tau=\binom{2w}{w}4^{-w}\le(w+1)^{-1/2}$ (the ratio from $w$ to $w+1$ is $\frac{2w+1}{2w+2}$, and
+$(\frac{2w+1}{2w+2})^2\le\frac{w+1}{w+2}$). For $w+1>4^k$ every variable of a block has influence $\tau\iota_j<\delta$, so
 $x$ is the unique coordinate of largest influence, and by Proposition~\ref{prop:leaf} its ratio is that of $f_k$.
 
 \emph{Most shortest minterms.} Substitute $\varphi_j=\MAJ_3$. The minterms of $F$ are $x$ together with a minterm of
@@ -308,8 +306,8 @@ Proposition~\ref{prop:forced} below.
 For $f_k$ the hidden coordinate has the same level-two weight as every other coordinate, which is not the smallest
 normalised value. The next construction removes it.
 
-Let $k\ge6$ be even, let $y^0\in\{0,1\}^k$ have $k/2$ ones and $y^1=\bar y^0$. Let $B(y)=1$ if $|y|\ge k/2$ and $0$
-otherwise, and define $f'_k(y,x)=B(y)$ except that $f'_k(y,x)=x$ when $y\in\{y^0,y^1\}$. Lowering a point of the middle
+Let $k\ge6$ be even, let $y^0\in\{0,1\}^k$ have $k/2$ ones. Let $N(y)=1$ if $|y|\ge k/2$ and $0$
+otherwise, and define $f'_k(y,x)=N(y)$ except that $f'_k(y,x)=x$ when $y\in\{y^0,\bar y^0\}$. Lowering a point of the middle
 layer from $1$ to $0$ preserves monotonicity, so $f'_k$ is monotone.
 
 \begin{proposition}\label{prop:pair}
@@ -321,26 +319,26 @@ level-two weight; $\Inf_x=2^{1-k}$, $\Inf_{y_j}=\binom{k}{k/2}2^{-k}$ for every 
 \end{proposition}
 
 \begin{proof}
-With $P=\mathbf 1[y\in\{y^0,y^1\}]$ we have $f'_k=B-(1-x)P$ in $\pm1$ values, the derivative in $x$ is $P$, and the
-average over $x$ is $g=B-P$. Put $\delta=2^{1-k}$. Since $\chi_T(y^1)=(-1)^{|T|}\chi_T(y^0)$, $\hat P(T)$ vanishes for
-odd $|T|$ and has modulus $\delta$ for even $|T|$. So $\Inf_x=\Pr[y\in\{y^0,y^1\}]=\delta$ and the coefficient of
-$f'_k$ at $\{x,y_j\}$, which is $\hat P(\{y_j\})$, is zero: $W^{(2)}_x=0$. At $y^0$ and at $y^1$ the change creates or
+With $D=\mathbf 1[y\in\{y^0,\bar y^0\}]$ we have $f'_k=N-(1-x)D$ in $\pm1$ values, the derivative in $x$ is $D$, and the
+average over $x$ is $g=N-D$. Put $\delta'=2^{1-k}$. Since $\chi_T(\bar y^0)=(-1)^{|T|}\chi_T(y^0)$, $\hat D(T)$ vanishes for
+odd $|T|$ and has modulus $\delta'$ for even $|T|$. So $\Inf_x=\Pr[y\in\{y^0,\bar y^0\}]=\delta'$ and the coefficient of
+$f'_k$ at $\{x,y_j\}$, which is $\hat D(\{y_j\})$, is zero: $W^{(2)}_x=0$. At $y^0$ and at $\bar y^0$ the change creates or
 removes a pivotal edge in direction $j$ according to the $j$th bit, and the two bits are opposite, so
-$\Inf_{y_j}(f'_k)=\Inf_j(B)=\binom{k}{k/2}2^{-k}=:a_0$.
+$\Inf_{y_j}(f'_k)=\Inf_j(N)=\binom{k}{k/2}2^{-k}=:a_0$.
 
-In $\pm1$ values, $B$ is the sum of an odd function, the sign of $|y|-k/2$ with $0$ on the middle layer, and the
+In $\pm1$ values, $N$ is the sum of an odd function, the sign of $|y|-k/2$ with $0$ on the middle layer, and the
 indicator of the middle layer. Only the latter has even coefficients, and by the generating function of
 Proposition~\ref{prop:diverge}, for even $r=|T|$,
 \begin{equation}\label{eq:B}
-|\hat B(T)|=a_0\binom{k/2}{r/2}\Big/\binom kr.
+|\hat N(T)|=a_0\binom{k/2}{r/2}\Big/\binom kr.
 \end{equation}
-At $r=2$ this is $a_0/(k-1)$, and $a_0/((k-1)\delta)=\binom k{k/2}/(2(k-1))$ equals $2$ at $k=6$ and increases. So
-$|\hat f'_k(\{y_j,y_l\})|\ge|\hat B(\{y_j,y_l\})|-\delta>0$ and $W^{(2)}_{y_j}>0$.
+At $r=2$ this is $a_0/(k-1)$, and $a_0/((k-1)\delta')=\binom k{k/2}/(2(k-1))$ equals $2$ at $k=6$ and increases. So
+$|\hat f'_k(\{y_j,y_{j'}\})|\ge|\hat N(\{y_j,y_{j'}\})|-\delta'>0$ and $W^{(2)}_{y_j}>0$.
 
 The derivative spectrum is uniform over the even subsets $T$ of $[k]$, and $E_x/\Inf_x$ is the average of
-$\delta^{-2}\Phi(\hat g(T)^2,\delta^2)$. For even $r\in[k/4,3k/4]$, \eqref{eq:B} with $\binom{k/2}{r/2}\ge2^{k/8}$,
-$a_0\ge1/(k+1)$ and $\binom kr\le2^k$ gives $|\hat B(T)|\ge2^{-7k/8}/(k+1)\ge2\delta$ for large $k$, hence $|\hat
-g(T)|\ge|\hat B(T)|/2$ and $\delta^{-2}\Phi(\hat g(T)^2,\delta^2)\ge k/4-4-2\log(k+1)$. By Chebyshev's inequality,
+$\delta'^{-2}\Phi(\hat g(T)^2,\delta'^2)$. For even $r\in[k/4,3k/4]$, \eqref{eq:B} with $\binom{k/2}{r/2}\ge2^{k/8}$,
+$a_0\ge1/(k+1)$ and $\binom kr\le2^k$ gives $|\hat N(T)|\ge2^{-7k/8}/(k+1)\ge2\delta'$ for large $k$, hence $|\hat
+g(T)|\ge|\hat N(T)|/2$ and $\delta'^{-2}\Phi(\hat g(T)^2,\delta'^2)\ge k/4-4-2\log(k+1)$. By Chebyshev's inequality,
 conditioned on $|T|$ even, $|T|\in[k/4,3k/4]$ with probability at least $1-8/k$.
 \end{proof}
 
@@ -356,8 +354,8 @@ $A(f)\cap B(f)$ minimising $E_i/\Inf_i$. It is bounded when a shortest minterm o
 variable, but not in general.
 
 \begin{proposition}\label{prop:xand}
-Let $f=x\wedge g$, where $g$ is a monotone function of the other variables that is not identically false, and let
-$p=\Pr[g\text{ true}]$. Then $\Inf_x(f)=p$ and
+Let $f=x\wedge h$, where $h$ is a monotone function of the other variables that is not identically false, and let
+$p=\Pr[h\text{ true}]$. Then $\Inf_x(f)=p$ and
 \[
 \frac{E_x(f)}{\Inf_x(f)}=2(1-p)+\frac{\Phi\bigl((1-p)^2,p^2\bigr)}{p}\ \le\ 4(1-p).
 \]
@@ -366,10 +364,10 @@ $2.697377$, attained near $p=0.1994$.
 \end{proposition}
 
 \begin{proof}
-Write $x$ and $g$ in $\pm1$ values with $-1$ for true. Then $f=\frac{1+g}2+x\,\frac{1-g}2$, so for $T$ not containing
-$x$, $\hat f(T)=\frac12(\mathbf 1[T=\emptyset]+\hat g(T))$ and $\hat f(T\cup\{x\})=\frac12(\mathbf
-1[T=\emptyset]-\hat g(T))$. As $\hat g(\emptyset)=1-2p$, we get $\mu(\emptyset)=(1-p)^2$, $\mu(\{x\})=p^2$, and
-$\mu(T)=\mu(T\cup\{x\})=\hat g(T)^2/4$ for $T\ne\emptyset$. Since $\Phi(c,c)=2c$, \eqref{eq:Ei} gives
+Write $x$ and $h$ in $\pm1$ values with $-1$ for true. Then $f=\frac{1+h}2+x\,\frac{1-h}2$, so for $T$ not containing
+$x$, $\hat f(T)=\frac12(\mathbf 1[T=\emptyset]+\hat h(T))$ and $\hat f(T\cup\{x\})=\frac12(\mathbf
+1[T=\emptyset]-\hat h(T))$. As $\hat h(\emptyset)=1-2p$, we get $\mu(\emptyset)=(1-p)^2$, $\mu(\{x\})=p^2$, and
+$\mu(T)=\mu(T\cup\{x\})=\hat h(T)^2/4$ for $T\ne\emptyset$. Since $\Phi(t,t)=2t$, \eqref{eq:Ei} gives
 \[
 E_x=\Phi\bigl((1-p)^2,p^2\bigr)+\tfrac12\bigl(1-(1-2p)^2\bigr),\qquad \Inf_x=p^2+\tfrac14\bigl(1-(1-2p)^2\bigr)=p,
 \]
@@ -378,14 +376,13 @@ inequality $h_2(t)\le2\sqrt{t(1-t)}$, which follows from $h_2(t)\le(4t(1-t))^{1/
 $2\sqrt{ab}=2p(1-p)$.
 \end{proof}
 
-If a shortest maxterm of a monotone $f$ is a single variable $x$, then $f=x\wedge g$ with $g$ the restriction $x=1$,
+If a shortest maxterm of a monotone $f$ is a single variable $x$, then $f=x\wedge h$ with $h$ the restriction $x=1$,
 and every shortest maxterm is a single variable of this kind. So every variable of $B(f)$, and hence of $A(f)\cap B(f)$,
-has $E_i/\Inf_i<2.6974$. The dual $f^\dagger(z)=\neg f(\bar z)$ exchanges minterms and maxterms and has the same
+has $E_i/\Inf_i<2.6974$. The dual $f^\dagger$, the negation of $f$ at the complement of its argument, exchanges minterms and maxterms and has the same
 squared Fourier coefficients, so the same holds when a shortest minterm is a single variable. In these cases any
 variable of $A\cap B$ will do.
 
-In general a variable of $A\cap B$ can be bad. For odd $k\ge3$ let $m=(k-1)/2$, let $y^0$ have ones exactly at $y_1,\dots,y_m$, put
-$y^1=y^0+e_{m+1}$, let $M$ be $\MAJ_k$ with its value at $y^1$ changed to false, and
+In general a variable of $A\cap B$ can be bad. For odd $k\ge3$ let $m=(k-1)/2$, let $y^0$ have ones exactly at $y_1,\dots,y_m$, let $y^1$ differ from $y^0$ only in $y^1_{m+1}=1$, let $M$ be $\MAJ_k$ with its value at $y^1$ changed to false, and
 \[
 \tilde f_k(y,x)=M(y)\vee\bigl(x\wedge[y\ge y^0]\bigr).
 \]
@@ -407,11 +404,11 @@ with $x$ false and $y=y^1$ is false and has weight $m+1$, so the variables at wh
 shortest maxterm.
 
 In $\pm1$ values with $+1$ for true, $\tilde f_k=\MAJ_k+(1+x)\mathbf 1[y=y^0]-(1-x)\mathbf 1[y=y^1]$. The derivative in
-$x$ is $D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1]$ and the average over $x$ is $\bar g=\MAJ_k+\mathbf 1[y=y^0]-\mathbf
+$x$ is $D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1]$ and the average over $x$ is $g=\MAJ_k+\mathbf 1[y=y^0]-\mathbf
 1[y=y^1]$. With $\delta=2^{-k}$, $\hat D(T)=\delta(\chi_T(y^0)+\chi_T(y^1))$ vanishes if $y_{m+1}\in T$ and has
 modulus $2\delta$ otherwise. So $\Inf_x=2^{k-1}(2\delta)^2=2^{1-k}$, and $E_x/\Inf_x$ is the average of
-$(2\delta)^{-2}\Phi(\hat{\bar g}(T)^2,4\delta^2)$ over the $2^{k-1}$ sets $T\subseteq[k]\setminus\{m+1\}$. For these
-$T$, $\chi_T(y^0)=\chi_T(y^1)$, the two indicators cancel, and $|\hat{\bar g}(T)|=b_r$ for $|T|=r$ odd, with $b_r$ as
+$(2\delta)^{-2}\Phi(\hat g(T)^2,4\delta^2)$ over the $2^{k-1}$ sets $T\subseteq[k]\setminus\{m+1\}$. For these
+$T$, $\chi_T(y^0)=\chi_T(y^1)$, the two indicators cancel, and $|\hat g(T)|=b_r$ for $|T|=r$ odd, with $b_r$ as
 in the proof of Proposition~\ref{prop:diverge}. If $(k-1)/4\le r-1\le3(k-1)/4$, that proof gives $b_r/(2\delta)\ge
 2^{(k-1)/8}/k\ge1$ for large $k$, hence $(2\delta)^{-2}\Phi(b_r^2,4\delta^2)\ge\log(b_r^2/(4\delta^2))\ge(k-1)/4-2\log k$.
 Now $|T|$ is binomial with parameters $k-1$ and $\frac12$; it is odd with probability $\frac12$, and by Chebyshev's
@@ -428,10 +425,10 @@ At $k=3,5,\dots,13$ the ratio at $x$ is $1.80$, $2.56$, $3.17$, $3.90$, $4.70$ a
 over $A(\tilde f_k)\cap B(\tilde f_k)$ is the smallest over all coordinates, $1.00$ at $k=3$ and $0.0060$ at $k=13$.
 So $\tilde f_k$ does not defeat the rule. A substitution removes the other variables from $A\cap B$.
 
-For $t\ge1$ let $T_t$ be the function of $2t$ variables that is true when at least $t$ of them are true, and $T'_t$
+For $t\ge1$ let $\mathrm{Th}_t$ be the function of $2t$ variables that is true when at least $t$ of them are true, and $\mathrm{Th}'_t$
 the one that is true when at least $t+1$ are. Their shortest minterms have sizes $t$ and $t+1$, and their shortest
-maxterms sizes $t+1$ and $t$. Let $F_{k,t}$ be obtained from $\tilde f_k$ by replacing $y_j$ with $T_t$ of a block of
-fresh variables for $j\le m$ and with $T'_t$ of a block of fresh variables for $j>m$.
+maxterms sizes $t+1$ and $t$. Let $F_{k,t}$ be obtained from $\tilde f_k$ by replacing $y_j$ with $\mathrm{Th}_t$ of a block of
+fresh variables for $j\le m$ and with $\mathrm{Th}'_t$ of a block of fresh variables for $j>m$.
 
 \begin{proposition}\label{prop:forced}
 $A(F_{k,t})\cap B(F_{k,t})=\{x\}$, and for each $k$,
@@ -443,39 +440,37 @@ functions.
 \end{proposition}
 
 \begin{proof}
-If each $y_j$ of a monotone $g$ is replaced by a non-constant monotone $\varphi_j$ of its own block, the minterms of
-the result are the sets $\bigcup_{j\in S}R_j$, together with $x$ when $x\in S$, where $S$ is a minterm of $g$ and each
-$R_j$ is a minterm of $\varphi_j$; the same holds for maxterms. So a shortest minterm of the result comes from a
-minterm $S$ of $g$ minimising $\sum_{j\in S}a_j$, where $a_x=1$ and $a_j$ is the size of a shortest minterm of
-$\varphi_j$, and likewise for maxterms.
+If each $y_j$ of $\tilde f_k$ is replaced by a non-constant monotone $\varphi_j$ of its own block, the minterms of
+the result are the sets $\bigcup_{j\in S}Q_j$, together with $x$ when $x\in S$, where $S$ is a minterm of $\tilde f_k$ and each $Q_j$ is a minterm of $\varphi_j$; the same holds for maxterms. So a shortest minterm of the result comes from a
+minterm $S$ of $\tilde f_k$ minimising $\sum_{j\in S}\alpha_j$, where $\alpha_x=1$ and $\alpha_j$ is the size of a shortest minterm of $\varphi_j$, and likewise for maxterms, with the sizes $\beta_x=1$ and $\beta_j$ of shortest maxterms.
 
-Write $S_0=\{y_1,\dots,y_m\}$ and $R=\{y_{m+2},\dots,y_k\}$. The minterms of $\tilde f_k$ are $\{x\}\cup S_0$ and the
-sets of $m+1$ variables $y_j$ other than $S_0\cup\{y_{m+1}\}$: a true point either has $y\ge y^0$ and $x$ true or
+Write $Y_0=\{y_1,\dots,y_m\}$ and $Y_1=\{y_{m+2},\dots,y_k\}$. The minterms of $\tilde f_k$ are $\{x\}\cup Y_0$ and the
+sets of $m+1$ variables $y_j$ other than $Y_0\cup\{y_{m+1}\}$: a true point either has $y\ge y^0$ and $x$ true or
 satisfies $M$, and $M$ is true exactly at the points of weight at least $m+1$ other than $y^1$. The first has
-$\sum a_j=1+mt$. Any other contains $i\le m$ variables of $S_0$ and $m+1-i\ge1$ others, and has
-$\sum a_j=(m+1)t+(m+1-i)>1+mt$. The maximal false points of $\tilde f_k$ are the point with $x$ false and $y=y^1$, and
-the points with $x$ true and $|y|=m$, $y\ne y^0$; the maxterms are therefore $\{x\}\cup R$ and the sets of $m+1$
-variables $y_j$ other than $R\cup\{y_{m+1}\}$. The first has $\sum b_j=1+mt$, and every other contains a variable of
-$S_0$ and has $\sum b_j\ge(m+1)t+1$. Hence every shortest minterm of $F_{k,t}$ consists of $x$ and variables of the
-blocks of $S_0$, every shortest maxterm consists of $x$ and variables of the blocks of $R$, and $A\cap B=\{x\}$.
+$\sum\alpha_j=1+mt$. Any other contains $i\le m$ variables of $Y_0$ and $m+1-i\ge1$ others, and has
+$\sum\alpha_j=(m+1)t+(m+1-i)>1+mt$. The maximal false points of $\tilde f_k$ are the point with $x$ false and $y=y^1$, and
+the points with $x$ true and $|y|=m$, $y\ne y^0$; the maxterms are therefore $\{x\}\cup Y_1$ and the sets of $m+1$
+variables $y_j$ other than $Y_1\cup\{y_{m+1}\}$. The first has $\sum\beta_j=1+mt$, and every other contains a variable of
+$Y_0$ and has $\sum\beta_j\ge(m+1)t+1$. Hence every shortest minterm of $F_{k,t}$ consists of $x$ and variables of the
+blocks of $Y_0$, every shortest maxterm consists of $x$ and variables of the blocks of $Y_1$, and $A\cap B=\{x\}$.
 
-For the ratio let $\mu_j$ be the probability that $\varphi_j$ is true, $\sigma_j^2=\mu_j(1-\mu_j)$, and expand
-$\tilde f_k$, in $\pm1$ values, in the orthonormal basis $\prod_{j\in S}(y_j-\mu_j)/\sigma_j$ (times $x$ when $x\in
-S$) of the product measure with $\Pr[y_j=1]=\mu_j$ and $x$ uniform (the biased setting of~\cite{KMS12}); call the
-coefficients $c_\mu(S)$. Each
-$\psi_j=(\varphi_j-\mu_j)/\sigma_j$ has mean $0$ and variance $1$ under the uniform measure on its block, so
+For the ratio let $\pi_j$ be the probability that $\varphi_j$ is true, $\sigma_j^2=\pi_j(1-\pi_j)$, and expand
+$\tilde f_k$, in $\pm1$ values, in the orthonormal basis $\prod_{j\in S}(y_j-\pi_j)/\sigma_j$ (times $x$ when $x\in
+S$) of the product measure with $\Pr[y_j=1]=\pi_j$ and $x$ uniform (the biased setting of~\cite{KMS12}); call the
+coefficients $c_\pi(S)$. Each
+$\psi_j=(\varphi_j-\pi_j)/\sigma_j$ has mean $0$ and variance $1$ under the uniform measure on its block, so
 $\sum_{R_j\ne\emptyset}\hat\psi_j(R_j)^2=1$, and the coefficient of $F_{k,t}$ at the union of $S\cap\{x\}$ and sets
-$R_j\ne\emptyset$, $j\in S\setminus\{x\}$, is $c_\mu(S)\prod_j\hat\psi_j(R_j)$. So the spectral sample of
-$F_{k,t}$ is obtained by drawing $S$ with probability $c_\mu(S)^2$ and then each $R_j$ independently. It contains $x$
+$R_j\ne\emptyset$, $j\in S\setminus\{x\}$, is $c_\pi(S)\prod_j\hat\psi_j(R_j)$. So the spectral sample of
+$F_{k,t}$ is obtained by drawing $S$ with probability $c_\pi(S)^2$ and then each $R_j$ independently. It contains $x$
 exactly when $S$ does, it determines $S\setminus\{x\}$, and given $S\setminus\{x\}$ the $R_j$ do not depend on whether
 $x\in S$. Hence $E_x(F_{k,t})$ and $\Inf_x(F_{k,t})$ are the erasure entropy and the influence of $x$ for the law
-$c_\mu(S)^2$. Here $\mu_j=P_t$ for $j\le m$ and $1-P_t$ for $j>m$, with $P_t=\Pr[\mathrm{Bin}(2t,\frac12)\ge t]\to\frac12$.
-The coefficients $c_\mu(S)$ are continuous in $\mu\in(0,1)^k$ and $\Phi$ is continuous, so both quantities converge
-to their values at $\mu=\frac12$, which are $E_x(\tilde f_k)$ and $\Inf_x(\tilde f_k)>0$. The last statement follows
+$c_\pi(S)^2$. Here $\pi_j=P_t$ for $j\le m$ and $1-P_t$ for $j>m$, with $P_t=\Pr[\mathrm{Bin}(2t,\frac12)\ge t]\to\frac12$.
+The coefficients $c_\pi(S)$ are continuous in $\pi\in(0,1)^k$ and $\Phi$ is continuous, so both quantities converge
+to their values at $\pi=\frac12$, which are $E_x(\tilde f_k)$ and $\Inf_x(\tilde f_k)>0$. The last statement follows
 from Proposition~\ref{prop:both}.
 \end{proof}
 
-Already $t=1$, where $T_1$ and $T'_1$ are the OR and the AND of two variables, gives a growing ratio at the forced
+Already $t=1$, where $\mathrm{Th}_1$ and $\mathrm{Th}'_1$ are the OR and the AND of two variables, gives a growing ratio at the forced
 coordinate, on $2k+1$ variables. By the proof above it is the ratio of $\tilde f_k$ under the product measure with
 bias $\frac34$ on $y_1,\dots,y_m$ and $\frac14$ on $y_{m+1},\dots,y_k$. There $D$ and the average over $x$ have
 coefficients that depend only on $|S\cap\{y_1,\dots,y_m\}|$ and $|S\cap\{y_{m+2},\dots,y_k\}|$, so the ratio is a
@@ -499,9 +494,8 @@ following law satisfies both identities, is invariant under permutations, and ha
 the spectral distribution of a Boolean function, so it shows only that any proof must use more of the structure.
 
 \begin{proposition}\label{prop:law}
-For $n\ge100$ let $p=1/n$, let $\rho$ be the law of a random subset of $[n]$ containing each element independently
-with probability $p$, conditioned on having at least two elements, let $d=\rho[i\in U]$, $b=1/4$, and
-$\delta=(1-\sqrt{1-4bd})/2$. The law $\mu$ that gives mass $b\rho(S)$ to each $S$ with $|S|\ge2$, mass $\delta^2$ to
+For $n\ge100$ let $\rho$ be the law of a random subset of $[n]$ containing each element independently
+with probability $1/n$, conditioned on having at least two elements, let $d=\rho[i\in U]$, and $\lambda=(1-\sqrt{1-d})/2$. The law $\mu$ that gives mass $\rho(S)/4$ to each $S$ with $|S|\ge2$, mass $\lambda^2$ to
 each singleton and the rest to $\emptyset$ is a probability law with $\mu(\{i\})=\Pr_\mu[i\in U]^2$, and
 \[
 \frac{H(\mathbf 1[i\in U]\mid U\setminus\{i\})}{\Pr_\mu[i\in U]}\ \ge\ \frac{\log n}{288}.
@@ -509,14 +503,14 @@ each singleton and the rest to $\emptyset$ is a probability law with $\mu(\{i\})
 \end{proposition}
 
 \begin{proof}
-Let $q=\Pr[\mathrm{Bin}(n,p)\ge2]\ge\Pr[\mathrm{Bin}(n,p)=2]=\frac{n-1}{2n}(1-\frac1n)^{n-2}\ge\frac1{12}$, using
-$(1-1/n)^{n-2}\ge e^{-1}>1/3$. Then $d\le p/q\le12/n$, $bd\le3/n<1/4$, so $\delta$ is real, $\delta\le2bd\le6/n$ and
-$n\delta^2\le36/n\le0.36$; the mass of $\emptyset$ is at least $1-\frac14-0.36>0$. By the choice of $\delta$,
-$\Pr_\mu[i\in U]=\delta^2+bd=\delta$. In~\eqref{eq:Ei} keep only the $T\not\ni i$ with $|T|\ge2$: both $T$ and
-$T\cup\{i\}$ lie in the product part, with masses in ratio $(1-p):p$, so each pair contributes
-$(\mu(T)+\mu(T\cup\{i\}))h_2(p)$, and the pairs have total mass $(b/q)\Pr[\mathrm{Bin}(n-1,p)\ge2]\ge\frac14\cdot\frac1{12}$,
-the last factor by the same estimate as for $q$. With $\delta\le6/n$ and $h_2(1/n)\ge(\log n)/n$ this gives
-$E_i/\delta\ge n\,h_2(1/n)/288\ge(\log n)/288$.
+Let $q=\Pr[\mathrm{Bin}(n,1/n)\ge2]\ge\Pr[\mathrm{Bin}(n,1/n)=2]=\frac{n-1}{2n}(1-\frac1n)^{n-2}\ge\frac1{12}$, using
+$(1-1/n)^{n-2}\ge e^{-1}>1/3$. Then $d\le1/(nq)\le12/n$, $d/4\le3/n<1/4$, so $\lambda$ is real, $\lambda\le d/2\le6/n$ and
+$n\lambda^2\le36/n\le0.36$; the mass of $\emptyset$ is at least $1-\frac14-0.36>0$. By the choice of $\lambda$,
+$\Pr_\mu[i\in U]=\lambda^2+d/4=\lambda$. In~\eqref{eq:Ei} keep only the $T\not\ni i$ with $|T|\ge2$: both $T$ and
+$T\cup\{i\}$ lie in the product part, with masses in ratio $(n-1):1$, so each pair contributes
+$(\mu(T)+\mu(T\cup\{i\}))h_2(1/n)$, and the pairs have total mass $(1/(4q))\Pr[\mathrm{Bin}(n-1,1/n)\ge2]\ge\frac14\cdot\frac1{12}$,
+the last factor by the same estimate as for $q$. With $\lambda\le6/n$ and $h_2(1/n)\ge(\log n)/n$ this gives
+$E_i/\lambda\ge n\,h_2(1/n)/288\ge(\log n)/288$.
 \end{proof}
 
 The exact ratio is $4.59$, $5.95$, $7.34$ and $8.73$ at $n=10^2,10^3,10^4,10^5$.
@@ -570,8 +564,8 @@ is $x_1x_2\vee x_3x_4\vee\dots\vee x_{11}x_{12}$, the dual of the tribes functio
 $243/2048$ and ratio $3.541677755510$ at every variable. Since a function of $n$ variables is also a function of $n+1$
 variables, $G_{\mathrm{mon}}$ is nondecreasing, and $G_{\mathrm{mon}}(n)\ge3.5416$ for $n\ge12$; for $n=9$, $11$ and
 $13$ the best read-once values, $3.1282$, $3.3618$ and $3.4242$, lie below the bound for $n-1$. Along the family
-$\bigvee_{j=1}^{k}x_{2j-1}x_{2j}$, with every influence $\frac12(3/4)^{k-1}$, the ratio is $2.3160$, $3.0428$, $3.3892$,
-$3.5417$, $3.5984$, $3.6068$, $3.5916$ and $3.5657$ for $k=3,\dots,10$; it is largest at $k=8$, where it equals
+$\bigvee_{j=1}^{K}x_{2j-1}x_{2j}$, with every influence $\frac12(3/4)^{K-1}$, the ratio is $2.3160$, $3.0428$, $3.3892$,
+$3.5417$, $3.5984$, $3.6068$, $3.5916$ and $3.5657$ for $K=3,\dots,10$; it is largest at $K=8$, where it equals
 $3.606847002096$, so $G_{\mathrm{mon}}(n)\ge3.6068$ for $n\ge16$. Among ORs of disjoint blocks of the forms
 $x_1x_2$, $x_1x_2x_3$, $(x_1\vee x_2)(x_3\vee x_4)$ and $(x_1\vee x_2)(x_3\vee x_4)(x_5\vee x_6)$ with at most $20$
 variables, the best is
@@ -581,20 +575,19 @@ variables, the best is
 with every influence $12321/131072$ and ratio $3.713716018539$ at every variable, so $G_{\mathrm{mon}}(n)\ge3.7137$
 for $n\ge18$. With two blocks of two pairs the same construction is the dual of the eight-variable function above.
 
-Larger ORs of blocks need no truth table. Let $f=\bigvee_b g_b$ with the $g_b$ on disjoint sets of variables, and let
-$a_b$ be the indicator that $g_b$ is false. Then $f=-1+2\prod_ba_b$, so $\hat f(T)=2\prod_b\hat a_b(T_b)$ for
+Larger ORs of blocks need no truth table. Let $f=\bigvee_b h_b$ with the $h_b$ on disjoint sets of variables, and let $\nu_b$ be the indicator that $h_b$ is false. Then $f=-1+2\prod_b\nu_b$, so $\hat f(T)=2\prod_b\hat\nu_b(T_b)$ for
 $T\ne\emptyset$, where $T_b$ is the part of $T$ in block $b$. Since $\Phi$ is homogeneous of degree one and
-$\sum_S\hat a_b(S)^2=\Pr[a_b=1]$, for a variable $i$ of block $1$, with $A=\hat a_1^2$, $q=\prod_{b>1}\Pr[a_b=1]$ and
-$r=\prod_{b>1}\hat a_b(\emptyset)^2$,
+$\sum_S\hat\nu_b(S)^2=\Pr[\nu_b=1]$, for a variable $i$ of block $1$, with $\omega=\hat\nu_1^2$, $\kappa=\prod_{b>1}\Pr[\nu_b=1]$ and
+$\kappa_0=\prod_{b>1}\hat\nu_b(\emptyset)^2$,
 \begin{align*}
-\Inf_i&=4q\sum_SA(S\cup\{i\}),\\
-E_i&=4q\sum_{S\not\ni i}\Phi\bigl(A(S),A(S\cup\{i\})\bigr)-4r\,\Phi\bigl(A(\emptyset),A(\{i\})\bigr)
-+\Phi\bigl(\hat f(\emptyset)^2,4rA(\{i\})\bigr).
+\Inf_i&=4\kappa\sum_S\omega(S\cup\{i\}),\\
+E_i&=4\kappa\sum_{S\not\ni i}\Phi\bigl(\omega(S),\omega(S\cup\{i\})\bigr)-4\kappa_0\,\Phi\bigl(\omega(\emptyset),\omega(\{i\})\bigr)
++\Phi\bigl(\hat f(\emptyset)^2,4\kappa_0\omega(\{i\})\bigr).
 \end{align*}
-For $m$ copies of $\bigwedge_{t=1}^{j}(x_{2t-1}\vee x_{2t})$ every influence is
-$\frac12(3/4)^{j-1}\bigl(1-(3/4)^j\bigr)^{m-1}$. The ratio is largest at $m=4$ for $j=3$ ($n=24$, ratio
-$3.783969373526$), at $m=6$ for $j=4$ ($n=48$, $3.924260765374$) and at $m=8$ for $j=5$ ($n=80$,
-$3.949934743097$); this last value is the largest for $j\le8$ and $m\le40$, and no OR of copies of two of these blocks,
+For $L$ copies of $\bigwedge_{t=1}^{J}(x_{2t-1}\vee x_{2t})$ every influence is
+$\frac12(3/4)^{J-1}\bigl(1-(3/4)^J\bigr)^{L-1}$. The ratio is largest at $L=4$ for $J=3$ ($n=24$, ratio
+$3.783969373526$), at $L=6$ for $J=4$ ($n=48$, $3.924260765374$) and at $L=8$ for $J=5$ ($n=80$,
+$3.949934743097$); this last value is the largest for $J\le8$ and $L\le40$, and no OR of copies of two of these blocks,
 at most $30$ of each, does better. Hence $G_{\mathrm{mon}}(n)\ge3.7839$ for $n\ge24$, $G_{\mathrm{mon}}(n)\ge3.9242$
 for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$. Iterated compositions of
 monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
@@ -641,11 +634,10 @@ The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_cen
 \texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
 their truth tables, \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table, and
 \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$, and
-\texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $k\le11$, and \texttt{or\_of\_blocks.py} the ORs of
+\texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $K\le11$, and \texttt{or\_of\_blocks.py} the ORs of
 blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
 above, after checking it against truth tables of six functions with up to $18$ variables. The script
-\texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge g$ for
-$300$ random monotone $g$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
+\texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge h$ for $300$ random monotone $h$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
 $k\le13$ and checks monotonicity. The script \texttt{forced\_rule.py} builds $F_{k,t}$ for
 $(k,t)=(3,1),(5,1),(7,1),(9,1),(3,2),(5,2),(3,3)$, checks that $A\cap B=\{x\}$ and that the ratio at $x$ equals the
@@ -688,6 +680,75 @@ Code and outputs: \url{https://github.com/yspennstate/fei-hidden-coordinates}.
 
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+Symbols are listed roughly in the order in which they first appear, and the last column gives that place. The letters $i$ and $j$ index coordinates, $s$ is half the size of an even set in the proof of Proposition~\ref{prop:diverge}, $b$ and $t$ index blocks and pairs in the products of Section~\ref{sec:census}, $p$ and $q$ are also the arguments of $\Phi$, and $\mu$ in Proposition~\ref{prop:law} is a law on subsets that takes the place of a spectral distribution. The hidden variable $x$ and the variables $x_1,x_2,\dots$ of Section~\ref{sec:census} are different objects. A hat always denotes a Fourier coefficient: $\hat g$, $\hat D$, $\hat N$, $\hat h$, $\hat\varphi_j$ and $\hat\nu_b$ are those of $g$, $D$, $N$, $h$, $\varphi_j$ and $\nu_b$.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Symbol & Meaning & First appears \\
+\midrule
+\endhead
+$f$, $n$ & a Boolean function $\{0,1\}^n\to\{-1,1\}$, and its number of variables & Section~\ref{sec:intro} \\
+$S$, $T$, $\hat f(S)$, $\chi_S$ & sets of coordinates, the Fourier coefficient of $f$ at $S$, and the character $(-1)^{\sum_{j\in S}x_j}$ & Section~\ref{sec:intro} \\
+$U$, $\mu$ & the spectral sample, and its law $\mu(S)=\Pr[U=S]=\hat f(S)^2$, the spectral distribution & Section~\ref{sec:intro} \\
+$H(\cdot)$, $\E$, $\Pr$ & Shannon entropy in bits, with $H(f)=H(U)$ the Fourier entropy; expectation and probability & Section~\ref{sec:intro} \\
+$\Inf_i(f)$, $I(f)$ & the influence $\Pr[i\in U]$ of the coordinate $i$, and the total influence $\E|U|$ & Section~\ref{sec:intro} \\
+$C$ & the constant of the Fourier entropy-influence conjecture $H(f)\le C\,I(f)$ & Section~\ref{sec:intro} \\
+$E_i(f)$ & the erasure entropy $H(\mathbf 1[i\in U]\mid U\setminus\{i\})$ & Section~\ref{sec:intro} \\
+$G$ & $\sup_f\min_{i:\Inf_i(f)>0}E_i(f)/\Inf_i(f)$, finite exactly when the conjecture holds & Section~\ref{sec:intro} \\
+$k$, $\MAJ_k$ & an odd number of inputs (even in Proposition~\ref{prop:pair}), and the majority of $k$ inputs & Section~\ref{sec:intro} \\
+$y$, $y_j$, $x$ & a point of $\{0,1\}^k$, its $j$-th coordinate, and the hidden variable & Section~\ref{sec:intro} \\
+$y^0$, $[y\ge y^0]$ & the point with $(k-1)/2$ ones ($k/2$ in Proposition~\ref{prop:pair}), and the AND of the coordinates at which $y^0$ is $1$ & Section~\ref{sec:intro} \\
+$f_k$ & $\MAJ_k(y)\vee(x\wedge[y\ge y^0])$ & Section~\ref{sec:intro} \\
+$\varphi_j$, $F$ & a non-constant self-dual monotone function of a block of fresh variables, and $f_k$ with each $y_j$ replaced by $\varphi_j$ & Theorem~\ref{thm:sum} \\
+$h_2$ & the binary entropy function in bits & Section~\ref{sec:intro} \\
+$W^{(2)}_i(f)$ & the level-two weight $\sum_{j\ne i}\hat f(\{i,j\})^2$ & Section~\ref{sec:intro} \\
+$A(f)$, $B(f)$ & the variables lying in some shortest minterm, and in some shortest maxterm, of a monotone $f$ & Section~\ref{sec:rules} \\
+$G_{\mathrm{mon}}(n)$ & the largest $\min_{i:\Inf_i>0}E_i/\Inf_i$ over non-constant monotone functions on $n$ variables & Section~\ref{sec:intro} \\
+$\log$, $\ln$, $e$ & the logarithms to base $2$ and to base $e$, and the base of the natural logarithm & Section~\ref{sec:prelim} \\
+$\eta$ & $\log_2e$ & Section~\ref{sec:prelim} \\
+$\Phi(p,q)$ & $p\log\frac{p+q}p+q\log\frac{p+q}q=(p+q)\,h_2(\frac q{p+q})$ & Section~\ref{sec:prelim} \\
+$\bar x$ & the complement of a point $x$ of the cube & Section~\ref{sec:prelim} \\
+$\varepsilon$ & $\Pr[\,|U|\text{ even}\,]$ & Lemma~\ref{lem:parity} \\
+$\delta$, $a$ & $2^{-k}$, and $\binom{k-1}{(k-1)/2}2^{1-k}$, the influence of every variable of $\MAJ_k$ & Section~\ref{sec:hidden} \\
+$\mathbf 1[\cdot]$ & the indicator of an event & Lemma~\ref{lem:hidden} \\
+$g$ & the average over $x$ of $f_k$, of $f'_k$ or of $\tilde f_k$ & proof of Proposition~\ref{prop:diverge} \\
+$r$, $b_r$ & the size of a set $T$, and $|\widehat{\MAJ_k}(T)|$ for $|T|=r$ odd & proof of Proposition~\ref{prop:diverge} \\
+$m$ & $(k-1)/2$ & proof of Proposition~\ref{prop:diverge} \\
+$v$, $\xi$ & a uniform point of $\{0,1\}^{2m}$, and a formal variable & proof of Proposition~\ref{prop:diverge} \\
+$z$, $z^j$, $\ell$ & the variables of $F$, those of block $j$, and one variable of block $j$ & Section~\ref{sec:subst} \\
+$\iota_j$, $\tau$ & $\Inf_{y_j}(f_k)$, and $\Inf_\ell(\varphi_j)=|\hat\varphi_j(\{\ell\})|$ & Section~\ref{sec:subst} \\
+$p_T$, $q_T$ & $\mu(T)$ and $\mu(T\cup\{y_j\})$ for $T\not\ni y_j$ & Proposition~\ref{prop:leaf} \\
+$S_j$, $V$ & the part of $S$ in block $j$, and a set not containing $\ell$ & proof of Proposition~\ref{prop:leaf} \\
+$\tau_0$, $\gamma_k$ & $\sqrt{\delta/\iota_j}$, and the bound $\sqrt{2k2^{-k}}\,(k+\eta)$ & proof of Theorem~\ref{thm:sum} \\
+$w$ & the block size parameter in $\varphi_j=\MAJ_{2w+1}$ & proof of Theorem~\ref{thm:rules} \\
+$N$, $f'_k$ & the indicator of $|y|\ge k/2$ for even $k$, and $N$ with the value $x$ at $y^0$ and $\bar y^0$ & Section~\ref{sec:rules} \\
+$D$ & the derivative in $x$ of $f'_k$ or of $\tilde f_k$ & proof of Proposition~\ref{prop:pair} \\
+$\delta'$, $a_0$ & $2^{1-k}$, and $\binom k{k/2}2^{-k}$, the influence of every variable of $N$ & proof of Proposition~\ref{prop:pair} \\
+$h$, $p$ & a monotone function of the variables other than $x$, and $\Pr[h\text{ true}]$ & Proposition~\ref{prop:xand} \\
+$f^\dagger$ & the dual of $f$, its negation at the complement of its argument & Section~\ref{sec:rules} \\
+$y^1$, $M$ & $y^0$ with $y^1_{m+1}=1$, and $\MAJ_k$ with the value false at $y^1$ & Section~\ref{sec:rules} \\
+$\tilde f_k$ & $M(y)\vee(x\wedge[y\ge y^0])$ & Section~\ref{sec:rules} \\
+$t$, $\mathrm{Th}_t$, $\mathrm{Th}'_t$ & a positive integer, and the functions of $2t$ variables true when at least $t$, respectively $t+1$, are true & Section~\ref{sec:rules} \\
+$F_{k,t}$ & $\tilde f_k$ with $y_j$ replaced by $\mathrm{Th}_t$ of a fresh block for $j\le m$ and by $\mathrm{Th}'_t$ for $j>m$ & Section~\ref{sec:rules} \\
+$Q_j$, $\alpha_j$, $\beta_j$ & a minterm of $\varphi_j$, and the sizes of a shortest minterm and of a shortest maxterm of $\varphi_j$ ($\alpha_x=\beta_x=1$) & proof of Proposition~\ref{prop:forced} \\
+$Y_0$, $Y_1$ & $\{y_1,\dots,y_m\}$ and $\{y_{m+2},\dots,y_k\}$ & proof of Proposition~\ref{prop:forced} \\
+$\pi_j$, $\sigma_j$ & the probability that $\varphi_j$ is true, and $\sqrt{\pi_j(1-\pi_j)}$ & proof of Proposition~\ref{prop:forced} \\
+$c_\pi(S)$, $\psi_j$, $R_j$ & the coefficients of $\tilde f_k$ in the basis of the product measure with $\Pr[y_j=1]=\pi_j$, $(\varphi_j-\pi_j)/\sigma_j$, and a subset of block $j$ & proof of Proposition~\ref{prop:forced} \\
+$\mathrm{Bin}(n,p)$, $P_t$ & a binomial variable, and $\Pr[\mathrm{Bin}(2t,\frac12)\ge t]$ & proof of Proposition~\ref{prop:forced} \\
+$\rho$, $d$, $\lambda$ & the law of a $\frac1n$-random subset of $[n]$ conditioned to have two elements or more, $\rho[i\in U]$, and $(1-\sqrt{1-d})/2$ & Proposition~\ref{prop:law} \\
+$q$ & $\Pr[\mathrm{Bin}(n,\frac1n)\ge2]$ & proof of Proposition~\ref{prop:law} \\
+$f_0$, $f_1$ & the restrictions of a monotone function to the two values of its last variable & Section~\ref{sec:census} \\
+$x_1,x_2,\dots$ & the variables of the explicit functions of Section~\ref{sec:census} & Section~\ref{sec:census} \\
+$K$ & the number of terms of $\bigvee_{j=1}^Kx_{2j-1}x_{2j}$ & Section~\ref{sec:census} \\
+$h_b$, $\nu_b$, $T_b$ & the blocks of an OR of functions on disjoint variables, the indicator that $h_b$ is false, and the part of $T$ in block $b$ & Section~\ref{sec:census} \\
+$\omega$, $\kappa$, $\kappa_0$ & $\hat\nu_1^2$, $\prod_{b>1}\Pr[\nu_b=1]$ and $\prod_{b>1}\hat\nu_b(\emptyset)^2$ & Section~\ref{sec:census} \\
+$L$, $J$ & the number of copies, and the number of pairs in each copy, of $\bigwedge_{t=1}^J(x_{2t-1}\vee x_{2t})$ & Section~\ref{sec:census} \\
+\bottomrule
+\end{longtable}
 
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
