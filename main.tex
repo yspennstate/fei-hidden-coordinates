@@ -520,7 +520,7 @@ monotone functions on $n-1$ variables with $f_0\le f_1$; there are $7{,}828{,}35
 $2{,}414{,}682{,}040{,}998$ for $n=7$, the Dedekind numbers. For $n\le6$ the program \texttt{census\_mono.py}
 evaluates every labelled function. The program \texttt{mono\_census.c} lets the first function of each pair range over
 one representative of each orbit of the symmetric group on the first $n-1$ variables, weighted by the orbit size, and
-checks that the weighted count is the Dedekind number; at $n=6$ its three maxima and its worst cases for the rules of
+checks that the weighted count is the Dedekind number. At $n=6$ its three maxima and its worst cases for the rules of
 largest and smallest influence agree with those of \texttt{census\_mono.py} to $10^{-12}$, although
 \texttt{mono\_census.c} breaks ties in favour of a rule and \texttt{census\_mono.py} against it. It gives the row $n=7$.
 Table~\ref{tab:census} gives the results.
@@ -626,13 +626,13 @@ The script \texttt{check\_hidden.py} in the code repository computes exact Walsh
 $k\le17$, of six substituted functions with blocks of sizes $1$, $3$ and $5$, and of $f'_k$ for even $k\le18$, and
 checks Lemma~\ref{lem:hidden}, Proposition~\ref{prop:leaf} against a direct evaluation of the erasure entropy at every
 variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each rule of Theorem~\ref{thm:rules}, and
-Proposition~\ref{prop:pair} including monotonicity; it also evaluates the law of Proposition~\ref{prop:law} exactly.
-The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$), and
-\texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
-their truth tables, \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table, and
-\texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$, and
+Proposition~\ref{prop:pair} including monotonicity. It also evaluates the law of Proposition~\ref{prop:law} exactly.
+The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$).
+The script \texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
+their truth tables, and \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table.
+The script \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$,
 \texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $K\le11$, and \texttt{or\_of\_blocks.py} the ORs of
-blocks with at most $20$ variables; \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
+blocks with at most $20$ variables. The script \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
 above, after checking it against truth tables of six functions with up to $18$ variables. The script
 \texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge h$ for $300$ random monotone $h$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
 bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
