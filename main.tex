@@ -26,13 +26,13 @@
 
 \begin{abstract}
 The erasure entropy $E_i(f)$ of a coordinate $i$ of a Boolean function $f$ is the entropy of the event $i\in U$ given
-$U\setminus\{i\}$, with $U$ drawn from the spectral distribution of $f$. The Fourier entropy-influence conjecture is
+$U\setminus\{i\}$, where $U$ is the spectral sample of $f$. The Fourier entropy-influence conjecture is
 equivalent to every non-constant $f$ having a coordinate whose erasure entropy is at most a constant times its
-influence. We give monotone functions with a hidden coordinate, which enters only through one point below a majority
-threshold, whose erasure entropy is unbounded relative to its influence, while the erasure entropies of all
-coordinates sum to at most twice the total influence. Hence no rule that chooses the coordinate by its influence, by
-its normalised level-two weight or by shortest minterms works, even for monotone functions. We also compute three
-extremal ratios over monotone functions of up to seven variables.
+influence. For known monotone functions in which one coordinate enters only through one point below a majority
+threshold, and so has unbounded ratio of erasure entropy to influence, we show that the erasure entropies of all
+coordinates sum to at most twice the total influence. Variants of these functions place that coordinate where a rule
+choosing by influence, by normalised level-two weight or by shortest minterms looks, so no such rule works, even for
+monotone functions. We also compute three extremal ratios over monotone functions of up to seven variables.
 \end{abstract}
 
 \subjclass[2020]{06E30, 42C10, 94A17}
@@ -43,14 +43,16 @@ extremal ratios over monotone functions of up to seven variables.
 \section{Introduction}\label{sec:intro}
 
 For $f\colon\{0,1\}^n\to\{-1,1\}$ write $f=\sum_S\hat f(S)\chi_S$ with $\chi_S(x)=(-1)^{\sum_{j\in S}x_j}$, and let $U$
-be a random subset with $\Pr[U=S]=\mu(S)=\hat f(S)^2$. The Fourier entropy is $H(f)=H(U)$ and the total influence is
+be a random subset, the spectral sample, with law $\Pr[U=S]=\mu(S)=\hat f(S)^2$, the spectral distribution. The Fourier entropy is $H(f)=H(U)$ and the total influence is
 $I(f)=\E|U|=\sum_i\Inf_i(f)$, where $\Inf_i(f)=\Pr[i\in U]$. The Fourier entropy-influence (FEI) conjecture of Friedgut
 and Kalai~\cite{FK96} asks for an absolute $C$ with $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for symmetric
 functions~\cite{OWZ}, for read-once formulas~\cite{OT13,CKLS} and for linear threshold functions~\cite{Shm2}. It is
 also known for plateaued functions~\cite{Pot26}, for a class of cryptographic Boolean functions of logarithmic density
 one~\cite{GS14} and for read-$k$ decision trees with $k$ fixed~\cite{WWW}. Its min-entropy version is known for read-$k$ DNFs (formulas in disjunctive normal form) with $k$
 fixed~\cite{Shalev,ACKSW}, and Kelman, Kindler, Lifshitz, Minzer and Safra~\cite{KKLMS} prove that the min-entropy is
-$O(I(f)\log I(f))$ for functions of constant variance, with a matching concentration of the spectrum. Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and the earlier bound of Keller, Mossel and Schlank~\cite[Claim~4.1]{KMS12}, by the sum of the binary entropies of the influences, gives this with the multiple $1/\ln 2$. Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$, and explicit balanced monotone functions on $14$ to $18$ variables raise this to $6.5218$~\cite{MI26a,MI26b,Num26}.
+$O(I(f)\log I(f))$ for functions of constant variance, with a matching concentration of the spectrum. Han~\cite{Han} bounds $H(f)$ by a multiple of $I(f)$ plus $\sum_i\Inf_i(f)\log_2(1/\Inf_i(f))$, and the earlier bound of Keller, Mossel and Schlank~\cite[Claim~4.1]{KMS12}, by the sum of the binary entropies of the influences, gives this with the multiple $1/\ln 2$. Hod~\cite{Hod} shows, with monotone functions, that the best constant exceeds $6.45$. Explicit balanced monotone
+functions raise this further: a certificate archive of Mosaic Intelligence gives $6.4901$~\cite{MI26a}, a second one
+a bound from $17$ variables~\cite{MI26b}, and one of Numaro gives $6.5218$ from $18$ variables~\cite{Num26}.
 
 The erasure entropy of $f$ at $i$ is
 \[
@@ -62,59 +64,69 @@ $\Inf_i$~\cite[Remarks~3.1--3.2]{Han},~\cite[(32)]{GMP}, and the FEI conjecture 
 G=\sup_f\ \min_{i:\,\Inf_i(f)>0}\frac{E_i(f)}{\Inf_i(f)}
 \]
 is finite~\cite{Shm1}. One direction is immediate from $\sum_iE_i\le H$. The other restricts $f$ one coordinate at a
-time, each time at a coordinate with small ratio, and does not say which coordinate that is. This paper is about that
-choice. For monotone linear DNFs of large width in which two terms share at most one variable, every relevant coordinate
-has $E_i/\Inf_i=2+o(1)$~\cite{Shm6}, so there the choice does not matter; an upper bound on each $E_i$ obtained by
-revealing the other coordinates one at a time is given in~\cite{Shm5}.
+time, each time at a coordinate with small ratio $E_i/\Inf_i$, and gives no rule for finding that coordinate. For
+monotone linear DNFs of large width in which two terms share at most one variable, every relevant coordinate has
+$E_i/\Inf_i=2+o(1)$~\cite{Shm6}, so there the choice does not matter; an upper bound on each $E_i$ obtained by
+revealing the other coordinates one at a time is given in~\cite{Shm5}. In general it does matter. Iterated
+compositions of monotone gates give $G\ge4.5064$ already on monotone functions~\cite[Proposition~3.1]{Shm3}, every
+leaf of a read-once formula has ratio below $\pi/\ln2$~\cite[Theorem~4.3]{Shm3}, and the coordinate of largest
+influence can have unbounded ratio~\cite[Proposition~5.1]{Shm3}.
 
-Section~\ref{sec:hidden} studies the functions
+Section~\ref{sec:hidden} studies the functions of~\cite[Proposition~5.1]{Shm3},
 \[
 f_k(y,x)=\MAJ_k(y)\vee\bigl(x\wedge[y\ge y^0]\bigr),\qquad k\ \text{odd},
 \]
 where $y^0\in\{0,1\}^k$ has $(k-1)/2$ ones and $[y\ge y^0]$ is the AND (conjunction) of the coordinates of $y$ at which $y^0$ is $1$.
-The variable $x$ changes the value only at the single point $y=y^0$, so $\Inf_x(f_k)=2^{-k}$, and the ratio
-$E_x/\Inf_x$ tends to infinity (Proposition~\ref{prop:diverge}). Nevertheless the erasure entropies of all coordinates
-together are small:
+The coordinate $x$ changes the value only at the single point $y=y^0$, so $\Inf_x(f_k)=2^{-k}$, and
+$E_x/\Inf_x\ge k/2-O(\log k)$~\cite[Proposition~5.1]{Shm3}. What is new here is that the erasure entropies of all
+coordinates together are small:
 
 \begin{theorem}\label{thm:sum}
-For every odd $k$, $\sum_iE_i(f_k)\le2\,I(f_k)$. If every $y_j$ is replaced by a non-constant self-dual monotone
-function $\varphi_j$ of its own block of fresh variables, the resulting monotone function $F$ satisfies
+For every odd $k$, $\sum_iE_i(f_k)\le2\,I(f_k)$. If every $y_j$ is replaced by a non-constant monotone function
+$\varphi_j$ of its own block of fresh variables that is self-dual, $\varphi_j(\bar z)=-\varphi_j(z)$ for the
+complement $\bar z$ of $z$, the resulting monotone function $F$ satisfies
 $E_x(F)=E_x(f_k)$, $E_\ell(F)<4\,\Inf_\ell(F)$ at every relevant variable $\ell\ne x$, and
 $\sum_iE_i(F)\le5\,I(F)$.
 \end{theorem}
 
-The large ratio at $x$ is paid for by the total influence: $E_x\le h_2(2^{-k})$, which is far below $I(f_k)\ge1$.
+The large ratio at $x$ is paid for by the total influence: $E_x\le h_2(2^{-k})$, with $h_2$ the binary entropy
+function, which is far below $I(f_k)\ge1$.
 Two facts drive the proof. The parity of $|U|$ determines whether $i\in U$ once $U\setminus\{i\}$ is known, so every
-$E_i$ is at most the binary entropy of the Fourier weight on even levels, and for $f_k$ that weight is exactly
+$E_i$ is at most the binary entropy of the Fourier weight on sets of even size, and for $f_k$ that weight is exactly
 $2^{-k}$ (Lemma~\ref{lem:parity}). After the substitution, $E_\ell$ has an exact expression in terms of the spectrum of
-$f_k$ (Proposition~\ref{prop:leaf}). Theorem~\ref{thm:sum} does not by itself give $H\le C\,I$ for these functions, since the
+$f_k$ (Proposition~\ref{prop:leaf}, the case of~\cite[Theorem~2.1]{Shm3} with self-dual inner functions that may
+differ from block to block). Theorem~\ref{thm:sum} does not by itself give $H\le C\,I$ for these functions, since the
 passage from erasure entropies to $H$ uses a good coordinate in every restriction and the family is not closed under
-restrictions; its point is that an unbounded ratio at one coordinate is compatible with a bounded sum.
+restrictions. It shows that an unbounded ratio $E_x/\Inf_x$ occurs together with $\sum_iE_i\le2I$.
 
-Section~\ref{sec:rules} uses these functions against simple selection rules.
+Section~\ref{sec:rules} uses these functions against simple selection rules, maps that assign to each Boolean
+function one of its coordinates. Write $W^{(2)}_i(f)=\sum_{j\ne i}\hat f(\{i,j\})^2$ for the level-two weight at $i$.
+A minterm of a monotone $f$ is a set of coordinates such that setting them to true forces $f$ to be true and no proper
+subset does; a maxterm is a set such that setting them to false forces $f$ to be false and no proper subset does.
 
 \begin{theorem}\label{thm:rules}
 For each of the following rules there are monotone functions on which the coordinate it selects has $E_i/\Inf_i$ as
 large as we like, with ties broken in any way: the coordinate of smallest influence; of largest influence; of largest
-normalised level-two weight $W^{(2)}_i/\Inf_i$; of smallest normalised level-two weight; the variable lying in the most
-minterms of smallest size; the variable of smallest $E_i/\Inf_i$ among those lying both in a minterm of smallest size
-and in a maxterm of smallest size.
+normalised level-two weight $W^{(2)}_i/\Inf_i$; of smallest normalised level-two weight; the coordinate lying in the
+most shortest minterms; the coordinate of smallest $E_i/\Inf_i$ among those lying both in a shortest minterm and in a
+shortest maxterm.
 \end{theorem}
 
-Here $W^{(2)}_i(f)=\sum_{j\ne i}\hat f(\{i,j\})^2$. That the largest influence fails was shown in~\cite{Shm3} by a
-different construction. For the rule of smallest normalised level-two weight, $f_k$ itself is not a counterexample;
-there the hidden coordinate is made pivotal at two complementary points of the middle layer, which removes its
-level-two weight altogether (Proposition~\ref{prop:pair}).
+The rule of largest influence is~\cite[Proposition~5.1]{Shm3} and is included for completeness. For the rule of
+smallest normalised level-two weight, $f_k$ itself is not a counterexample; there the hidden coordinate is made to
+matter at two complementary points with $k/2$ ones, for even $k$, which removes its level-two weight altogether
+(Proposition~\ref{prop:pair}).
 
-Section~\ref{sec:obstruction} shows that the identities $\hat f(\{i\})^2=\Inf_i(f)^2$ and
+Section~\ref{sec:obstruction} shows that the identity $\hat f(\{i\})^2=\Inf_i(f)^2$ and the bound
 $\sum_i\Inf_i(f)^2\le1$, which hold for monotone $f$, are not enough to bound the erasure entropy: an exchangeable
 probability law on subsets of $[n]$ satisfies both and has $E_i/\Pr[i\in U]\ge\log_2(n)/288$. Section~\ref{sec:census}
 gives the exact maxima of the three ratios $\min_iE_i/\Inf_i$, $H/I$ and $\sum_iE_i/I$ over all monotone functions on
 at most seven variables, and the worst cases of the simple rules on at most six.
 
 The last rule of Theorem~\ref{thm:rules} needs more than the hidden coordinate of $f_k$, which lies in no shortest
-maxterm. The rule is bounded by $2.6974$ when a shortest minterm or maxterm is a single variable
-(Proposition~\ref{prop:xand}), and on at most six variables its worst case equals $G_{\mathrm{mon}}(n)$. It fails
+maxterm. The rule is bounded by $4$ when a shortest minterm or maxterm is a single variable
+(Proposition~\ref{prop:xand}), and on $n\le6$ variables its worst case equals $G_{\mathrm{mon}}(n)$, the largest value
+of $\min_iE_i/\Inf_i$ over non-constant monotone functions of $n$ variables. It fails
 because a variant of $f_k$ has its hidden coordinate in both a shortest minterm and a shortest maxterm
 (Proposition~\ref{prop:both}), and substituting threshold functions of slightly different minterm and maxterm sizes
 leaves that coordinate the only variable in both, with almost the same ratio (Proposition~\ref{prop:forced}).
@@ -129,14 +141,14 @@ Then
 \begin{equation}\label{eq:Ei}
 E_i(f)=\sum_{T\not\ni i}\Phi\bigl(\mu(T),\mu(T\cup\{i\})\bigr),\qquad \Inf_i(f)=\sum_{T\not\ni i}\mu(T\cup\{i\}).
 \end{equation}
+This is the expansion of~\cite[Section~4]{Shm3}, where $\Phi$ is written $\Lambda$.
 $\Phi$ is concave and positively homogeneous of degree one, hence superadditive:
 $\sum_t\Phi(p_t,q_t)\le\Phi(\sum_tp_t,\sum_tq_t)$. It is nondecreasing in each argument, and
 $\Phi(p,q)\ge q\log(p/q)$ when $p\ge q$, since both of its terms are nonnegative and $(p+q)/q\ge p/q$. We use
 $h_2(t)\le t\log(e/t)$, which follows from $-(1-t)\ln(1-t)\le t$.
 
 For monotone $f$ (true may be written $-1$ or $+1$; squared coefficients do not depend on the choice),
-$|\hat f(\{i\})|=\Inf_i(f)$. A Boolean function is self-dual if $f(\bar x)=-f(x)$, where $\bar x$ is the complement of
-$x$; then $\hat f(S)=0$ for every $S$ of even size, and in particular $\hat f(\emptyset)=0$.
+$|\hat f(\{i\})|=\Inf_i(f)$. For a self-dual $f$, $f(\bar u)=-f(u)$ for every point $u$, so $\hat f(S)=0$ for every $S$ of even size, and in particular $\hat f(\emptyset)=0$.
 
 \begin{lemma}\label{lem:parity}
 Let $\varepsilon=\Pr[\,|U|\text{ even}\,]$. Then $E_i(f)\le h_2(\varepsilon)$ for every $i$, and $E_i(f)\le
@@ -155,11 +167,11 @@ values with $+1$ for true. Put
 \[
 \delta=2^{-k},\qquad a=\binom{k-1}{(k-1)/2}2^{1-k},
 \]
-so that $a$ is the influence of every variable of $\MAJ_k$. For $k=1$ the vector $y^0$ is empty and $f_1=y\vee x$.
+so that $a$ is the influence of every variable of $\MAJ_k$. For $k=1$, $y^0=0$, the conjunction $[y\ge y^0]$ is empty and true, and $f_1=y\vee x$.
 
 \begin{lemma}\label{lem:hidden}
 \begin{enumerate}
-\item $f_k=\MAJ_k+(1+x)\mathbf 1[y=y^0]$, where $x$ is the $\pm1$ value of the hidden variable.
+\item $f_k=\MAJ_k+(1+x)\mathbf 1[y=y^0]$, where $x$ is the $\pm1$ value of the hidden coordinate.
 \item $\Inf_x(f_k)=\delta$; $\Inf_{y_j}(f_k)=a+\delta$ if $y^0_j=1$ and $a-\delta$ if $y^0_j=0$; $I(f_k)=ka\ge1$.
 \item The Fourier weight of $f_k$ on sets of even size is exactly $\delta$.
 \end{enumerate}
@@ -183,36 +195,36 @@ $4h_2(1/8)<2.18<3$. For odd $k\ge5$, $(k+1)h_2(\delta)\le(k+1)(k+\eta)2^{-k}$, w
 decreases, since its ratio from $k$ to $k+2$ is $\frac14\frac{k+3}{k+1}\frac{k+2+\eta}{k+\eta}<1$.
 \end{proof}
 
-\begin{proposition}\label{prop:diverge}
-For odd $k$ large enough,
-\[
-\frac{E_x(f_k)}{\Inf_x(f_k)}\ \ge\ \Bigl(\frac12-\frac{4k}{(k-3)^2}\Bigr)\Bigl(\frac{k-1}4-2\log k\Bigr).
-\]
+\begin{proposition}[{\cite[Proposition~5.1]{Shm3}}]\label{prop:diverge}
+$E_x(f_k)/\Inf_x(f_k)\ge k/2-O(\log k)$.
 \end{proposition}
 
-\begin{proof}
-Write $g=\MAJ_k+\mathbf 1[y=y^0]$ for the average of $f_k$ over $x$. By~\eqref{eq:Ei}, $E_x=\sum_T\Phi(\hat
-g(T)^2,\delta^2)$ over $T\subseteq[k]$, and $\Inf_x=2^k\delta^2$, so $E_x/\Inf_x$ is the average of
-$\delta^{-2}\Phi(\hat g(T)^2,\delta^2)$ over uniform $T$. For $|T|=r$ odd, $\widehat{\MAJ_k}(T)$ has modulus
-\[
-b_r=a\binom{(k-1)/2}{(r-1)/2}\Big/\binom{k-1}{r-1}.
-\]
-Indeed, for $j\in T$ it equals the coefficient at $T\setminus\{j\}$ of the derivative in $y_j$, the indicator of the
-middle layer of the other $2m=k-1$ coordinates, evaluated at a uniform point $v$ of $\{0,1\}^{2m}$, and
-$\sum_S\E[\chi_S\mid|v|=m]\,\xi^{|S|}=(1-\xi)^m(1+\xi)^m=(1-\xi^2)^m$ gives $\E[\chi_S\mid |v|=m]=(-1)^s\binom ms/\binom{2m}{2s}$
-for $|S|=2s$. If $(k-1)/4\le r-1\le3(k-1)/4$ then $\binom{m}{(r-1)/2}\ge2^{(k-1)/8}$, and with $a\ge1/k$ and
-$\binom{k-1}{r-1}\le2^{k-1}$ we get $b_r/\delta\ge2^{(k-1)/8+1}/k\ge2$ for large $k$. Then $|\hat g(T)|\ge b_r-\delta\ge
-b_r/2$ and $\delta^{-2}\Phi(\hat g(T)^2,\delta^2)\ge\log(\hat g(T)^2/\delta^2)\ge(k-1)/4-2\log k$. The set of such $T$
-has probability at least $\frac12-\Pr[\,|\,|T|-k/2|>(k-3)/4\,]\ge\frac12-\frac{4k}{(k-3)^2}$ by Chebyshev's inequality.
-\end{proof}
+The variants of $f_k$ in Section~\ref{sec:rules} need the coefficients of the majority on a range of levels.
 
-The ratio is $3.52$, $5.78$ and $9.27$ at $k=3,9,17$.
+\begin{lemma}\label{lem:maj}
+Let $m=(k-1)/2$. For $|T|=r$ odd, $\widehat{\MAJ_k}(T)$ has modulus
+\[
+b_r=a\binom{m}{(r-1)/2}\Big/\binom{k-1}{r-1}.
+\]
+If $(k-1)/4\le r-1\le3(k-1)/4$, then $b_r/\delta\ge2^{(k-1)/8+1}/k$.
+\end{lemma}
+
+\begin{proof}
+For $j\in T$ the coefficient equals the coefficient at $T\setminus\{j\}$ of the derivative in $y_j$, the indicator of
+the middle layer of the other $2m=k-1$ coordinates, so it is $a\,\E[\chi_S\mid|v|=m]$ with $S=T\setminus\{j\}$ and $v$
+uniform on $\{0,1\}^{2m}$. The identity $\sum_S\E[\chi_S\mid|v|=m]\,\xi^{|S|}=(1-\xi)^m(1+\xi)^m=(1-\xi^2)^m$ gives
+$\E[\chi_S\mid |v|=m]=(-1)^s\binom ms/\binom{2m}{2s}$ for $|S|=2s$ (see also~\cite[Section~5.3]{ODo}). In the stated
+range $\binom{m}{(r-1)/2}\ge2^{(k-1)/8}$, and with $a\ge1/k$ and $\binom{k-1}{r-1}\le2^{k-1}$ the bound follows.
+\end{proof}
 
 \section{Substitution}\label{sec:subst}
 
 Let $\varphi_1,\dots,\varphi_k$ be non-constant self-dual monotone functions on disjoint blocks of fresh variables, and
 $F(z,x)=f_k(\varphi_1(z^1),\dots,\varphi_k(z^k),x)$. Write $\mu$ for the spectral distribution of $f_k$ and $\iota_j$
 for $\Inf_{y_j}(f_k)$. For a variable $\ell$ of block $j$ let $\tau=\Inf_\ell(\varphi_j)=|\hat\varphi_j(\{\ell\})|$.
+
+The next proposition is~\cite[Theorem~2.1]{Shm3} for self-dual inner functions, here allowed to differ from block to
+block; the proof is short and is included.
 
 \begin{proposition}\label{prop:leaf}
 With $p_T=\mu(T)$ and $q_T=\mu(T\cup\{y_j\})$ for $T$ a subset of the coordinates of $f_k$ other than $y_j$,
@@ -233,7 +245,7 @@ $\prod_{i\in T}\hat\varphi_i(S_i)^2$. By homogeneity of $\Phi$ and $\sum_{S_i\ne
 (Parseval and $\hat\varphi_i(\emptyset)=0$), summing over the other blocks leaves $\Phi(p_T,\tau^2q_T)$. The influence
 follows in the same way from $\sum_{S\ni\ell}\hat\varphi_j(S)^2=\tau$. For $x$, the pairs $(V,V\cup\{x\})$ correspond to
 $(T,T\cup\{x\})$ with a common factor, so $E_x$ and $\Inf_x$ are unchanged. Each nonempty $S_i$ has odd size, so
-$|S|\equiv|T|\pmod 2$ and the even weight is that of $f_k$.
+$|S|\equiv|T|\pmod 2$ and the weight on sets of even size is that of $f_k$.
 \end{proof}
 
 \begin{corollary}\label{cor:leaf}
@@ -270,7 +282,7 @@ $I(F)\ge\delta+\sum_j\iota_j=I(f_k)\ge1$. Therefore
 \begin{remark}
 The bound $E_\ell<4\Inf_\ell$ holds at every variable of every block, whatever the sizes of the blocks; in particular
 for majority blocks of any size and for iterated majorities. Since $x$ keeps the same $E_x$ and $\Inf_x$, the ratio at
-$x$ still tends to infinity with $k$.
+$x$ still tends to infinity with $k$, as in~\cite[Proposition~5.1]{Shm3}.
 \end{remark}
 
 \section{Selection rules}\label{sec:rules}
@@ -283,10 +295,9 @@ Proposition~\ref{prop:diverge} applies.
 at a set of size two is a coefficient of $(1+x)\mathbf 1[y=y^0]$, of modulus $\delta$. Thus $W^{(2)}_i=k\delta^2$ for
 every coordinate, and maximising $W^{(2)}_i/\Inf_i$ is minimising $\Inf_i$.
 
-\emph{Largest influence.} Substitute $\varphi_j=\MAJ_{2w+1}$ for every $j$. Then
-$\tau=\binom{2w}{w}4^{-w}\le(w+1)^{-1/2}$ (the ratio from $w$ to $w+1$ is $\frac{2w+1}{2w+2}$, and
-$(\frac{2w+1}{2w+2})^2\le\frac{w+1}{w+2}$). For $w+1>4^k$ every variable of a block has influence $\tau\iota_j<\delta$, so
-$x$ is the unique coordinate of largest influence, and by Proposition~\ref{prop:leaf} its ratio is that of $f_k$.
+\emph{Largest influence.} This is~\cite[Proposition~5.1]{Shm3}: with $\varphi_j=\MAJ_{2w+1}$ for every $j$ and $w$
+large, every variable of a block has influence $\tau\iota_j<\delta$, so $x$ is the unique coordinate of largest
+influence, and by Proposition~\ref{prop:leaf} its ratio is that of $f_k$.
 
 \emph{Most shortest minterms.} Substitute $\varphi_j=\MAJ_3$. The minterms of $F$ are $x$ together with a minterm of
 $\MAJ_3$ in each block $j$ with $y^0_j=1$, of size $1+2\cdot\frac{k-1}2=k$, and minterms of $\MAJ_3$ in $(k+1)/2$ of the
@@ -308,7 +319,7 @@ layer from $1$ to $0$ preserves monotonicity, so $f'_k$ is monotone.
 
 \begin{proposition}\label{prop:pair}
 $W^{(2)}_x(f'_k)=0$ and $W^{(2)}_{y_j}(f'_k)>0$ for every $j$, so $x$ is the unique coordinate of smallest normalised
-level-two weight; $\Inf_x=2^{1-k}$, $\Inf_{y_j}=\binom{k}{k/2}2^{-k}$ for every $j$; and for even $k$ large enough
+level-two weight; $\Inf_x=2^{1-k}$, $\Inf_{y_j}=\binom{k}{k/2}2^{-k}$ for every $j$; and for even $k\ge66$
 \[
 \frac{E_x(f'_k)}{\Inf_x(f'_k)}\ \ge\ \Bigl(1-\frac8k\Bigr)\Bigl(\frac k4-4-2\log(k+1)\Bigr).
 \]
@@ -323,17 +334,17 @@ removes a pivotal edge in direction $j$ according to the $j$th bit, and the two 
 $\Inf_{y_j}(f'_k)=\Inf_j(N)=\binom{k}{k/2}2^{-k}=:a_0$.
 
 In $\pm1$ values, $N$ is the sum of an odd function, the sign of $|y|-k/2$ with $0$ on the middle layer, and the
-indicator of the middle layer. Only the latter has even coefficients, and by the generating function of
-Proposition~\ref{prop:diverge}, for even $r=|T|$,
+indicator of the middle layer. Only the latter has even coefficients, and by the generating function in the proof of
+Lemma~\ref{lem:maj}, for even $r=|T|$,
 \begin{equation}\label{eq:B}
 |\hat N(T)|=a_0\binom{k/2}{r/2}\Big/\binom kr.
 \end{equation}
 At $r=2$ this is $a_0/(k-1)$, and $a_0/((k-1)\delta')=\binom k{k/2}/(2(k-1))$ equals $2$ at $k=6$ and increases. So
 $|\hat f'_k(\{y_j,y_{j'}\})|\ge|\hat N(\{y_j,y_{j'}\})|-\delta'>0$ and $W^{(2)}_{y_j}>0$.
 
-The derivative spectrum is uniform over the even subsets $T$ of $[k]$, and $E_x/\Inf_x$ is the average of
+The squared coefficients of $D$ are equal on the even subsets $T$ of $[k]$ and vanish on the odd ones, so $E_x/\Inf_x$ is the average of
 $\delta'^{-2}\Phi(\hat g(T)^2,\delta'^2)$. For even $r\in[k/4,3k/4]$, \eqref{eq:B} with $\binom{k/2}{r/2}\ge2^{k/8}$,
-$a_0\ge1/(k+1)$ and $\binom kr\le2^k$ gives $|\hat N(T)|\ge2^{-7k/8}/(k+1)\ge2\delta'$ for large $k$, hence $|\hat
+$a_0\ge1/(k+1)$ and $\binom kr\le2^k$ gives $|\hat N(T)|\ge2^{-7k/8}/(k+1)\ge2\delta'$, since $2^{k/8}\ge4(k+1)$ for $k\ge66$, hence $|\hat
 g(T)|\ge|\hat N(T)|/2$ and $\delta'^{-2}\Phi(\hat g(T)^2,\delta'^2)\ge k/4-4-2\log(k+1)$. By Chebyshev's inequality,
 conditioned on $|T|$ even, $|T|\in[k/4,3k/4]$ with probability at least $1-8/k$.
 \end{proof}
@@ -355,8 +366,7 @@ $p=\Pr[h\text{ true}]$. Then $\Inf_x(f)=p$ and
 \[
 \frac{E_x(f)}{\Inf_x(f)}=2(1-p)+\frac{\Phi\bigl((1-p)^2,p^2\bigr)}{p}\ \le\ 4(1-p).
 \]
-The middle expression tends to $2$ as $p\to0$, equals $2$ at $p=1/2$, and its maximum over $p\in(0,1]$ is
-$2.697377$, attained near $p=0.1994$.
+In particular $E_x(f)/\Inf_x(f)<4$.
 \end{proposition}
 
 \begin{proof}
@@ -372,9 +382,12 @@ inequality $h_2(t)\le2\sqrt{t(1-t)}$, which follows from $h_2(t)\le(4t(1-t))^{1/
 $2\sqrt{ab}=2p(1-p)$.
 \end{proof}
 
+The middle expression tends to $2$ as $p\to0$ and equals $2$ at $p=1/2$; evaluated numerically, its maximum over
+$p\in(0,1]$ is $2.697377$, near $p=0.1994$.
+
 If a shortest maxterm of a monotone $f$ is a single variable $x$, then $f=x\wedge h$ with $h$ the restriction $x=1$,
 and every shortest maxterm is a single variable of this kind. So every variable of $B(f)$, and hence of $A(f)\cap B(f)$,
-has $E_i/\Inf_i<2.6974$. The dual $f^\dagger$, the negation of $f$ at the complement of its argument, exchanges minterms and maxterms and has the same
+has $E_i/\Inf_i<4$. The dual $f^\dagger$, the negation of $f$ at the complement of its argument, exchanges minterms and maxterms and has the same
 squared Fourier coefficients, so the same holds when a shortest minterm is a single variable. In these cases any
 variable of $A\cap B$ will do.
 
@@ -386,7 +399,7 @@ The point $y^1$ lies in the lowest true layer of $\MAJ_k$, so $M$ and $\tilde f_
 
 \begin{proposition}\label{prop:both}
 The variable $x$ lies in a shortest minterm and in a shortest maxterm of $\tilde f_k$, $\Inf_x(\tilde f_k)=2^{1-k}$,
-and for odd $k$ large enough
+and for odd $k\ge45$
 \[
 \frac{E_x(\tilde f_k)}{\Inf_x(\tilde f_k)}\ \ge\ \Bigl(\frac12-\frac{4(k-1)}{(k-5)^2}\Bigr)\Bigl(\frac{k-1}4-2\log k\Bigr).
 \]
@@ -405,17 +418,12 @@ $x$ is $D=\mathbf 1[y=y^0]+\mathbf 1[y=y^1]$ and the average over $x$ is $g=\MAJ
 modulus $2\delta$ otherwise. So $\Inf_x=2^{k-1}(2\delta)^2=2^{1-k}$, and $E_x/\Inf_x$ is the average of
 $(2\delta)^{-2}\Phi(\hat g(T)^2,4\delta^2)$ over the $2^{k-1}$ sets $T\subseteq[k]\setminus\{m+1\}$. For these
 $T$, $\chi_T(y^0)=\chi_T(y^1)$, the two indicators cancel, and $|\hat g(T)|=b_r$ for $|T|=r$ odd, with $b_r$ as
-in the proof of Proposition~\ref{prop:diverge}. If $(k-1)/4\le r-1\le3(k-1)/4$, that proof gives $b_r/(2\delta)\ge
-2^{(k-1)/8}/k\ge1$ for large $k$, hence $(2\delta)^{-2}\Phi(b_r^2,4\delta^2)\ge\log(b_r^2/(4\delta^2))\ge(k-1)/4-2\log k$.
+in Lemma~\ref{lem:maj}. If $(k-1)/4\le r-1\le3(k-1)/4$, the lemma gives $b_r/(2\delta)\ge
+2^{(k-1)/8}/k\ge1$, since $2^{(k-1)/8}\ge k$ for $k\ge45$, hence $(2\delta)^{-2}\Phi(b_r^2,4\delta^2)\ge\log(b_r^2/(4\delta^2))\ge(k-1)/4-2\log k$.
 Now $|T|$ is binomial with parameters $k-1$ and $\frac12$; it is odd with probability $\frac12$, and by Chebyshev's
 inequality $\bigl||T|-\frac{k-1}2\bigr|>\frac{k-5}4$ with probability at most $4(k-1)/(k-5)^2$. Otherwise
 $(k+3)/4\le|T|\le(3k-7)/4$, which is the required range.
 \end{proof}
-
-Both factors of the bound in Proposition~\ref{prop:both}, and of those in Propositions~\ref{prop:diverge}
-and~\ref{prop:pair}, are positive only from $k=45$, $k=45$ and $k=66$ respectively. For smaller $k$ the displayed
-product says nothing: at $k=5$ the right side of Proposition~\ref{prop:diverge} is $16.4$, a product of two negative
-factors.
 
 At $k=3,5,\dots,13$ the ratio at $x$ is $1.80$, $2.56$, $3.17$, $3.90$, $4.70$ and $5.55$, while the smallest ratio
 over $A(\tilde f_k)\cap B(\tilde f_k)$ is the smallest over all coordinates, $1.00$ at $k=3$ and $0.0060$ at $k=13$.
@@ -456,8 +464,8 @@ S$) of the product measure with $\Pr[y_j=1]=\pi_j$ and $x$ uniform (the biased s
 coefficients $c_\pi(S)$. Each
 $\psi_j=(\varphi_j-\pi_j)/\sigma_j$ has mean $0$ and variance $1$ under the uniform measure on its block, so
 $\sum_{R_j\ne\emptyset}\hat\psi_j(R_j)^2=1$, and the coefficient of $F_{k,t}$ at the union of $S\cap\{x\}$ and sets
-$R_j\ne\emptyset$, $j\in S\setminus\{x\}$, is $c_\pi(S)\prod_j\hat\psi_j(R_j)$. So the spectral sample of
-$F_{k,t}$ is obtained by drawing $S$ with probability $c_\pi(S)^2$ and then each $R_j$ independently. It contains $x$
+$R_j\ne\emptyset$, $j\in S\setminus\{x\}$, is $c_\pi(S)\prod_j\hat\psi_j(R_j)$. So, as in the two-stage description
+of the spectral sample before~\cite[Theorem~2.1]{Shm3}, the spectral sample of $F_{k,t}$ is obtained by drawing $S$ with probability $c_\pi(S)^2$ and then each $R_j$ independently. It contains $x$
 exactly when $S$ does, it determines $S\setminus\{x\}$, and given $S\setminus\{x\}$ the $R_j$ do not depend on whether
 $x\in S$. Hence $E_x(F_{k,t})$ and $\Inf_x(F_{k,t})$ are the erasure entropy and the influence of $x$ for the law
 $c_\pi(S)^2$. Here $\pi_j=P_t$ for $j\le m$ and $1-P_t$ for $j>m$, with $P_t=\Pr[\mathrm{Bin}(2t,\frac12)\ge t]\to\frac12$.
@@ -466,33 +474,33 @@ to their values at $\pi=\frac12$, which are $E_x(\tilde f_k)$ and $\Inf_x(\tilde
 from Proposition~\ref{prop:both}.
 \end{proof}
 
-Already $t=1$, where $\mathrm{Th}_1$ and $\mathrm{Th}'_1$ are the OR (disjunction) and the AND of two variables, gives a growing ratio at the forced
-coordinate, on $2k+1$ variables. By the proof above it is the ratio of $\tilde f_k$ under the product measure with
+Already $t=1$, where $\mathrm{Th}_1$ and $\mathrm{Th}'_1$ are the OR (disjunction) and the AND of two variables, gives a growing ratio at the coordinate $x$
+of $F_{k,1}$, on $2k+1$ variables. By the proof above it is the ratio of $\tilde f_k$ under the product measure with
 bias $\frac34$ on $y_1,\dots,y_m$ and $\frac14$ on $y_{m+1},\dots,y_k$. There $D$ and the average over $x$ have
 coefficients that depend only on $|S\cap\{y_1,\dots,y_m\}|$ and $|S\cap\{y_{m+2},\dots,y_k\}|$, so the ratio is a
 double sum over these two numbers and can be computed exactly. It is $1.05$, $1.88$, $2.57$, $3.12$, $3.59$, $4.12$,
 $4.70$ and $5.30$ for $k=3,5,\dots,17$, and $13.83$, $29.31$, $45.28$ and $53.32$ at $k=41,81,121,141$, an increase
 of about $0.39$ per unit of $k$; for $\tilde f_k$ the values at these four $k$ are $18.62$, $38.11$, $57.81$ and
-$67.70$. Under a bias the
-coefficients of the majority near its threshold are Krawtchouk-type sums that change sign, and the proof of
-Proposition~\ref{prop:both} does not carry over. For $t=1$ the ratio is $(1+o(1))(k-1)\log_2\frac43$, which is
-$(1+o(1))\log_2(1/\Inf_x)$ and so asymptotic to its largest possible value~\cite{Shm9}; the proof writes these sums
-as integrals over the unit circle. The same holds for every fixed $t\ge1$: the ratio is
+$67.70$ (program \texttt{forced\_exact.py}). Under a bias the coefficients $c_\pi(S)$ at $|S|$ near $k/2$ are
+Krawtchouk sums that change sign, so the bound $|\hat g(T)|=b_r$ used for Proposition~\ref{prop:both} has no
+analogue. For $t=1$ the ratio is $(1+o(1))(k-1)\log_2\frac43$, which is $(1+o(1))\log_2(1/\Inf_x)$ and so asymptotic
+to its largest possible value~\cite{Shm9}, where these sums are written as integrals over the unit circle. The same holds for every fixed $t\ge1$: the ratio is
 $(1+o(1))(k-1)\log_2(1/P_t)$~\cite{Shm10}.
-At $k=7$, $t=1$ the smallest ratio over all coordinates is $2.15$, and at $k=17$, $t=20$ the forced ratio is
+At $k=7$, $t=1$ the smallest ratio over all coordinates is $2.15$, and at $k=17$, $t=20$ the ratio at $x$ is
 $9.59$. On monotone functions of at most six variables the rule does no worse than $G_{\mathrm{mon}}(n)$
 (Section~\ref{sec:census}).
 
-\section{The singleton identities do not suffice}\label{sec:obstruction}
+\section{The singleton identity does not suffice}\label{sec:obstruction}
 
 For monotone $f$, $\mu(\{i\})=\Inf_i(f)^2=\Pr[i\in U]^2$ for every $i$, and hence $\sum_i\Pr[i\in U]^2\le1$. The
-following law satisfies both identities, is invariant under permutations, and has unbounded erasure ratio. It is not
+following law satisfies both, is invariant under permutations, and has unbounded ratio $E_i/\Pr[i\in U]$. It is not
 the spectral distribution of a Boolean function, so it shows only that any proof must use more of the structure.
 
 \begin{proposition}\label{prop:law}
 For $n\ge100$ let $\rho$ be the law of a random subset of $[n]$ containing each element independently
 with probability $1/n$, conditioned on having at least two elements, let $d=\rho[i\in U]$, and $\lambda=(1-\sqrt{1-d})/2$. The law $\mu$ that gives mass $\rho(S)/4$ to each $S$ with $|S|\ge2$, mass $\lambda^2$ to
-each singleton and the rest to $\emptyset$ is a probability law with $\mu(\{i\})=\Pr_\mu[i\in U]^2$, and
+each singleton and the rest to $\emptyset$ is a probability law with $\mu(\{i\})=\Pr_\mu[i\in U]^2$ and
+$\sum_i\Pr_\mu[i\in U]^2\le1$, and
 \[
 \frac{H(\mathbf 1[i\in U]\mid U\setminus\{i\})}{\Pr_\mu[i\in U]}\ \ge\ \frac{\log n}{288}.
 \]
@@ -519,9 +527,8 @@ monotone functions on $n-1$ variables with $f_0\le f_1$; there are $7{,}828{,}35
 $2{,}414{,}682{,}040{,}998$ for $n=7$, the Dedekind numbers. For $n\le6$ the program \texttt{census\_mono.py}
 evaluates every labelled function. The program \texttt{mono\_census.c} lets the first function of each pair range over
 one representative of each orbit of the symmetric group on the first $n-1$ variables, weighted by the orbit size, and
-checks that the weighted count is the Dedekind number. At $n=6$ its three maxima and its worst cases for the rules of
-largest and smallest influence agree with those of \texttt{census\_mono.py} to $10^{-12}$, although
-\texttt{mono\_census.c} breaks ties in favour of a rule and \texttt{census\_mono.py} against it. It gives the row $n=7$.
+checks that the weighted count is the Dedekind number. The two programs give the same row $n=6$ to $10^{-12}$, and
+\texttt{mono\_census.c} gives the row $n=7$.
 Table~\ref{tab:census} gives the results.
 
 \begin{table}[tbp]
@@ -552,9 +559,10 @@ $3.389192093442$ at every variable. The read-once function
 \[
 (x_1\vee x_2)(x_3\vee x_4)\vee(x_5\vee x_6)(x_7\vee x_8)\vee x_9x_{10}
 \]
-does better: its influences are $49/512$ at $x_1,\dots,x_8$ and $63/512$ at $x_9,x_{10}$, with ratios
+does better: its influences are $63/512$ at $x_1,\dots,x_8$ and $49/512$ at $x_9,x_{10}$, with ratios
 $3.401069972510$ and $3.589953807822$, so $G_{\mathrm{mon}}(10)\ge3.4010$. Both functions are read-once, a class
-for which the conjecture holds~\cite{OT13,CKLS}. Up to a permutation of the variables and duality, which leaves every
+for which the conjecture holds~\cite{OT13,CKLS} and in which every relevant leaf has ratio below
+$\pi/\ln2\approx4.53$~\cite[Theorem~4.3]{Shm3}. Up to a permutation of the variables and duality, which leaves every
 ratio unchanged, a read-once monotone function is a series-reduced planted tree with an OR gate at the root, and there
 are $261$, $2{,}312$ and $68{,}954$ such trees with $8$, $10$ and $13$ leaves~\cite{OEIS669}. Evaluating all of them for
 $n\le13$ shows that the two functions above are the best read-once functions for $n=8$ and $n=10$. For $n=12$ the best
@@ -587,9 +595,8 @@ $\frac12(3/4)^{J-1}\bigl(1-(3/4)^J\bigr)^{L-1}$. The ratio is largest at $L=4$ f
 $3.783969373526$), at $L=6$ for $J=4$ ($n=48$, $3.924260765374$) and at $L=8$ for $J=5$ ($n=80$,
 $3.949934743097$); this last value is the largest for $J\le8$ and $L\le40$, and no OR of copies of two of these blocks,
 at most $30$ of each, does better. Hence $G_{\mathrm{mon}}(n)\ge3.7839$ for $n\ge24$, $G_{\mathrm{mon}}(n)\ge3.9242$
-for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$. Iterated compositions of
-monotone gates reach $4.506$~\cite{Shm3}, so the values in the table are far from the supremum over all monotone
-functions.
+for $n\ge48$ and $G_{\mathrm{mon}}(n)\ge3.9499$ for $n\ge80$. These values are the best we found at each $n$; iterated compositions of monotone gates, on many more variables,
+reach $4.5064$~\cite[Proposition~3.1]{Shm3}.
 
 Table~\ref{tab:rules} gives, for $n\le6$, the largest $E_i/\Inf_i$ at the coordinate chosen by a rule, with ties
 broken against the rule. The coordinate of largest influence never does worse than $G_{\mathrm{mon}}(n)$ here, and at
@@ -607,7 +614,8 @@ $n$ & largest $\Inf_i$ & smallest $\Inf_i$ & largest $W^{(2)}_i/\Inf_i$ & smalle
 6 & 2.944495303872 & 5.019930166880 & 4.833940887931 & 5.019930166880\\
 \bottomrule
 \end{tabular}
-\caption{Worst ratio at the coordinate selected by each rule, over all monotone functions on $n$ variables.}
+\caption{Worst ratio at the coordinate selected by each rule, over all monotone functions on $n$ variables,
+with ties broken against the rule.}
 \label{tab:rules}
 \end{table}
 
@@ -622,26 +630,6 @@ has a positive ratio, so that the quotient is infinite; for one of them the six 
 $0,0,0.686,0.686,0.451,0.451$ and $A\cap B$ consists of the last two variables. Taking the worst variable of $A\cap B$ instead gives
 $3.344977967946$ at $n=5$ and $3.650196658624$ at $n=6$; the worst variable of $A$, of $B$ or of $A\cup B$ gives
 $4.950362212005$ at $n=6$.
-
-\section{Numerical checks}\label{sec:num}
-
-The script \texttt{check\_hidden.py} in the code repository computes exact Walsh--Hadamard transforms of $f_k$ for odd
-$k\le17$, of six substituted functions with blocks of sizes $1$, $3$ and $5$, and of $f'_k$ for even $k\le18$, and
-checks Lemma~\ref{lem:hidden}, Proposition~\ref{prop:leaf} against a direct evaluation of the erasure entropy at every
-variable, Corollary~\ref{cor:leaf}, the bounds of Theorem~\ref{thm:sum}, each rule of Theorem~\ref{thm:rules}, and
-Proposition~\ref{prop:pair} including monotonicity. It also evaluates the law of Proposition~\ref{prop:law} exactly.
-The census programs are \texttt{census\_mono.py} ($n\le6$) and \texttt{mono\_census.c} ($n=7$).
-The script \texttt{check\_small\_trees.py} computes the functions on $8$ and $10$ variables of Section~\ref{sec:census} from
-their truth tables, and \texttt{check\_table.py} evaluates a function given as a hexadecimal truth table.
-The script \texttt{read\_once\_census.py} evaluates every read-once monotone function for $n\le13$,
-\texttt{or\_of\_and2.py} the family $\bigvee_jx_{2j-1}x_{2j}$ for $K\le11$, and \texttt{or\_of\_blocks.py} the ORs of
-blocks with at most $20$ variables. The script \texttt{or\_of\_blocks\_formula.py} computes larger ORs of blocks by the formula
-above, after checking it against truth tables of six functions with up to $18$ variables. The script
-\texttt{check\_xand.py} compares the formula of Proposition~\ref{prop:xand} with exact transforms of $x\wedge h$ for $300$ random monotone $h$ on at most nine variables (largest difference $1.3\cdot10^{-15}$) and evaluates it and the
-bound on a grid of $p$; \texttt{check\_gk.py} computes $A$, $B$ and every ratio of $f_k$ and $\tilde f_k$ for odd
-$k\le13$ and checks monotonicity. The script \texttt{forced\_rule.py} builds $F_{k,t}$ for
-$(k,t)=(3,1),(5,1),(7,1),(9,1),(3,2),(5,2),(3,3)$, checks that $A\cap B=\{x\}$ and that the ratio at $x$ equals the
-one computed from the biased expansion of $\tilde f_k$ (to $10^{-9}$), and tabulates the latter for $k\le17$.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -666,17 +654,25 @@ These entities are included in the funding declaration above.
 The paper comes out of Math Brain, a project on the use of AI systems in research
 mathematics~\cite{BrainFramework,MathBrainRepo}. Codex agents running OpenAI's GPT-6.1 found the constructions of
 Sections~\ref{sec:hidden}--\ref{sec:obstruction} other than Propositions~\ref{prop:xand}, \ref{prop:both}
-and~\ref{prop:forced}, with their proofs, and computed the census for $n\le6$. Claude agents (Anthropic: Fable and
-Opus~5.5) computed the census for $n=7$, found the eight- and ten-variable functions of Section~\ref{sec:census},
-Propositions~\ref{prop:xand}, \ref{prop:both} and~\ref{prop:forced} and the census of Section~\ref{sec:rules}, checked
-the proofs and computations, and prepared the manuscript. The author directed the work and is responsible for the
+and~\ref{prop:forced}, with their proofs, and computed Tables~\ref{tab:census} and~\ref{tab:rules} for $n\le6$. Claude
+agents (Anthropic: Fable and Opus~5.5) computed the row $n=7$ of Table~\ref{tab:census}, found the eight- and
+ten-variable functions of Section~\ref{sec:census}, Propositions~\ref{prop:xand}, \ref{prop:both}
+and~\ref{prop:forced} and the values for $A(f)\cap B(f)$ in Section~\ref{sec:census}, checked the proofs and
+computations, and prepared the manuscript. The function $f_k$ and the composition identity behind
+Proposition~\ref{prop:leaf} are from~\cite{Shm3}. The conjecture is that of Friedgut and Kalai~\cite{FK96}, the
+erasure entropy is that of Verd\'u and Weissman~\cite{VW08}, and the reduction of the conjecture to one coordinate is
+that of~\cite{Shm1}. The author directed the work and is responsible for the
 content of the paper and for decisions concerning its dissemination.
 
 \section*{Code and data availability}
-Code and outputs: \url{https://github.com/yspennstate/fei-hidden-coordinates}, archived on Zenodo with doi:10.5281/zenodo.24125561.
-
-The paper is part of the Math Brain project, whose public repository is
-\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+Code and outputs: \url{https://github.com/yspennstate/fei-hidden-coordinates}, archived on Zenodo with
+doi:10.5281/zenodo.24125561 (all versions). Table~\ref{tab:census} comes from \texttt{census\_mono.py} ($n\le6$) and
+\texttt{mono\_census.c} ($n=7$), Table~\ref{tab:rules} from \texttt{census\_mono.py}, and the values for $A(f)\cap B(f)$
+from \texttt{rule\_minmax.py}. The values of $F_{k,1}$ come from \texttt{forced\_exact.py}, those of $f'_k$ and of the
+law of Proposition~\ref{prop:law} from \texttt{check\_hidden.py}, and those of $\tilde f_k$ from \texttt{check\_gk.py}.
+The read-once values of Section~\ref{sec:census} come from \texttt{check\_small\_trees.py},
+\texttt{read\_once\_census.py}, \texttt{or\_of\_and2.py}, \texttt{or\_of\_blocks.py} and
+\texttt{or\_of\_blocks\_formula.py}.
 
 \appendix
 \section{Notation}\label{app:notation}
@@ -697,25 +693,25 @@ $C$ & the constant of the Fourier entropy-influence conjecture $H(f)\le C\,I(f)$
 $E_i(f)$ & the erasure entropy $H(\mathbf 1[i\in U]\mid U\setminus\{i\})$ & Section~\ref{sec:intro} \\
 $G$ & $\sup_f\min_{i:\Inf_i(f)>0}E_i(f)/\Inf_i(f)$, finite exactly when the conjecture holds & Section~\ref{sec:intro} \\
 $k$, $\MAJ_k$ & an odd number of inputs (even in Proposition~\ref{prop:pair}), and the majority of $k$ inputs & Section~\ref{sec:intro} \\
-$y$, $y_j$, $x$ & a point of $\{0,1\}^k$, its $j$-th coordinate, and the hidden variable & Section~\ref{sec:intro} \\
+$y$, $y_j$, $x$ & a point of $\{0,1\}^k$, its $j$-th coordinate, and the hidden coordinate & Section~\ref{sec:intro} \\
 $y^0$, $[y\ge y^0]$ & the point with $(k-1)/2$ ones ($k/2$ in Proposition~\ref{prop:pair}), and the AND of the coordinates at which $y^0$ is $1$ & Section~\ref{sec:intro} \\
 $f_k$ & $\MAJ_k(y)\vee(x\wedge[y\ge y^0])$ & Section~\ref{sec:intro} \\
 $\varphi_j$, $F$ & a non-constant self-dual monotone function of a block of fresh variables, and $f_k$ with each $y_j$ replaced by $\varphi_j$ & Theorem~\ref{thm:sum} \\
 $h_2$ & the binary entropy function in bits & Section~\ref{sec:intro} \\
 $W^{(2)}_i(f)$ & the level-two weight $\sum_{j\ne i}\hat f(\{i,j\})^2$ & Section~\ref{sec:intro} \\
 $A(f)$, $B(f)$ & the variables lying in some shortest minterm, and in some shortest maxterm, of a monotone $f$ & Section~\ref{sec:rules} \\
-$G_{\mathrm{mon}}(n)$ & the largest $\min_{i:\Inf_i>0}E_i/\Inf_i$ over non-constant monotone functions on $n$ variables & Section~\ref{sec:intro} \\
+$G_{\mathrm{mon}}(n)$ & the largest $\min_{i:\Inf_i>0}E_i/\Inf_i$ over non-constant monotone functions on $n$ variables & Section~\ref{sec:intro}, defined in Section~\ref{sec:census} \\
 $\log$, $\ln$, $e$ & the logarithms to base $2$ and to base $e$, and the base of the natural logarithm & Section~\ref{sec:prelim} \\
 $\eta$ & $\log_2e$ & Section~\ref{sec:prelim} \\
 $\Phi(p,q)$ & $p\log\frac{p+q}p+q\log\frac{p+q}q=(p+q)\,h_2(\frac q{p+q})$ & Section~\ref{sec:prelim} \\
-$\bar x$ & the complement of a point $x$ of the cube & Section~\ref{sec:prelim} \\
+$\bar z$, $\bar u$ & the complement of a point of the cube & Theorem~\ref{thm:sum} \\
 $\varepsilon$ & $\Pr[\,|U|\text{ even}\,]$ & Lemma~\ref{lem:parity} \\
 $\delta$, $a$ & $2^{-k}$, and $\binom{k-1}{(k-1)/2}2^{1-k}$, the influence of every variable of $\MAJ_k$ & Section~\ref{sec:hidden} \\
 $\mathbf 1[\cdot]$ & the indicator of an event & Lemma~\ref{lem:hidden} \\
-$g$ & the average over $x$ of $f_k$, of $f'_k$ or of $\tilde f_k$ & proof of Proposition~\ref{prop:diverge} \\
-$r$, $b_r$ & the size of a set $T$, and $|\widehat{\MAJ_k}(T)|$ for $|T|=r$ odd & proof of Proposition~\ref{prop:diverge} \\
-$m$ & $(k-1)/2$ & proof of Proposition~\ref{prop:diverge} \\
-$v$, $\xi$ & a uniform point of $\{0,1\}^{2m}$, and a formal variable & proof of Proposition~\ref{prop:diverge} \\
+$g$ & the average over $x$ of $f_k$, of $f'_k$ or of $\tilde f_k$ & Lemma~\ref{lem:maj} \\
+$r$, $b_r$ & the size of a set $T$, and $|\widehat{\MAJ_k}(T)|$ for $|T|=r$ odd & Lemma~\ref{lem:maj} \\
+$m$ & $(k-1)/2$ & Lemma~\ref{lem:maj} \\
+$v$, $\xi$ & a uniform point of $\{0,1\}^{2m}$, and a formal variable & Lemma~\ref{lem:maj} \\
 $z$, $z^j$, $\ell$ & the variables of $F$, those of block $j$, and one variable of block $j$ & Section~\ref{sec:subst} \\
 $\iota_j$, $\tau$ & $\Inf_{y_j}(f_k)$, and $\Inf_\ell(\varphi_j)=|\hat\varphi_j(\{\ell\})|$ & Section~\ref{sec:subst} \\
 $p_T$, $q_T$ & $\mu(T)$ and $\mu(T\cup\{y_j\})$ for $T\not\ni y_j$ & Proposition~\ref{prop:leaf} \\
@@ -773,6 +769,7 @@ conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138, doi:10.1007/s00039-020-00
 \bibitem{Num26} Numaro, Improved lower bound $C_{71}>6.521845710923046575$ for the Fourier entropy-influence constant ($n=18$ explicit construction), certificate archive, Zenodo, 2026, doi:10.5281/zenodo.21497769.
 \bibitem{OEIS669} OEIS Foundation Inc., The On-Line Encyclopedia of Integer Sequences, sequence A000669, number of
 series-reduced planted trees with $n$ leaves, \url{https://oeis.org/A000669}, accessed 2026.
+\bibitem{ODo} R.~O'Donnell, \emph{Analysis of Boolean Functions}, Cambridge University Press, 2014.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture, ICALP 2013,
 Lecture Notes in Comput. Sci. 7965, 780--791, doi:10.1007/978-3-642-39206-1\_66.
 \bibitem{OWZ} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
